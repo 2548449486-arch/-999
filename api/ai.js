@@ -1,3 +1,5 @@
+const OR_KEY = process.env.OR_KEY || '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';
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -11,7 +13,7 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.OR_KEY}`,
+        'Authorization': `Bearer ${OR_KEY}`,
         'HTTP-Referer': 'https://viral.zenithsmart.xin',
         'X-Title': 'AI Viral Factory'
       },
