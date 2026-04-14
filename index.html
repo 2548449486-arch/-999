@@ -637,8 +637,6 @@ const CODES={
 };
 
 // ═══ CONFIG ═══
-const KEY='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';
-const OR='https://openrouter.ai/api/v1/chat/completions';
 const M_TEXT='google/gemini-flash-1.5';
 const M_SCRIPT='anthropic/claude-3.5-haiku-20241022';
 
@@ -721,18 +719,18 @@ function setSc(el){document.querySelectorAll('.sch').forEach(c=>c.classList.remo
 
 // ═══ API ═══
 async function orCall(messages,model,max_tokens){
-  const r=await fetch(OR,{
+  const r=await fetch('/api/ai',{
     method:'POST',
-    headers:{'Content-Type':'application/json','Authorization':'Bearer '+KEY,'HTTP-Referer':location.origin,'X-Title':'AI爆款工厂'},
-    body:JSON.stringify({model,messages,max_tokens:max_tokens||1400})
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({messages,model:model||M_TEXT,max_tokens:max_tokens||1400})
   });
   const d=await r.json();
   if(!r.ok||d.error){
-    const msg=(d.error&&(d.error.message||d.error.code))||('HTTP '+r.status);
+    const msg=(d.error&&(d.error.message||d.error.code))||('接口错误 '+r.status);
     throw new Error(msg);
   }
   const content=d.choices&&d.choices[0]&&d.choices[0].message&&d.choices[0].message.content;
-  if(!content)throw new Error('模型返回空内容，请重试');
+  if(!content)throw new Error('返回为空，请重试');
   return content;
 }
 function pJ(raw){
