@@ -13,7 +13,7 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${process.env.OR_KEY}`,
         'HTTP-Referer': 'https://viral.zenithsmart.xin',
-        'X-Title': 'AI爆款工厂'
+        'X-Title': 'AI Viral Factory'
       },
       body: JSON.stringify({
         model: model || 'google/gemini-flash-1.5',
