@@ -639,7 +639,7 @@ const CODES={
 // ═══ CONFIG ═══
 const KEY='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';
 const OR='https://openrouter.ai/api/v1/chat/completions';
-const M_TEXT='google/gemini-2.0-flash-001';
+const M_TEXT='google/gemini-flash-1.5';
 const M_SCRIPT='anthropic/claude-3.5-haiku-20241022';
 
 // ═══ STATE ═══
@@ -726,12 +726,23 @@ async function orCall(messages,model,max_tokens){
     headers:{'Content-Type':'application/json','Authorization':'Bearer '+KEY,'HTTP-Referer':location.origin,'X-Title':'AI爆款工厂'},
     body:JSON.stringify({model,messages,max_tokens:max_tokens||1400})
   });
-  if(!r.ok){const t=await r.text();throw new Error(r.status+': '+t.slice(0,100));}
   const d=await r.json();
-  if(d.error)throw new Error(d.error.message||JSON.stringify(d.error));
-  return d.choices[0].message.content;
+  if(!r.ok||d.error){
+    const msg=(d.error&&(d.error.message||d.error.code))||('HTTP '+r.status);
+    throw new Error(msg);
+  }
+  const content=d.choices&&d.choices[0]&&d.choices[0].message&&d.choices[0].message.content;
+  if(!content)throw new Error('模型返回空内容，请重试');
+  return content;
 }
-function pJ(raw){return JSON.parse(raw.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim());}
+function pJ(raw){
+  try{
+    const c=raw.replace(/```json[\s\S]*?```/g,m=>m.slice(7,-3)).replace(/```/g,'').trim();
+    const s=c.indexOf('{'),e=c.lastIndexOf('}');
+    if(s<0||e<0)throw new Error('无JSON');
+    return JSON.parse(c.slice(s,e+1));
+  }catch(ex){throw new Error('解析失败：'+ex.message);}
+}
 
 // ═══ GENERATE ═══
 async function doGen(){
