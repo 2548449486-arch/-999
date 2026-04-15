@@ -1,4 +1,4 @@
-const OR_KEY = process.env.OR_KEY || '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';
+const OR_KEY = process.env.OR_KEY || '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';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
