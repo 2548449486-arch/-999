@@ -705,10 +705,8 @@ audio#ap2{width:100%;border-radius:10px;margin-top:10px;display:none}
           <div class="is"><div class="ip"><span style="font-size:28px">🖼</span><span style="font-size:11px">等待生成</span></div></div>
           <div class="is"><div class="ip"><span style="font-size:28px">🖼</span><span style="font-size:11px">等待生成</span></div></div>
         </div>
-        <div id="ptA" style="display:none;margin-top:14px">
-          <div class="st">生成Prompt（可复制至MidJourney）</div>
-          <div class="cd" style="font-size:12px;color:var(--mt2);line-height:1.7" id="ptT"></div>
-          <button class="rb" onclick="cp('ptT')">📋 复制Prompt</button>
+        <div id="ptA" style="display:none">
+          <div style="display:none" id="ptT"></div>
         </div>
       </div>
     </div>
@@ -755,7 +753,7 @@ audio#ap2{width:100%;border-radius:10px;margin-top:10px;display:none}
               <div class="sh2-icon pu">🎬</div>
               <div><div class="sh2-title">产品口播脚本</div><div class="sh2-sub">Claude 3.5 Haiku · 30秒带货脚本</div></div>
             </div>
-            <div class="mt2 m2" style="margin-bottom:12px">✦ Claude 3.5 Haiku · 视频脚本</div>
+            <div class="mt2 m2" style="margin-bottom:12px">✦ Gemini 2.0 Flash · 视频脚本</div>
             <textarea class="ta" id="tV" rows="3" placeholder="输入产品信息（如：空气炸锅299元，无油烹饪，减脂人群，30秒抖音带货视频）"></textarea>
             <button class="bb b2" onclick="doVidScript()" style="margin-top:12px">🎬 一键生成口播脚本</button>
           </div>
@@ -941,7 +939,7 @@ const CODES={
 
 // ═══ CONFIG ═══
 const M_IMG='google/gemini-2.0-flash-001';
-const M_SCRIPT='anthropic/claude-3.5-haiku-20241022';
+const M_SCRIPT='google/gemini-2.0-flash-001';
 const QWEN_KEY='sk-cfb5319ee5a24f7b9361608b7615a79b';
 const OR_KEY='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';
 
@@ -1138,26 +1136,47 @@ async function doImgs(){
     const raw=await orCall([{role:'user',content:req}],M_IMG,700);
     const r=pJ(raw);const ps=r.prompts||[];
     document.getElementById('ptT').textContent=ps.join('\n\n---\n\n');
-    document.getElementById('ptA').style.display='block';
+    // prompt section hidden
     hideL();showL('Flux生成4张图（约30秒）...','图片渲染中');
     const g=document.getElementById('iG');g.innerHTML='';
+    // Build all card shells first
+    var imgEls=[];
     ps.forEach(function(p2,i){
       var sl=document.createElement('div');sl.className='is';
-      var url='https://image.pollinations.ai/prompt/'+encodeURIComponent(p2+', '+S.sc+', ultra high quality 4K product photography')+'?width=512&height=512&model=flux&nologo=true&seed='+(Date.now()+i*137);
       var ph='ph'+i;
       var loader=document.createElement('div');loader.className='ip';loader.id=ph;
       loader.innerHTML='<div style="width:28px;height:28px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--cy);border-radius:50%;animation:sp .8s linear infinite"></div><span style="font-size:11px;margin-top:6px">生成中…</span>';
-      var img=document.createElement('img');img.src=url;img.style.width='100%';img.style.height='100%';img.style.objectFit='cover';img.style.display='none';
+      var img=document.createElement('img');
+      img.style.cssText='width:100%;height:100%;object-fit:cover;display:none;';
       var overlay=document.createElement('div');overlay.className='io';overlay.textContent='🔍';
-      (function(phId,imgEl){
+      (function(phId,imgEl,idx2){
         imgEl.onload=function(){imgEl.style.display='block';var e=document.getElementById(phId);if(e)e.style.display='none';};
-        imgEl.onerror=function(){var e=document.getElementById(phId);if(e)e.innerHTML='⚠️失败';};
+        imgEl.onerror=function(){
+          // Retry once with different seed after 2s
+          var e=document.getElementById(phId);
+          if(!imgEl._retried){
+            imgEl._retried=true;
+            if(e)e.innerHTML='<span style="font-size:11px;color:var(--mt2)">重试中…</span>';
+            setTimeout(function(){
+              var retryUrl='https://image.pollinations.ai/prompt/'+encodeURIComponent(ps[idx2]+', '+S.sc+', professional product photo, high quality')+'?width=512&height=512&model=flux&nologo=true&enhance=true&seed='+(Math.floor(Math.random()*99999));
+              imgEl.src=retryUrl;
+            },3000+idx2*1000);
+          }else{if(e)e.innerHTML='⚠️失败';}
+        };
         imgEl.onclick=function(){window.open(imgEl.src,'_blank');};
-      })(ph,img);
+      })(ph,img,i);
       sl.appendChild(loader);sl.appendChild(img);sl.appendChild(overlay);
       g.appendChild(sl);
+      imgEls.push({img:img,ph:ph,p2:p2});
     });
-    S.stats.i+=4;saveSt();renderStats();toast('图片生成中，约30秒','ok');
+    // Load sequentially with staggered delay (avoid rate limit)
+    imgEls.forEach(function(item,i){
+      setTimeout(function(){
+        var url='https://image.pollinations.ai/prompt/'+encodeURIComponent(item.p2+', '+S.sc+', ultra high quality 4K product photography')+'?width=512&height=512&model=flux&nologo=true&seed='+(Date.now()+i*137);
+        item.img.src=url;
+      }, i*3000);
+    });
+    S.stats.i+=4;saveSt();renderStats();toast('AI正在生成 '+ps.length+' 张产品大片，约1分钟','ok');
   }catch(e){toast('失败：'+e.message,'er');}
   finally{setTimeout(hideL,1000);}
 }
@@ -1224,8 +1243,8 @@ function setVStep(n){
 async function doVidScript(){
   const p=(document.getElementById('tV').value||'').trim();
   if(!p){toast('请输入产品信息','er');return;}
-  showL('Claude Haiku 生成口播脚本...','OpenRouter · Claude Haiku');
-  const msg='你是抖音电商口播文案专家。产品：'+p+'。\n创作30秒带货口播脚本（9:16竖屏）+分镜，为每个分镜生成英文图像描述。\n输出JSON（无代码块）：{"script":"完整口播稿，前3秒强钩子，含产品/价格/行动号召，约150字","shots":[{"no":1,"desc":"分镜描述中文","img":"英文图像描述用于AI绘图30词"},...]共4个}';
+  showL('Claude Haiku 生成口播脚本...','Gemini 2.0 Flash · 视频');
+  const msg='你是抖音电商口播文案专家。产品：'+p+'。\n请严格输出JSON，无代码块，无额外说明：{"script":"30秒口播稿，前3秒强钩子，含产品价格行动号召，约150字","shots":[{"no":1,"desc":"分镜中文描述","img":"English image prompt 30 words for AI art"},...共4个]}';
   try{
     const raw=await orCall([{role:'user',content:msg}],M_SCRIPT,1200);
     const r=pJ(raw);
