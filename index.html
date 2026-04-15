@@ -1041,7 +1041,7 @@ async function qwenCall(messages,max_tokens){
 async function orCall(messages,model,max_tokens){
   const r=await fetch('https://openrouter.ai/api/v1/chat/completions',{
     method:'POST',
-    headers:{'Content-Type':'application/json','Authorization':'Bearer '+OR_KEY,'HTTP-Referer':'https://aura.zenithsmart.xin','X-Title':'AI爆款工厂'},
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+OR_KEY,'HTTP-Referer':'https://viral.zenithsmart.xin','X-Title':'AI-Viral-Factory'},
     body:JSON.stringify({model:model||M_IMG,messages,max_tokens:max_tokens||1400})
   });
   const d=await r.json();
