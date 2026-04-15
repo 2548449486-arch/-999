@@ -3,18 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>✦ AI爆款工厂</title>
+<title>✦ AI爆款工厂 · 全套创作</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#060612;--s1:rgba(255,255,255,.03);--s2:rgba(255,255,255,.06);
-  --bd:rgba(255,255,255,.07);--bd2:rgba(255,255,255,.12);
+  --bg:#06060f;--s1:rgba(255,255,255,.04);--s2:rgba(255,255,255,.07);
+  --bd:rgba(255,255,255,.08);--bd2:rgba(255,255,255,.14);
   --gold:#f0b429;--pu:#7c3aed;--pk:#db2777;--cy:#0891b2;--gr:#059669;--rd:#dc2626;
   --tx:#f1f5f9;--mt:#475569;--mt2:#64748b;
   --g1:linear-gradient(135deg,#7c3aed,#db2777);
   --g2:linear-gradient(135deg,#f0b429,#ea580c);
   --g3:linear-gradient(135deg,#0891b2,#7c3aed);
   --g4:linear-gradient(135deg,#059669,#0891b2);
+  --glass:rgba(255,255,255,.05);
+  --glass2:rgba(255,255,255,.08);
+  --shadow:0 8px 32px rgba(0,0,0,.4);
+  --shadow-pu:0 8px 24px rgba(124,58,237,.25);
 }
 html,body{height:100%;background:var(--bg);color:var(--tx);
   font-family:"PingFang SC","SF Pro Display",-apple-system,sans-serif;overflow:hidden}
@@ -323,6 +327,166 @@ audio#ap2{width:100%;border-radius:10px;margin-top:10px;display:none}
 .ft{display:inline-block;padding:3px 8px;border-radius:8px;font-size:10px;margin-bottom:6px}
 .fn{font-size:14px;font-weight:700;margin-bottom:4px}
 .fd{font-size:12px;color:var(--mt2);line-height:1.5}
+
+@keyframes slideUp{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes glow{0%,100%{box-shadow:0 0 12px rgba(124,58,237,.3)}50%{box-shadow:0 0 24px rgba(219,39,119,.4)}}
+@keyframes tpScroll{from{transform:translateY(0)}to{transform:translateY(-100%)}}
+
+/* ── GLASS CARDS ── */
+.gc{background:var(--glass);border:1px solid var(--bd2);border-radius:18px;
+  padding:18px;margin-bottom:12px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.gc-gold{background:linear-gradient(135deg,rgba(240,180,41,.08),rgba(234,88,12,.05));
+  border:1px solid rgba(240,180,41,.2);border-radius:18px;padding:18px;margin-bottom:12px}
+.gc-pu{background:linear-gradient(135deg,rgba(124,58,237,.1),rgba(219,39,119,.07));
+  border:1px solid rgba(124,58,237,.22);border-radius:18px;padding:18px;margin-bottom:12px}
+.gc-cy{background:linear-gradient(135deg,rgba(8,145,178,.08),rgba(124,58,237,.06));
+  border:1px solid rgba(8,145,178,.2);border-radius:18px;padding:18px;margin-bottom:12px}
+
+/* ── SECTION HEADER ── */
+.sh2{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.sh2-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;
+  justify-content:center;font-size:14px;flex-shrink:0}
+.sh2-icon.pu{background:rgba(124,58,237,.2)}
+.sh2-icon.cy{background:rgba(8,145,178,.2)}
+.sh2-icon.go{background:rgba(240,180,41,.2)}
+.sh2-icon.gr{background:rgba(5,150,105,.2)}
+.sh2-title{font-size:13px;font-weight:800;color:var(--tx)}
+.sh2-sub{font-size:10px;color:var(--mt2);margin-top:1px}
+
+/* ── STEP FLOW ── */
+.sf{display:flex;align-items:flex-start;margin-bottom:22px;padding:0 4px}
+.sf-item{flex:1;text-align:center;position:relative}
+.sf-item:not(:last-child)::after{content:'';position:absolute;top:13px;left:64%;right:-36%;
+  height:1.5px;background:var(--bd)}
+.sf-item.sf-done:not(:last-child)::after{background:linear-gradient(90deg,var(--gr),rgba(5,150,105,.3))}
+.sf-item.sf-act:not(:last-child)::after{background:linear-gradient(90deg,var(--pu),rgba(124,58,237,.2))}
+.sf-dot{width:26px;height:26px;border-radius:50%;margin:0 auto 5px;font-size:11px;
+  font-weight:800;display:flex;align-items:center;justify-content:center;transition:.3s}
+.sf-done .sf-dot{background:var(--gr);color:#fff}
+.sf-act .sf-dot{background:var(--g1);color:#fff;animation:glow 2s infinite}
+.sf-wait .sf-dot{background:var(--s2);color:var(--mt);border:1px solid var(--bd)}
+.sf-label{font-size:9px;color:var(--mt2);letter-spacing:.2px}
+.sf-act .sf-label{color:var(--tx);font-weight:700}
+.sf-done .sf-label{color:var(--gr)}
+
+/* ── TELEPROMPTER ── */
+.tp-box{background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;padding:18px 16px;height:170px;overflow:hidden;
+  position:relative;cursor:pointer}
+.tp-inner{font-size:18px;font-weight:600;line-height:1.9;color:#fff;
+  transition:transform .3s linear}
+.tp-fade-t{position:absolute;top:0;left:0;right:0;height:44px;
+  background:linear-gradient(to bottom,rgba(0,0,0,.7),transparent);
+  border-radius:16px 16px 0 0;pointer-events:none;z-index:2}
+.tp-fade-b{position:absolute;bottom:0;left:0;right:0;height:44px;
+  background:linear-gradient(to top,rgba(0,0,0,.7),transparent);
+  border-radius:0 0 16px 16px;pointer-events:none;z-index:2}
+.tp-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:12px;color:var(--mt2);text-align:center;pointer-events:none;z-index:1}
+.tp-recording-line{position:absolute;top:50%;left:16px;right:16px;height:2px;
+  background:var(--pk);opacity:.5;transform:translateY(-1px);z-index:3;
+  border-radius:1px}
+
+/* ── RESULT CARDS ── */
+.res-title-item{padding:12px 14px;border-radius:12px;border:1px solid var(--bd);
+  margin-bottom:8px;cursor:pointer;transition:.2s;font-size:14px;line-height:1.55}
+.res-title-item:active{border-color:var(--pu);background:rgba(124,58,237,.08)}
+.res-title-item.picked{border-color:var(--pu);background:rgba(124,58,237,.1);
+  box-shadow:0 0 0 1px rgba(124,58,237,.3)}
+.res-hook{font-size:18px;font-weight:900;color:var(--gold);line-height:1.4;
+  text-align:center;padding:8px 0}
+
+/* ── VIDEO RESULT ── */
+.vr-section{background:rgba(255,255,255,.03);border:1px solid var(--bd);
+  border-radius:14px;overflow:hidden;margin-bottom:14px}
+.vr-head{padding:12px 14px;background:rgba(255,255,255,.03);
+  border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:700}
+.vr-body{padding:14px;font-size:14px;line-height:1.8;white-space:pre-wrap;color:var(--tx)}
+
+/* ── EXPORT BUTTONS ── */
+.exp-row{display:flex;gap:8px;margin-top:12px}
+.exp-btn{flex:1;padding:12px 8px;border-radius:12px;border:1px solid var(--bd);
+  background:var(--s1);font-size:12px;font-weight:700;color:var(--tx);
+  cursor:pointer;text-align:center;transition:.2s}
+.exp-btn:active{background:var(--s2);transform:scale(.97)}
+.exp-btn.primary{background:var(--g1);border:none;color:#fff;box-shadow:var(--shadow-pu)}
+
+/* ── COMMENT REPLY ── */
+.cr-wrap{border-radius:14px;overflow:hidden;border:1px solid var(--bd);margin-bottom:12px}
+.cr-in{padding:12px 14px;font-size:13px;color:var(--mt2);background:rgba(255,255,255,.02);
+  border-bottom:1px solid var(--bd)}
+.cr-out{padding:14px;font-size:14px;line-height:1.75;color:var(--tx)}
+
+/* ── BATCH RESULTS ── */
+.batch-item{border-radius:14px;border:1px solid var(--bd);overflow:hidden;margin-bottom:10px}
+.batch-head{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--bd)}
+.batch-plat{font-size:12px;font-weight:800;display:flex;align-items:center;gap:6px}
+.batch-body{padding:12px 14px;font-size:13px;line-height:1.7;color:var(--tx)}
+
+/* ── NAV ENHANCED ── */
+.nb.on .ni{filter:drop-shadow(0 0 6px rgba(167,139,250,.6))}
+.nb.on{opacity:1}
+
+/* ── WAVEFORM ENHANCED ── */
+.wv-wrap{border-radius:14px;overflow:hidden;background:rgba(0,0,0,.4);
+  border:1px solid var(--bd);margin-bottom:12px}
+
+/* ── BADGE TAGS ── */
+.pro-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;
+  border-radius:20px;font-size:10px;font-weight:800;
+  background:linear-gradient(90deg,rgba(240,180,41,.15),rgba(234,88,12,.12));
+  color:var(--gold);border:1px solid rgba(240,180,41,.25)}
+.new-tag{display:inline-flex;align-items:center;padding:2px 7px;
+  border-radius:6px;font-size:9px;font-weight:900;
+  background:rgba(5,150,105,.2);color:#34d399;margin-left:6px}
+
+/* ── TOGGLE SWITCH ── */
+.tog-row{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 0;border-bottom:1px solid var(--bd)}
+.tog-row:last-child{border:none}
+.tog-label{font-size:13px;color:var(--tx)}
+.tog-sub{font-size:11px;color:var(--mt2);margin-top:2px}
+.tog{width:40px;height:22px;border-radius:11px;background:var(--bd2);
+  position:relative;cursor:pointer;transition:.3s;flex-shrink:0}
+.tog.on{background:var(--pu)}
+.tog::after{content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;
+  border-radius:50%;background:#fff;transition:.3s}
+.tog.on::after{left:21px}
+
+/* ── ANIMATED STATS ── */
+.sn{font-size:24px;font-weight:900;background:var(--g1);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+/* ── VIDEO MAKER OVERLAY ── */
+#vmOverlay{position:fixed;inset:0;z-index:500;background:rgba(6,6,15,.97);
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  padding:24px}
+#vmOverlay.on{display:flex}
+.vm-title{font-size:18px;font-weight:900;text-align:center;margin-bottom:6px;
+  background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.vm-sub{font-size:12px;color:var(--mt2);margin-bottom:20px;text-align:center}
+.vm-canvas-wrap{border-radius:16px;overflow:hidden;border:2px solid var(--bd2);
+  box-shadow:0 0 40px rgba(124,58,237,.3);margin-bottom:18px;width:180px}
+#vmCanvas{display:block;width:180px;height:320px}
+.vm-progress-bar{width:100%;max-width:300px;height:6px;background:rgba(255,255,255,.1);
+  border-radius:3px;overflow:hidden;margin-bottom:8px}
+.vm-progress-fill{height:100%;background:var(--g1);border-radius:3px;
+  transition:width .1s linear;width:0%}
+.vm-pct{font-size:24px;font-weight:900;color:var(--tx);text-align:center;margin-bottom:4px}
+.vm-eta{font-size:12px;color:var(--mt2);text-align:center;margin-bottom:20px}
+.vm-done{display:none;width:100%;max-width:300px}
+.vm-done-icon{font-size:48px;text-align:center;margin-bottom:12px}
+.vm-done-title{font-size:17px;font-weight:900;text-align:center;margin-bottom:4px;color:var(--tx)}
+.vm-done-sub{font-size:12px;color:var(--mt2);text-align:center;margin-bottom:18px;line-height:1.6}
+.vm-dl-btn{width:100%;padding:16px;border:none;border-radius:16px;cursor:pointer;
+  font-size:16px;font-weight:900;letter-spacing:.5px;color:#fff;margin-bottom:10px;
+  background:var(--g1);box-shadow:0 4px 20px rgba(124,58,237,.4)}
+.vm-dl-btn.b{background:var(--g4);box-shadow:0 4px 20px rgba(5,150,105,.3)}
+.vm-note{font-size:11px;color:var(--mt);text-align:center;line-height:1.7;
+  padding:10px 14px;background:rgba(255,255,255,.03);border-radius:10px;
+  border:1px solid var(--bd)}
 </style>
 </head>
 <body>
@@ -406,15 +570,53 @@ audio#ap2{width:100%;border-radius:10px;margin-top:10px;display:none}
         <textarea class="ta" id="tE" rows="2" placeholder="如：突出情感共鸣、加入网络梗、针对25-35岁职场女性..."></textarea>
         <div class="mt2 m1" style="margin-top:14px">✦ Qwen-Plus · 文案生成</div>
         <button class="bb b1" onclick="doGen()">✦ 生成爆款文案</button>
-        <div id="gr2" style="display:none">
-          <div class="rx"><div class="rl">📌 爆款标题（三选一）</div><div class="rt" id="rT"></div><button class="rb" onclick="cp('rT')">📋 复制</button></div>
-          <div class="rx"><div class="rl">✍️ 正文文案</div><div class="rt" id="rB"></div><button class="rb" onclick="cp('rB')">📋 复制</button></div>
-          <div class="rx"><div class="rl">🏷 话题标签</div><div class="rt" id="rTg"></div><button class="rb" onclick="cp('rTg')">📋 复制</button></div>
-          <div class="rx" style="border-color:rgba(240,180,41,.3);background:rgba(240,180,41,.04)">
-            <div class="rl" style="color:var(--gold)">💡 爆款金句</div>
-            <div class="rt" id="rH" style="color:var(--gold)"></div>
-            <button class="rb" onclick="cp('rH')">📋 复制</button>
+        <div id="gr2" style="display:none;animation:slideUp .3s ease">
+          <!-- 金句大字 -->
+          <div class="gc-gold" style="text-align:center;padding:14px 16px">
+            <div style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:6px">💡 爆款金句</div>
+            <div class="res-hook" id="rH"></div>
+            <button class="rb" onclick="cp('rH')" style="margin:6px auto 0;display:flex">📋 复制金句</button>
           </div>
+          <!-- 标题三选一 -->
+          <div class="gc">
+            <div class="sh2" style="margin-bottom:10px">
+              <div class="sh2-icon pu">📌</div>
+              <div><div class="sh2-title">爆款标题</div><div class="sh2-sub">点击选中 · 一键复制</div></div>
+            </div>
+            <div id="rTcards"></div>
+            <div style="display:none" id="rT"></div>
+          </div>
+          <!-- 正文 -->
+          <div class="gc-pu">
+            <div class="sh2" style="margin-bottom:10px">
+              <div class="sh2-icon pk">✍️</div>
+              <div><div class="sh2-title">正文文案</div><div class="sh2-sub" id="rBcount"></div></div>
+            </div>
+            <div class="rt" id="rB" style="font-size:14px;line-height:1.85"></div>
+            <button class="rb" onclick="cp('rB')" style="margin-top:10px">📋 复制正文</button>
+          </div>
+          <!-- 标签 -->
+          <div class="gc">
+            <div class="rl" style="margin-bottom:8px">🏷 话题标签</div>
+            <div class="rt" id="rTg" style="color:var(--cy);font-size:13px"></div>
+            <button class="rb" onclick="cp('rTg')" style="margin-top:8px">📋 复制标签</button>
+          </div>
+        </div>
+
+        <!-- 评论回复助手 -->
+        <div style="height:1px;background:var(--bd);margin:20px 0"></div>
+        <div class="sh2" style="margin-bottom:10px">
+          <div class="sh2-icon gr">💬</div>
+          <div><div class="sh2-title">评论回复助手 <span class="new-tag">NEW</span></div><div class="sh2-sub">买家评论 → AI一键回复</div></div>
+        </div>
+        <textarea class="ta" id="tCmt" rows="2" placeholder="粘贴买家评论（如：这个真的有效果吗？我皮肤很敏感...）"></textarea>
+        <button class="bb b4" onclick="doReply()" style="margin-top:10px;padding:13px">💬 生成专业回复</button>
+        <div id="replyR" style="display:none;margin-top:10px">
+          <div class="cr-wrap">
+            <div class="cr-in" id="rCmtIn"></div>
+            <div class="cr-out" id="rCmtOut"></div>
+          </div>
+          <button class="rb" onclick="cp('rCmtOut')" style="width:100%;justify-content:center">📋 复制回复</button>
         </div>
         <div class="st" style="margin-top:20px">⚡ 爆款公式</div>
         <div class="fc" onclick="apF('痛点公式')">
@@ -442,13 +644,16 @@ audio#ap2{width:100%;border-radius:10px;margin-top:10px;display:none}
           <div class="gt"><strong>🔥 全网热词雷达</strong><span>激活后解锁</span></div>
           <button class="gcb" onclick="goLp()">立即激活</button>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div class="st" style="margin:0">🔥 今日热词雷达</div>
-          <button style="padding:6px 12px;border-radius:20px;border:1px solid var(--bd);background:var(--s1);font-size:12px;color:var(--mt2);cursor:pointer;display:flex;align-items:center;gap:5px" onclick="doTrend()">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div class="sh2" style="margin:0">
+            <div class="sh2-icon go">🔥</div>
+            <div><div class="sh2-title">今日热词雷达</div><div class="sh2-sub">Qwen Plus · 实时趋势分析</div></div>
+          </div>
+          <button style="padding:8px 14px;border-radius:20px;border:1px solid var(--bd);background:var(--s1);font-size:12px;color:var(--mt2);cursor:pointer;display:flex;align-items:center;gap:5px" onclick="doTrend()">
             <span id="rsp">↻</span> 刷新
           </button>
         </div>
-        <div class="mt2 m1">✦ Qwen-Plus · 趋势分析</div>
+        <div class="mt2 m1" style="margin-bottom:14px">✦ Qwen-Plus · 趋势分析</div>
         <div class="cd">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
             <span style="font-size:13px;font-weight:700">📕 小红书飙升词</span>
@@ -476,6 +681,10 @@ audio#ap2{width:100%;border-radius:10px;margin-top:10px;display:none}
         <div class="gb" id="gb3" style="display:none">
           <div class="gt"><strong>🎨 AI图片工坊</strong><span>激活后解锁</span></div>
           <button class="gcb" onclick="goLp()">立即激活</button>
+        </div>
+        <div class="sh2" style="margin-bottom:14px">
+          <div class="sh2-icon cy">🎨</div>
+          <div><div class="sh2-title">AI产品大片工坊</div><div class="sh2-sub">Gemini 2.0 + Flux · 商业摄影级</div></div>
         </div>
         <div class="st">场景风格</div>
         <div class="scr">
@@ -512,68 +721,161 @@ audio#ap2{width:100%;border-radius:10px;margin-top:10px;display:none}
           <div class="lk">
             <span class="lic">🎬</span>
             <div class="lt">专业版专属功能</div>
-            <div class="ld">视频脚本 · 分镜故事板 · 声音录制<br>需升级专业版（¥99.9/月）</div>
+            <div class="ld">口播视频工坊 · AI配图 · 声音录制<br>需升级专业版（¥99.9/月）</div>
             <button class="uc" onclick="goTab('t-mem')">升级专业版 →</button>
           </div>
         </div>
+
         <!-- PRO CONTENT -->
         <div id="vPro" style="display:none">
 
-          <!-- 视频脚本 -->
-          <div class="st">🎬 视频脚本 + 分镜</div>
-          <div class="mt2 m2">✦ Claude 3.5 Haiku · 视频脚本</div>
-          <textarea class="ta" id="tV" rows="3" placeholder="产品信息（如：空气炸锅299元，适合减脂人群，无油烹饪，30秒带货视频）"></textarea>
-          <button class="bb b2" onclick="doScript()" style="margin-top:10px">🎬 生成脚本 + 分镜故事板</button>
-          <div id="scR" style="display:none">
-            <div class="rx" style="border-color:rgba(240,180,41,.3);background:rgba(240,180,41,.04)">
-              <div class="rl" style="color:var(--gold)">🎤 口播稿（30秒）</div>
-              <div class="rt" id="rSc"></div>
-              <button class="rb" onclick="cp('rSc')">📋 复制</button>
+          <!-- 步骤指示器 -->
+          <div class="sf" id="vidSteps">
+            <div class="sf-item sf-act" id="vstep1">
+              <div class="sf-dot">1</div>
+              <div class="sf-label">生成脚本</div>
             </div>
-            <div class="rx"><div class="rl">📋 分镜列表</div><div class="rt" id="rSh"></div></div>
-            <!-- 故事板图片 -->
-            <div class="st" style="margin-top:14px">🖼 AI故事板（自动生成分镜图）</div>
-            <div class="sb-wrap" id="sbW"></div>
-            <!-- canvas 预览 -->
-            <div id="cvWrap">
-              <div class="st">▶ 视频预览（分镜动态播放）</div>
-              <canvas id="cv" width="180" height="320"></canvas>
-              <div class="cv-btns">
-                <button class="cv-btn go" onclick="playCV()">▶ 播放</button>
-                <button class="cv-btn" onclick="stopCV()">■ 停止</button>
-                <button class="cv-btn" onclick="dlCV()">⬇ 导出帧</button>
-              </div>
+            <div class="sf-item sf-wait" id="vstep2">
+              <div class="sf-dot">2</div>
+              <div class="sf-label">录制口播</div>
+            </div>
+            <div class="sf-item sf-wait" id="vstep3">
+              <div class="sf-dot">3</div>
+              <div class="sf-label">AI配图</div>
+            </div>
+            <div class="sf-item sf-wait" id="vstep4">
+              <div class="sf-dot">4</div>
+              <div class="sf-label">合成导出</div>
             </div>
           </div>
 
-          <!-- 分割线 -->
-          <div style="height:1px;background:var(--bd);margin:20px 0"></div>
+          <!-- STEP 1: 脚本生成 -->
+          <div id="vStep1">
+            <div class="sh2">
+              <div class="sh2-icon pu">🎬</div>
+              <div><div class="sh2-title">产品口播脚本</div><div class="sh2-sub">Claude 3.5 Haiku · 30秒带货脚本</div></div>
+            </div>
+            <div class="mt2 m2" style="margin-bottom:12px">✦ Claude 3.5 Haiku · 视频脚本</div>
+            <textarea class="ta" id="tV" rows="3" placeholder="输入产品信息（如：空气炸锅299元，无油烹饪，减脂人群，30秒抖音带货视频）"></textarea>
+            <button class="bb b2" onclick="doVidScript()" style="margin-top:12px">🎬 一键生成口播脚本</button>
+          </div>
 
-          <!-- 声音录制 -->
-          <div class="st">🎙 声音录制</div>
-          <div class="cd">
-            <div class="vc-wrap">
-              <canvas class="vc-vis" id="waveCV"></canvas>
+          <!-- STEP 2: 提词器+录音 -->
+          <div id="vStep2" style="display:none">
+            <div class="sh2" style="margin-bottom:8px">
+              <div class="sh2-icon pk">🎙</div>
+              <div><div class="sh2-title">提词器 · 跟读录音</div><div class="sh2-sub">文字自动滚动 · 保持自然语速即可</div></div>
+            </div>
+
+            <!-- 提词器 -->
+            <div class="tp-box" id="tpBox">
+              <div class="tp-fade-t"></div>
+              <div class="tp-inner" id="tpInner"></div>
+              <div class="tp-recording-line" id="tpLine" style="display:none"></div>
+              <div class="tp-fade-b"></div>
+              <div class="tp-hint" id="tpHint">点击「开始录制」文字自动滚动</div>
+            </div>
+
+            <!-- 波形 -->
+            <div class="wv-wrap" style="margin-top:10px">
+              <canvas class="vc-vis" id="waveCV" style="display:block;width:100%;height:70px"></canvas>
+            </div>
+
+            <!-- 计时 + 状态 -->
+            <div style="text-align:center;margin:10px 0">
               <div class="vc-timer" id="vcT">00:00</div>
               <div class="vc-status" id="vcS" style="animation:none">准备录音</div>
-              <div class="vc-btns">
-                <button class="vc-btn vc-rec" onclick="startRec()" id="bRec" title="录音">🎙</button>
-                <button class="vc-btn vc-stop" onclick="stopRec()" id="bStop" title="停止" style="opacity:.4;pointer-events:none">⏹</button>
-                <button class="vc-btn vc-play" onclick="playRec()" id="bPlay" title="播放" style="opacity:.4;pointer-events:none">▶</button>
-              </div>
-              <audio id="ap2"></audio>
-              <a id="dlA" class="vc-dl bb b4" style="display:none;text-decoration:none;text-align:center;padding:12px;border-radius:14px;font-size:14px;font-weight:800;color:#fff" download="录音.wav">⬇ 下载录音文件</a>
             </div>
-            <div style="font-size:12px;color:var(--mt2);line-height:1.6;margin-top:10px">
-              💡 录制30秒声音样本，可用于AI声音克隆（ElevenLabs等服务）
+
+            <!-- 录音按钮 -->
+            <div class="vc-btns">
+              <button class="vc-btn vc-rec" onclick="startVidRec()" id="bRec" title="录音">🎙</button>
+              <button class="vc-btn vc-stop" onclick="stopVidRec()" id="bStop" title="停止" style="opacity:.4;pointer-events:none">⏹</button>
+              <button class="vc-btn vc-play" onclick="playVidRec()" id="bPlay" title="播放" style="opacity:.4;pointer-events:none">▶</button>
             </div>
+            <audio id="ap2" style="display:none;width:100%;border-radius:10px;margin-top:8px"></audio>
+
+            <button class="bb b3" onclick="nextToVidImages()" id="bNextImg" style="margin-top:14px;display:none">
+              🎨 录制完成 → AI生成配图
+            </button>
+            <button class="rb" onclick="backToScript()" style="width:100%;justify-content:center;margin-top:8px">← 重新生成脚本</button>
           </div>
 
-        </div>
+          <!-- STEP 3: AI配图 -->
+          <div id="vStep3" style="display:none">
+            <div class="sh2">
+              <div class="sh2-icon cy">🖼</div>
+              <div><div class="sh2-title">AI生成宣传配图</div><div class="sh2-sub">Gemini 2.0 + Flux · 自动匹配视频场景</div></div>
+            </div>
+            <div class="mt2 m1" style="margin-bottom:14px">✦ Gemini 2.0 Flash → Flux渲染</div>
+            <div class="sb-wrap" id="vImgWrap" style="display:grid;grid-template-columns:1fr 1fr;gap:8px"></div>
+            <button class="bb b3" onclick="nextToPreview()" id="bNextPrev" style="margin-top:14px;display:none">
+              ▶ 进入合成预览
+            </button>
+          </div>
+
+          <!-- STEP 4: 合成预览 -->
+          <div id="vStep4" style="display:none">
+            <div class="sh2">
+              <div class="sh2-icon go">✨</div>
+              <div><div class="sh2-title">视频素材已就绪</div><div class="sh2-sub">导入剪映一键合成带货视频</div></div>
+            </div>
+
+            <!-- 预览播放器 -->
+            <div style="text-align:center;margin-bottom:14px">
+              <canvas id="cv" width="180" height="320" style="border-radius:14px;border:1px solid var(--bd);max-width:100%;width:160px"></canvas>
+              <div class="cv-btns" style="margin-top:8px">
+                <button class="cv-btn go" onclick="playCV()">▶ 播放</button>
+                <button class="cv-btn" onclick="stopCV()">■ 停止</button>
+              </div>
+            </div>
+
+            <!-- 录音回放 -->
+            <div class="gc" style="margin-bottom:12px">
+              <div class="rl" style="margin-bottom:8px">🎙 口播录音</div>
+              <audio id="vAudioPlay" style="width:100%;border-radius:10px" controls></audio>
+            </div>
+
+            <!-- 口播稿 -->
+            <div class="gc-gold">
+              <div class="rl" style="color:var(--gold);margin-bottom:8px">📋 口播稿</div>
+              <div class="rt" id="rSc" style="font-size:13px"></div>
+              <button class="rb" onclick="cp('rSc')" style="margin-top:8px">📋 复制稿件</button>
+            </div>
+
+            <!-- 导出操作 -->
+            <div class="gc" style="margin-top:4px">
+              <div class="rl" style="margin-bottom:10px">💾 导出素材</div>
+              <div class="exp-row">
+                <button class="exp-btn primary" onclick="dlVidAudio()">⬇ 下载录音</button>
+                <button class="exp-btn" onclick="dlCV()">🖼 导出当前帧</button>
+              </div>
+              <div style="font-size:11px;color:var(--mt2);margin-top:10px;line-height:1.7">
+                💡 将录音+配图导入<strong style="color:var(--gold)">剪映</strong>，选「图文成片」即可一键合成带货视频
+              </div>
+            </div>
+
+            <!-- 一键生成成品视频 -->
+            <div class="gc-pu" style="margin-top:4px">
+              <div class="sh2" style="margin-bottom:8px">
+                <div class="sh2-icon pk">🎬</div>
+                <div><div class="sh2-title">一键生成成品带货视频</div><div class="sh2-sub">口播录音 + AI配图 + 文案叠加 → 直接下载发布</div></div>
+              </div>
+              <div style="font-size:11px;color:var(--mt2);line-height:1.7;margin-bottom:12px">
+                ✅ 9:16竖版格式 &nbsp;·&nbsp; ✅ Ken Burns动效 &nbsp;·&nbsp; ✅ 文案字幕
+              </div>
+              <button class="bb b1" onclick="startVideoMake()" style="padding:16px">
+                🎬 合成带货视频 · 一键下载
+              </button>
+            </div>
+            <button class="rb" onclick="restartVid()" style="width:100%;justify-content:center;margin-top:4px">🔄 重新制作</button>
+          </div>
+
+        </div><!-- /vPro -->
       </div>
     </div>
 
-    <!-- ─── 会员 ─── -->
+        <!-- ─── 会员 ─── -->
     <div class="tp2" id="t-mem">
       <div class="s">
         <div id="cpW"></div>
@@ -587,7 +889,7 @@ audio#ap2{width:100%;border-radius:10px;margin-top:10px;display:none}
           <div class="plb">标准版</div>
           <div class="plp">¥49.9<span style="font-size:14px;color:var(--mt2);font-weight:400">/月</span></div>
           <div class="pks">
-            <div class="pk"><span class="poc">✓</span>Gemini 2.0 文案无限生成</div>
+            <div class="pk"><span class="poc">✓</span>Qwen Plus 文案无限生成</div>
             <div class="pk"><span class="poc">✓</span>Gemini → Flux图片生成</div>
             <div class="pk"><span class="poc">✓</span>全网热词雷达 + 选品分析</div>
             <div class="pk"><span class="poc">✓</span>5大平台爆款公式库</div>
@@ -774,9 +1076,23 @@ async function doGen(){
     const raw=await qwenCall([{role:'user',content:msg}],1500);
     const r=pJ(raw);
     document.getElementById('rT').textContent=r.title||'—';
-    document.getElementById('rB').textContent=r.body||'—';
-    document.getElementById('rTg').textContent=r.tags||'—';
     document.getElementById('rH').textContent=r.hook||'—';
+    document.getElementById('rB').textContent=r.body||'—';
+    document.getElementById('rBcount').textContent=(r.body||'').length+'字';
+    document.getElementById('rTg').textContent=r.tags||'—';
+    // Render title cards
+    var tcEl=document.getElementById('rTcards');tcEl.innerHTML='';
+    var titles=(r.title||'').split('\n').filter(function(t){return t.trim();});
+    titles.forEach(function(t,i){
+      var d=document.createElement('div');d.className='res-title-item';
+      d.textContent=t.trim();
+      d.onclick=function(){
+        document.querySelectorAll('.res-title-item').forEach(function(x){x.classList.remove('picked');});
+        d.classList.add('picked');
+        if(navigator.clipboard){navigator.clipboard.writeText(t.trim()).then(function(){toast('标题已复制','ok');});}
+      };
+      tcEl.appendChild(d);
+    });
     document.getElementById('gr2').style.display='block';
     S.stats.g++;saveSt();renderStats();toast('✦ 文案生成完成','ok');
   }catch(e){toast('失败：'+e.message,'er');}
@@ -825,11 +1141,20 @@ async function doImgs(){
     document.getElementById('ptA').style.display='block';
     hideL();showL('Flux生成4张图（约30秒）...','图片渲染中');
     const g=document.getElementById('iG');g.innerHTML='';
-    ps.forEach((p2,i)=>{
-      const sl=document.createElement('div');sl.className='is';
-      const url='https://image.pollinations.ai/prompt/'+encodeURIComponent(p2+', '+S.sc+', ultra high quality 4K product photography')+'?width=512&height=512&model=flux&nologo=true&seed='+(Date.now()+i*137);
-      const ph='ph'+i;
-      sl.innerHTML='<div class="ip" id="'+ph+'"><div style="width:28px;height:28px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--cy);border-radius:50%;animation:sp .8s linear infinite"></div><span style="font-size:11px;margin-top:6px">生成中…</span></div>'+'<img src="'+url+'" onload="this.style.display=\'block\';var e=document.getElementById(\''+ph+'\');if(e)e.style.display=\'none\';" onerror="var e=document.getElementById(\''+ph+'\');if(e)e.innerHTML=\'⚠️失败\';" onclick="window.open(this.src,\'_blank\')">'+'<div class="io">🔍</div>';
+    ps.forEach(function(p2,i){
+      var sl=document.createElement('div');sl.className='is';
+      var url='https://image.pollinations.ai/prompt/'+encodeURIComponent(p2+', '+S.sc+', ultra high quality 4K product photography')+'?width=512&height=512&model=flux&nologo=true&seed='+(Date.now()+i*137);
+      var ph='ph'+i;
+      var loader=document.createElement('div');loader.className='ip';loader.id=ph;
+      loader.innerHTML='<div style="width:28px;height:28px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--cy);border-radius:50%;animation:sp .8s linear infinite"></div><span style="font-size:11px;margin-top:6px">生成中…</span>';
+      var img=document.createElement('img');img.src=url;img.style.width='100%';img.style.height='100%';img.style.objectFit='cover';img.style.display='none';
+      var overlay=document.createElement('div');overlay.className='io';overlay.textContent='🔍';
+      (function(phId,imgEl){
+        imgEl.onload=function(){imgEl.style.display='block';var e=document.getElementById(phId);if(e)e.style.display='none';};
+        imgEl.onerror=function(){var e=document.getElementById(phId);if(e)e.innerHTML='⚠️失败';};
+        imgEl.onclick=function(){window.open(imgEl.src,'_blank');};
+      })(ph,img);
+      sl.appendChild(loader);sl.appendChild(img);sl.appendChild(overlay);
       g.appendChild(sl);
     });
     S.stats.i+=4;saveSt();renderStats();toast('图片生成中，约30秒','ok');
@@ -837,33 +1162,9 @@ async function doImgs(){
   finally{setTimeout(hideL,1000);}
 }
 
-// ═══ VIDEO SCRIPT + STORYBOARD ═══
-async function doScript(){
-  const p=(document.getElementById('tV').value||'').trim();
-  if(!p){toast('请输入产品信息','er');return;}
-  showL('Claude Haiku 生成视频脚本...','OpenRouter · Claude Haiku');
-  const msg='你是抖音电商口播文案专家。产品：'+p+'。\n创作30秒带货口播脚本（9:16竖屏）+分镜，并为每个分镜生成一个英文图像描述。\n输出JSON（无代码块）：{"script":"完整口播稿，前3秒强钩子，含产品/价格/行动号召，150字","shots":[{"no":1,"desc":"分镜描述中文","img":"英文图像描述，用于AI绘图，30词"},...]4个}';
-  try{
-    const raw=await orCall([{role:'user',content:msg}],M_SCRIPT,1200);
-    const r=pJ(raw);
-    document.getElementById('rSc').textContent=r.script||'—';
-    document.getElementById('rSh').textContent=(r.shots||[]).map(s=>'[镜头'+s.no+'] '+s.desc).join('\n');
-    document.getElementById('scR').style.display='block';
-    // Generate storyboard images
-    const sb=document.getElementById('sbW');sb.innerHTML='';sbImgs=[];
-    (r.shots||[]).forEach((sh,i)=>{
-      const card=document.createElement('div');card.className='sb-card';
-      const ph='sbph'+i;
-      const url='https://image.pollinations.ai/prompt/'+encodeURIComponent(sh.img+', vertical 9:16 cinematic product video frame, high quality')+'?width=270&height=480&model=flux&nologo=true&seed='+(Date.now()+i*211);
-      card.innerHTML='<div class="sb-img ph" id="'+ph+'"><div style="width:24px;height:24px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--pu);border-radius:50%;animation:sp .8s linear infinite"></div></div>'+'<img class="sb-img" src="'+url+'" style="display:none" onload="this.style.display=\'block\';var e=document.getElementById(\''+ph+'\');if(e)e.style.display=\'none\';addSbImg('+i+',this.src);" onerror="var e=document.getElementById(\''+ph+'\');if(e)e.innerHTML=\'⚠️\';">'+'<div class="sb-label">镜头'+sh.no+'：'+sh.desc+'</div>';
-      sb.appendChild(card);
-    });
-    document.getElementById('cvWrap').style.display='block';
-    toast('脚本+故事板生成中','ok');
-  }catch(e){toast('失败：'+e.message,'er');}
-  finally{hideL();}
-}
-function addSbImg(idx,src){sbImgs[idx]=src;}
+// ═══ VIDEO SCRIPT (integrated into 口播工坊) ═══
+function doScript(){doVidScript();}
+function addSbImg(idx,src){if(sbImgs)sbImgs[idx]=src;}
 
 // ═══ CANVAS VIDEO PREVIEW ═══
 function playCV(){
@@ -893,62 +1194,540 @@ function dlCV(){
   toast('已导出当前帧','ok');
 }
 
-// ═══ VOICE RECORDER ═══
-let mr=null,chunks=[],vcInterval=null,vcSec=0,audioCtx=null,analyser=null,srcNode=null;
+// Voice recorder integrated into 口播视频工坊
 
-async function startRec(){
+
+// ═══ VIDEO WORKSHOP STATE ═══
+let vidScript='';
+let vidAudioBlob=null;
+let vidAudioUrl=null;
+let vImgs=[];
+let tpRAF=null;
+let tpStartTime=null;
+let tpDuration=33000;
+let vidMr=null,vidChunks=[],vidVcSec=0,vidVcInt=null;
+let vidAudioCtx=null,vidAnalyser=null,vidSrcNode=null,vidWaveRAF=null;
+
+function setVStep(n){
+  for(var i=1;i<=4;i++){
+    var el=document.getElementById('vstep'+i);
+    if(!el)continue;
+    el.className='sf-item '+(i<n?'sf-done':i===n?'sf-act':'sf-wait');
+    el.querySelector('.sf-dot').textContent=i<n?'✓':i;
+  }
+  for(var j=1;j<=4;j++){
+    var s=document.getElementById('vStep'+j);
+    if(s)s.style.display=(j===n)?'block':'none';
+  }
+}
+
+async function doVidScript(){
+  const p=(document.getElementById('tV').value||'').trim();
+  if(!p){toast('请输入产品信息','er');return;}
+  showL('Claude Haiku 生成口播脚本...','OpenRouter · Claude Haiku');
+  const msg='你是抖音电商口播文案专家。产品：'+p+'。\n创作30秒带货口播脚本（9:16竖屏）+分镜，为每个分镜生成英文图像描述。\n输出JSON（无代码块）：{"script":"完整口播稿，前3秒强钩子，含产品/价格/行动号召，约150字","shots":[{"no":1,"desc":"分镜描述中文","img":"英文图像描述用于AI绘图30词"},...]共4个}';
   try{
-    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-    audioCtx=new (window.AudioContext||window.webkitAudioContext)();
-    analyser=audioCtx.createAnalyser();analyser.fftSize=256;
-    srcNode=audioCtx.createMediaStreamSource(stream);
-    srcNode.connect(analyser);
-    drawWave();
-    mr=new MediaRecorder(stream);chunks=[];
-    mr.ondataavailable=e=>chunks.push(e.data);
-    mr.onstop=()=>{
-      const blob=new Blob(chunks,{type:'audio/webm'});
-      const url=URL.createObjectURL(blob);
-      const ap2=document.getElementById('ap2');ap2.src=url;ap2.style.display='block';
-      const dl=document.getElementById('dlA');dl.href=url;dl.style.display='block';
-      document.getElementById('bPlay').style.opacity='1';document.getElementById('bPlay').style.pointerEvents='auto';
-      document.getElementById('vcS').textContent='录音完成，点击播放';document.getElementById('vcS').style.animation='none';
-      stream.getTracks().forEach(t=>t.stop());
+    const raw=await orCall([{role:'user',content:msg}],M_SCRIPT,1200);
+    const r=pJ(raw);
+    vidScript=r.script||'';
+    document.getElementById('rSc').textContent=vidScript;
+    // Setup teleprompter
+    var inner=document.getElementById('tpInner');
+    inner.textContent=vidScript;
+    inner.style.transform='translateY(0)';
+    document.getElementById('tpHint').style.display='none';
+    // Store shots for image generation
+    window._vidShots=r.shots||[];
+    setVStep(2);
+    toast('脚本生成完成，开始录制吧','ok');
+  }catch(e){toast('失败：'+e.message,'er');}
+  finally{hideL();}
+}
+
+function backToScript(){
+  setVStep(1);
+  stopVidRec();
+}
+
+function startTeleprompter(){
+  var inner=document.getElementById('tpInner');
+  var box=document.getElementById('tpBox');
+  var totalH=inner.scrollHeight;
+  var visH=box.clientHeight||170;
+  var maxScroll=Math.max(totalH-visH+40,0);
+  tpStartTime=Date.now();
+  function tick(){
+    var elapsed=Date.now()-tpStartTime;
+    var prog=Math.min(elapsed/tpDuration,1);
+    inner.style.transform='translateY(-'+Math.round(prog*maxScroll)+'px)';
+    if(prog<1)tpRAF=requestAnimationFrame(tick);
+  }
+  tpRAF=requestAnimationFrame(tick);
+  document.getElementById('tpLine').style.display='block';
+}
+
+function stopTeleprompter(){
+  if(tpRAF)cancelAnimationFrame(tpRAF);
+  tpRAF=null;
+  document.getElementById('tpLine').style.display='none';
+}
+
+async function startVidRec(){
+  try{
+    var stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    vidAudioCtx=new (window.AudioContext||window.webkitAudioContext)();
+    vidAnalyser=vidAudioCtx.createAnalyser();vidAnalyser.fftSize=256;
+    vidSrcNode=vidAudioCtx.createMediaStreamSource(stream);
+    vidSrcNode.connect(vidAnalyser);
+    drawVidWave();
+    vidMr=new MediaRecorder(stream);vidChunks=[];
+    vidMr.ondataavailable=function(e){vidChunks.push(e.data);};
+    vidMr.onstop=function(){
+      vidAudioBlob=new Blob(vidChunks,{type:'audio/webm'});
+      vidAudioUrl=URL.createObjectURL(vidAudioBlob);
+      var ap2=document.getElementById('ap2');ap2.src=vidAudioUrl;ap2.style.display='block';
+      document.getElementById('bPlay').style.opacity='1';
+      document.getElementById('bPlay').style.pointerEvents='auto';
+      document.getElementById('vcS').textContent='录音完成 ✓';
+      document.getElementById('vcS').style.animation='none';
+      document.getElementById('bNextImg').style.display='block';
+      stream.getTracks().forEach(function(t){t.stop();});
+      stopTeleprompter();
+      stopVidWave();
     };
-    mr.start(100);vcSec=0;
-    clearInterval(vcInterval);
-    vcInterval=setInterval(()=>{vcSec++;const m=String(Math.floor(vcSec/60)).padStart(2,'0'),s=String(vcSec%60).padStart(2,'0');document.getElementById('vcT').textContent=m+':'+s;},1000);
-    document.getElementById('bRec').style.opacity='.4';document.getElementById('bRec').style.pointerEvents='none';
-    document.getElementById('bStop').style.opacity='1';document.getElementById('bStop').style.pointerEvents='auto';
-    document.getElementById('vcS').textContent='🔴 录音中...';document.getElementById('vcS').style.animation='pu .8s infinite';
-    toast('开始录音','ok');
+    vidMr.start(100);vidVcSec=0;
+    clearInterval(vidVcInt);
+    vidVcInt=setInterval(function(){
+      vidVcSec++;
+      var m=String(Math.floor(vidVcSec/60)).padStart(2,'0'),s=String(vidVcSec%60).padStart(2,'0');
+      document.getElementById('vcT').textContent=m+':'+s;
+    },1000);
+    document.getElementById('bRec').style.opacity='.4';
+    document.getElementById('bRec').style.pointerEvents='none';
+    document.getElementById('bStop').style.opacity='1';
+    document.getElementById('bStop').style.pointerEvents='auto';
+    document.getElementById('vcS').textContent='🔴 录音中...';
+    document.getElementById('vcS').style.animation='pu .8s infinite';
+    startTeleprompter();
+    toast('开始录音，跟着提词器朗读吧','ok');
   }catch(e){toast('麦克风权限被拒绝：'+e.message,'er');}
 }
 
-function stopRec(){
-  if(mr&&mr.state!=='inactive'){mr.stop();}
-  clearInterval(vcInterval);cancelAnimationFrame(waveRAF);
-  document.getElementById('bRec').style.opacity='1';document.getElementById('bRec').style.pointerEvents='auto';
-  document.getElementById('bStop').style.opacity='.4';document.getElementById('bStop').style.pointerEvents='none';
+function stopVidRec(){
+  if(vidMr&&vidMr.state!=='inactive')vidMr.stop();
+  clearInterval(vidVcInt);
+  document.getElementById('bRec').style.opacity='1';
+  document.getElementById('bRec').style.pointerEvents='auto';
+  document.getElementById('bStop').style.opacity='.4';
+  document.getElementById('bStop').style.pointerEvents='none';
+  stopTeleprompter();
+  stopVidWave();
 }
 
-function playRec(){document.getElementById('ap2').play();}
+function playVidRec(){document.getElementById('ap2').play();}
 
-let waveRAF=null;
-function drawWave(){
-  const cv=document.getElementById('waveCV'),ctx=cv.getContext('2d');
-  const W=cv.width=cv.offsetWidth||300,H=cv.height=80;
+function drawVidWave(){
+  var cv=document.getElementById('waveCV');
+  var ctx=cv.getContext('2d');
+  var W=cv.width=cv.offsetWidth||300,H=cv.height=70;
   function draw(){
-    waveRAF=requestAnimationFrame(draw);
-    const buf=new Uint8Array(analyser.frequencyBinCount);
-    analyser.getByteTimeDomainData(buf);
+    vidWaveRAF=requestAnimationFrame(draw);
+    var buf=new Uint8Array(vidAnalyser.frequencyBinCount);
+    vidAnalyser.getByteTimeDomainData(buf);
     ctx.clearRect(0,0,W,H);
-    ctx.lineWidth=2;ctx.strokeStyle='#7c3aed';ctx.beginPath();
-    const sl=W/buf.length;let x=0;
-    for(let i=0;i<buf.length;i++){const v=buf[i]/128,y=v*H/2;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);x+=sl;}
+    var grad=ctx.createLinearGradient(0,0,W,0);
+    grad.addColorStop(0,'#7c3aed');grad.addColorStop(1,'#db2777');
+    ctx.lineWidth=2;ctx.strokeStyle=grad;ctx.beginPath();
+    var sl=W/buf.length,x=0;
+    for(var i=0;i<buf.length;i++){
+      var v=buf[i]/128,y=v*H/2;
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);x+=sl;
+    }
     ctx.stroke();
   }
   draw();
+}
+
+function stopVidWave(){if(vidWaveRAF){cancelAnimationFrame(vidWaveRAF);vidWaveRAF=null;}}
+
+async function nextToVidImages(){
+  setVStep(3);
+  var wrap=document.getElementById('vImgWrap');
+  wrap.innerHTML='';vImgs=[];
+  showL('Gemini 2.0 优化摄影Prompt...','Gemini 2.0 Flash → Flux');
+  var productInfo=(document.getElementById('tV').value||'产品').trim();
+  var req='You are a commercial photographer. Product: '+productInfo+'. Create 4 Flux image prompts for a promotional video. Output ONLY JSON: {"prompts":["detailed 50-word English prompt vertical 9:16 product shot 1","prompt 2","prompt 3","prompt 4"]}';
+  try{
+    var raw=await orCall([{role:'user',content:req}],M_IMG,600);
+    var r=pJ(raw);
+    var ps=r.prompts||['product shot cinematic','product lifestyle shot','close up detail shot','promotional banner shot'];
+    hideL();
+    ps.forEach(function(p2,i){
+      var card=document.createElement('div');
+      card.style.cssText='border-radius:12px;overflow:hidden;border:1px solid var(--bd);background:rgba(255,255,255,.03);aspect-ratio:9/16;position:relative;';
+      var loader=document.createElement('div');
+      loader.id='viph'+i;
+      loader.style.cssText='width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;color:var(--mt);';
+      loader.innerHTML='<div style="width:22px;height:22px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--cy);border-radius:50%;animation:sp .8s linear infinite"></div><span style="font-size:10px">生成中</span>';
+      var img=document.createElement('img');
+      img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;';
+      var url='https://image.pollinations.ai/prompt/'+encodeURIComponent(p2+', vertical 9:16, cinematic, product promotional photo')+'?width=270&height=480&model=flux&nologo=true&seed='+(Date.now()+i*317);
+      img.src=url;
+      (function(idx){
+        img.onload=function(){
+          img.style.display='block';
+          var ldr=document.getElementById('viph'+idx);
+          if(ldr)ldr.style.display='none';
+          addVidImg(idx,img.src);
+          checkVidImgsDone(ps.length);
+        };
+        img.onerror=function(){
+          var ldr=document.getElementById('viph'+idx);
+          if(ldr)ldr.innerHTML='⚠️';
+        };
+      })(i);
+      card.appendChild(loader);
+      card.appendChild(img);
+      wrap.appendChild(card);
+    });
+    toast('AI配图生成中，约30秒','ok');
+    document.getElementById('bNextPrev').style.display='block';
+  }catch(e){toast('配图失败：'+e.message,'er');hideL();}
+}
+
+function addVidImg(idx,src){vImgs[idx]=src;}
+function checkVidImgsDone(total){
+  var done=vImgs.filter(function(v){return v;}).length;
+  if(done>=total){toast('所有配图生成完成 ✓','ok');}
+}
+
+function nextToPreview(){
+  setVStep(4);
+  // Set audio player
+  if(vidAudioUrl){
+    var ap=document.getElementById('vAudioPlay');
+    ap.src=vidAudioUrl;
+  }
+  // Sync sbImgs for canvas player
+  sbImgs=vImgs.filter(function(v){return v;});
+  document.getElementById('cvWrap').style.display='block';
+  toast('素材就绪，可以播放预览','ok');
+}
+
+function restartVid(){
+  vidScript='';vidAudioBlob=null;vidAudioUrl=null;vImgs=[];sbImgs=[];
+  document.getElementById('tV').value='';
+  document.getElementById('tpInner').textContent='';
+  document.getElementById('tpHint').style.display='block';
+  document.getElementById('vcT').textContent='00:00';
+  document.getElementById('vcS').textContent='准备录音';
+  document.getElementById('ap2').src='';document.getElementById('ap2').style.display='none';
+  document.getElementById('bNextImg').style.display='none';
+  document.getElementById('bPlay').style.opacity='.4';
+  document.getElementById('bPlay').style.pointerEvents='none';
+  document.getElementById('vImgWrap').innerHTML='';
+  stopCV();
+  setVStep(1);
+}
+
+function dlVidAudio(){
+  if(!vidAudioBlob){toast('没有录音','er');return;}
+  var a=document.createElement('a');
+  a.download='口播录音.webm';a.href=vidAudioUrl;a.click();
+  toast('录音已下载','ok');
+}
+
+// ═══ COMMENT REPLY ═══
+async function doReply(){
+  var cmt=(document.getElementById('tCmt').value||'').trim();
+  if(!cmt){toast('请输入买家评论','er');return;}
+  showL('Qwen-Plus 生成回复...','Qwen Plus · 评论运营');
+  var productCtx=(document.getElementById('tP').value||'我们的产品').trim();
+  var msg='你是电商客服专家，擅长维护买家关系。产品：'+productCtx+'。\n买家评论：「'+cmt+'」\n请生成一条专业、亲切、有温度的回复，适合'+S.pl+'平台，50-80字，结尾引导复购或关注，只输出回复内容。';
+  try{
+    var raw=await qwenCall([{role:'user',content:msg}],300);
+    document.getElementById('rCmtIn').textContent='👤 「'+cmt+'」';
+    document.getElementById('rCmtOut').textContent=raw.trim();
+    document.getElementById('replyR').style.display='block';
+    toast('回复生成完成','ok');
+  }catch(e){toast('失败：'+e.message,'er');}
+  finally{hideL();}
+}
+
+// ═══ ENHANCED doGen - title cards ═══
+
+
+// ═══════════════════════════════════════════════════════
+// 🎬 VIDEO MAKER - Canvas + MediaRecorder
+// ═══════════════════════════════════════════════════════
+
+var vmRecorder=null,vmChunks=[],vmVideoBlob=null,vmVideoUrl=null;
+var vmRAF=null,vmStartTime=null,vmAudioEl=null;
+var VM_W=540,VM_H=960,VM_FPS=30,VM_DURATION=30;
+
+function getSupportedMimeType(){
+  var types=['video/mp4;codecs=avc1,mp4a.40.2','video/mp4','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'];
+  for(var i=0;i<types.length;i++){
+    try{if(MediaRecorder.isTypeSupported(types[i]))return types[i];}catch(e){}
+  }
+  return '';
+}
+
+function closeVmOverlay(){
+  if(vmRecorder&&vmRecorder.state==='recording')vmRecorder.stop();
+  if(vmRAF){cancelAnimationFrame(vmRAF);vmRAF=null;}
+  if(vmAudioEl){vmAudioEl.pause();vmAudioEl=null;}
+  document.getElementById('vmOverlay').classList.remove('on');
+}
+
+function splitScript(script){
+  var result=[];
+  if(!script)return ['','','',''];
+  var total=script.length;
+  var q=Math.floor(total/4);
+  for(var i=0;i<4;i++){
+    var start=i*q;
+    var end=(i===3)?total:(i+1)*q;
+    result.push(script.slice(start,end).trim());
+  }
+  return result;
+}
+
+function loadImage(src){
+  return new Promise(function(resolve){
+    var img=new Image();
+    img.crossOrigin='anonymous';
+    img.onload=function(){resolve(img);};
+    img.onerror=function(){resolve(null);};
+    img.src=src;
+  });
+}
+
+async function startVideoMake(){
+  if(!vImgs||vImgs.filter(function(v){return v;}).length===0){
+    toast('请先生成AI配图（第3步）','er');return;
+  }
+
+  // Show overlay
+  var ov=document.getElementById('vmOverlay');
+  ov.classList.add('on');
+  document.getElementById('vmFill').style.width='0%';
+  document.getElementById('vmPct').textContent='0%';
+  document.getElementById('vmEta').textContent='准备中...';
+  document.getElementById('vmDone').style.display='none';
+  document.getElementById('vmSubTxt').textContent='正在逐帧渲染 · 请勿离开页面';
+  vmVideoBlob=null;vmVideoUrl=null;vmChunks=[];
+
+  // Load images
+  var imgs=[];
+  var validSrcs=vImgs.filter(function(v){return v;});
+  for(var i=0;i<validSrcs.length;i++){
+    var loaded=await loadImage(validSrcs[i]);
+    imgs.push(loaded);
+  }
+  if(imgs.length===0){toast('图片加载失败','er');closeVmOverlay();return;}
+
+  // Parse script into 4 sections
+  var script=vidScript||document.getElementById('rSc').textContent||'';
+  var scriptParts=splitScript(script);
+
+  // Setup canvas
+  var canvas=document.getElementById('vmCanvas');
+  var ctx=canvas.getContext('2d');
+  canvas.width=VM_W;canvas.height=VM_H;
+
+  // Check MediaRecorder support
+  var mimeType=getSupportedMimeType();
+  var hasRecorder=(typeof MediaRecorder!=='undefined')&&mimeType!=='';
+  var canvasStream=null,audioStream=null,combined=null;
+
+  if(hasRecorder){
+    try{
+      canvasStream=canvas.captureStream(VM_FPS);
+      // Setup audio
+      if(vidAudioUrl){
+        vmAudioEl=new Audio(vidAudioUrl);
+        var audioCtx2=new (window.AudioContext||window.webkitAudioContext)();
+        var src2=audioCtx2.createMediaElementSource(vmAudioEl);
+        var dest2=audioCtx2.createMediaStreamDestination();
+        src2.connect(dest2);src2.connect(audioCtx2.destination);
+        combined=new MediaStream([].concat(
+          canvasStream.getVideoTracks(),
+          dest2.stream.getAudioTracks()
+        ));
+      }else{combined=canvasStream;}
+      vmRecorder=new MediaRecorder(combined,{mimeType:mimeType,videoBitsPerSecond:2500000});
+      vmRecorder.ondataavailable=function(e){if(e.data&&e.data.size>0)vmChunks.push(e.data);};
+      vmRecorder.onstop=function(){
+        vmVideoBlob=new Blob(vmChunks,{type:mimeType});
+        vmVideoUrl=URL.createObjectURL(vmVideoBlob);
+        showVmDone(mimeType);
+      };
+      vmRecorder.start(200);
+      if(vmAudioEl)vmAudioEl.play();
+    }catch(ex){hasRecorder=false;console.log('Recorder error:',ex);}
+  }
+
+  // Animation loop
+  vmStartTime=Date.now();
+  var totalMs=VM_DURATION*1000;
+  var slideMs=(totalMs/imgs.length);
+
+  function renderLoop(){
+    var elapsed=Date.now()-vmStartTime;
+    var slideIdx=Math.min(Math.floor(elapsed/slideMs),imgs.length-1);
+    var slideElapsed=elapsed-(slideIdx*slideMs);
+    var progress=Math.min(elapsed/totalMs,1);
+
+    // Draw frame
+    drawVmFrame(ctx,imgs,slideIdx,slideElapsed,slideMs,scriptParts,progress);
+
+    // Update progress UI
+    var pct=Math.round(progress*100);
+    document.getElementById('vmFill').style.width=pct+'%';
+    document.getElementById('vmPct').textContent=pct+'%';
+    var remaining=Math.max(0,Math.round((totalMs-elapsed)/1000));
+    document.getElementById('vmEta').textContent=remaining>0?('还剩约 '+remaining+' 秒'):'即将完成...';
+
+    if(progress<1){
+      vmRAF=requestAnimationFrame(renderLoop);
+    }else{
+      // Done
+      if(vmRecorder&&vmRecorder.state==='recording'){
+        vmRecorder.stop();
+      }else{
+        // No recorder - show export options
+        showVmDone('');
+      }
+      if(vmAudioEl)vmAudioEl.pause();
+    }
+  }
+  vmRAF=requestAnimationFrame(renderLoop);
+}
+
+function drawVmFrame(ctx,imgs,slideIdx,slideElapsed,slideMs,scriptParts,totalProgress){
+  var W=VM_W,H=VM_H;
+  ctx.clearRect(0,0,W,H);
+
+  // ── Draw current image with Ken Burns ──
+  var img=imgs[slideIdx]||imgs[0];
+  var t=Math.min(slideElapsed/slideMs,1);
+
+  if(img){
+    var scale=1.0+(t*0.08);
+    var iw=img.naturalWidth||img.width;
+    var ih=img.naturalHeight||img.height;
+    var fitW,fitH;
+    if(iw/ih>W/H){fitH=H*scale;fitW=fitH*(iw/ih);}
+    else{fitW=W*scale;fitH=fitW/(iw/ih);}
+    var dx=(W-fitW)/2,dy=(H-fitH)/2;
+    ctx.drawImage(img,dx,dy,fitW,fitH);
+  }else{
+    ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+  }
+
+  // ── Dark gradient overlay ──
+  var grad=ctx.createLinearGradient(0,0,0,H);
+  grad.addColorStop(0,'rgba(0,0,0,0.15)');
+  grad.addColorStop(0.55,'rgba(0,0,0,0)');
+  grad.addColorStop(0.7,'rgba(0,0,0,0.5)');
+  grad.addColorStop(1,'rgba(0,0,0,0.88)');
+  ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
+
+  // ── Slide number dots ──
+  var dotY=H-220;
+  for(var di=0;di<imgs.length;di++){
+    ctx.beginPath();
+    ctx.arc(W/2+(di-imgs.length/2+0.5)*22,dotY,di===slideIdx?5:3,0,Math.PI*2);
+    ctx.fillStyle=di===slideIdx?'rgba(255,255,255,0.9)':'rgba(255,255,255,0.35)';
+    ctx.fill();
+  }
+
+  // ── Text fade in ──
+  var textFade=Math.min(t*3,1);
+  ctx.globalAlpha=textFade;
+
+  // Script text for this slide
+  var txt=scriptParts[slideIdx]||'';
+  var maxChars=40;
+  if(txt.length>maxChars)txt=txt.substring(0,maxChars)+'...';
+
+  // ── Main copy text ──
+  ctx.fillStyle='#ffffff';
+  ctx.font='bold 34px PingFang SC,sans-serif';
+  ctx.textAlign='center';
+  ctx.shadowColor='rgba(0,0,0,0.8)';ctx.shadowBlur=12;
+  wrapText(ctx,txt,W/2,H-165,W-80,42);
+
+  // ── Bottom CTA bar (last slide) ──
+  if(slideIdx===imgs.length-1){
+    ctx.fillStyle='rgba(124,58,237,0.85)';
+    var bh=64,by=H-100;
+    roundRect(ctx,40,by,W-80,bh,14);ctx.fill();
+    ctx.fillStyle='#ffffff';ctx.font='bold 26px PingFang SC,sans-serif';
+    ctx.shadowBlur=0;ctx.textAlign='center';
+    ctx.fillText('点击主页 立即购买',W/2,by+42);
+  }
+
+  ctx.globalAlpha=1;
+  ctx.shadowBlur=0;
+
+  // ── Progress bar at top ──
+  ctx.fillStyle='rgba(255,255,255,0.15)';
+  ctx.fillRect(0,0,W,4);
+  ctx.fillStyle='rgba(255,255,255,0.8)';
+  ctx.fillRect(0,0,W*totalProgress,4);
+}
+
+function wrapText(ctx,text,x,y,maxWidth,lineHeight){
+  var chars=text.split('');
+  var line='';
+  var lines=[];
+  for(var i=0;i<chars.length;i++){
+    var test=line+chars[i];
+    if(ctx.measureText(test).width>maxWidth&&line!==''){
+      lines.push(line);line=chars[i];
+    }else{line=test;}
+  }
+  if(line)lines.push(line);
+  var startY=y-(lines.length-1)*lineHeight/2;
+  for(var j=0;j<lines.length;j++){ctx.fillText(lines[j],x,startY+j*lineHeight);}
+}
+
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+r,r);
+  ctx.lineTo(x+w,y+h-r);ctx.arcTo(x+w,y+h,x+w-r,y+h,r);
+  ctx.lineTo(x+r,y+h);ctx.arcTo(x,y+h,x,y+h-r,r);
+  ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();
+}
+
+function showVmDone(mimeType){
+  document.getElementById('vmSubTxt').textContent='合成完成！';
+  document.getElementById('vmFill').style.width='100%';
+  document.getElementById('vmPct').textContent='100%';
+  document.getElementById('vmEta').textContent='';
+  document.getElementById('vmDone').style.display='block';
+
+  var ext=mimeType&&mimeType.indexOf('mp4')>=0?'mp4':'webm';
+  var dlBtn=document.getElementById('vmDlBtn');
+  var note=document.getElementById('vmCompatNote');
+
+  if(vmVideoUrl){
+    dlBtn.onclick=function(){
+      var a=document.createElement('a');
+      a.download='带货视频_'+Date.now()+'.'+ext;
+      a.href=vmVideoUrl;a.click();
+      toast('视频下载中','ok');
+    };
+    note.textContent='格式：'+ext.toUpperCase()+'  ·  抖音/小红书/微信视频号均可直接上传';
+  }else{
+    dlBtn.textContent='📱 素材已准备好';
+    dlBtn.onclick=function(){toast('请使用下方"下载录音"+"导出帧"导入剪映合成','ok');};
+    note.textContent='当前浏览器不支持直接生成视频，请将录音+配图导入剪映/CapCut一键合成（同样超快）';
+  }
+
+  S.stats.g++;saveSt();renderStats();
 }
 
 // ═══ UTILS ═══
@@ -957,5 +1736,28 @@ function hideL(){document.getElementById('lo').classList.remove('on');}
 function toast(msg,type){const el=document.getElementById('tt');el.textContent=msg;el.className='tt'+(type?' '+type:'');el.classList.add('sh');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('sh'),2800);}
 function cp(id){const t=(document.getElementById(id)||{}).textContent||'';if(navigator.clipboard){navigator.clipboard.writeText(t).then(()=>toast('已复制','ok'));}else{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('已复制','ok');}}
 </script>
+
+<!-- ═══ VIDEO MAKER OVERLAY ═══ -->
+<div id="vmOverlay">
+  <div class="vm-title">🎬 视频合成中</div>
+  <div class="vm-sub" id="vmSubTxt">正在逐帧渲染 · 请勿离开页面</div>
+  <div class="vm-canvas-wrap">
+    <canvas id="vmCanvas" width="540" height="960"></canvas>
+  </div>
+  <div class="vm-progress-bar"><div class="vm-progress-fill" id="vmFill"></div></div>
+  <div class="vm-pct" id="vmPct">0%</div>
+  <div class="vm-eta" id="vmEta">计算中...</div>
+
+  <!-- Done state -->
+  <div class="vm-done" id="vmDone">
+    <div class="vm-done-icon">🎉</div>
+    <div class="vm-done-title">带货视频已生成！</div>
+    <div class="vm-done-sub">已包含：口播录音 · AI产品大片 · 文案叠加<br>直接下载 → 上传至抖音/小红书/微信</div>
+    <button class="vm-dl-btn" id="vmDlBtn">⬇ 下载带货视频</button>
+    <button class="vm-dl-btn b" onclick="closeVmOverlay()">← 返回继续编辑</button>
+    <div class="vm-note" id="vmCompatNote"></div>
+  </div>
+</div>
+
 </body>
 </html>
