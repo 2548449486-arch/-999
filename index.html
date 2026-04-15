@@ -18,6 +18,7 @@
 }
 html,body{height:100%;background:var(--bg);color:var(--tx);
   font-family:"PingFang SC","SF Pro Display",-apple-system,sans-serif;overflow:hidden}
+body{overscroll-behavior:none}
 
 /* ── ANIMATIONS ── */
 @keyframes tw{
@@ -95,8 +96,8 @@ html,body{height:100%;background:var(--bg);color:var(--tx);
 .sd.on{background:var(--gr);animation:pu 2s infinite}
 .sd.off{background:var(--mt)}
 
-#tc{flex:1;overflow-y:auto;padding-bottom:78px;-webkit-overflow-scrolling:touch}
-.tp2{display:none;animation:fd .25s ease}
+#tc{flex:1;overflow-y:auto;padding-bottom:78px;-webkit-overflow-scrolling:touch;background:var(--bg)}
+.tp2{display:none;animation:fd .25s ease;background:var(--bg)}
 .tp2.ac{display:block}
 .s{padding:16px}
 .st{font-size:10px;color:var(--mt);letter-spacing:.8px;font-weight:700;
@@ -343,7 +344,7 @@ audio#ap2{width:100%;border-radius:10px;margin-top:10px;display:none}
     <h1>AI 爆款工厂</h1>
     <p>文案 · 图片 · 视频 · 声音 · 全套创作</p>
     <div class="model-row">
-      <span class="mb mb1">✦ Gemini 2.0</span>
+      <span class="mb mb1">✦ Qwen Plus</span>
       <span class="mb mb2">✦ Claude Haiku</span>
       <span class="mb mb3">✦ Flux Image</span>
     </div>
@@ -403,7 +404,7 @@ audio#ap2{width:100%;border-radius:10px;margin-top:10px;display:none}
         <textarea class="ta" id="tP" rows="3" placeholder="输入产品名称和卖点（如：空气炸锅，无油烹饪，不粘锅，减脂人群，299元）"></textarea>
         <div class="st" style="margin-top:10px">特殊要求（选填）</div>
         <textarea class="ta" id="tE" rows="2" placeholder="如：突出情感共鸣、加入网络梗、针对25-35岁职场女性..."></textarea>
-        <div class="mt2 m1" style="margin-top:14px">✦ Gemini 2.0 Flash · 文案生成</div>
+        <div class="mt2 m1" style="margin-top:14px">✦ Qwen-Plus · 文案生成</div>
         <button class="bb b1" onclick="doGen()">✦ 生成爆款文案</button>
         <div id="gr2" style="display:none">
           <div class="rx"><div class="rl">📌 爆款标题（三选一）</div><div class="rt" id="rT"></div><button class="rb" onclick="cp('rT')">📋 复制</button></div>
@@ -447,7 +448,7 @@ audio#ap2{width:100%;border-radius:10px;margin-top:10px;display:none}
             <span id="rsp">↻</span> 刷新
           </button>
         </div>
-        <div class="mt2 m1">✦ Gemini 2.0 Flash · 趋势分析</div>
+        <div class="mt2 m1">✦ Qwen-Plus · 趋势分析</div>
         <div class="cd">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
             <span style="font-size:13px;font-weight:700">📕 小红书飙升词</span>
@@ -485,7 +486,7 @@ audio#ap2{width:100%;border-radius:10px;margin-top:10px;display:none}
           <div class="sch" data-v="vibrant street market bokeh golden hour authentic" onclick="setSc(this)"><span class="si">🌅</span>烟火街拍</div>
           <div class="sch" data-v="Japanese minimalist zen soft morning light tatami pastel" onclick="setSc(this)"><span class="si">🍵</span>日系清新</div>
         </div>
-        <div class="mt2 m2">✦ Gemini Flash → Flux渲染</div>
+        <div class="mt2 m2">✦ Gemini 2.0 Flash → Flux渲染</div>
         <div class="st" style="margin-top:4px">产品描述</div>
         <textarea class="ta" id="tI" rows="2" placeholder="描述产品（如：磨砂质感保温杯，莫兰迪灰色，500ml）"></textarea>
         <button class="bb b3" onclick="doImgs()">🎨 生成4张产品大片</button>
@@ -520,7 +521,7 @@ audio#ap2{width:100%;border-radius:10px;margin-top:10px;display:none}
 
           <!-- 视频脚本 -->
           <div class="st">🎬 视频脚本 + 分镜</div>
-          <div class="mt2 m2">✦ Claude 3.5 Haiku · 视频创作</div>
+          <div class="mt2 m2">✦ Claude 3.5 Haiku · 视频脚本</div>
           <textarea class="ta" id="tV" rows="3" placeholder="产品信息（如：空气炸锅299元，适合减脂人群，无油烹饪，30秒带货视频）"></textarea>
           <button class="bb b2" onclick="doScript()" style="margin-top:10px">🎬 生成脚本 + 分镜故事板</button>
           <div id="scR" style="display:none">
@@ -637,8 +638,10 @@ const CODES={
 };
 
 // ═══ CONFIG ═══
-const M_TEXT='google/gemini-flash-1.5';
+const M_IMG='google/gemini-2.0-flash-001';
 const M_SCRIPT='anthropic/claude-3.5-haiku-20241022';
+const QWEN_KEY='sk-cfb5319ee5a24f7b9361608b7615a79b';
+const OR_KEY='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';
 
 // ═══ STATE ═══
 const S={user:null,pl:'小红书',st:'种草笔记',sc:'Nordic minimal white background soft natural lighting clean',stats:{g:0,i:0,t:0}};
@@ -718,11 +721,26 @@ function setSt(el){document.querySelectorAll('.sc').forEach(c=>c.classList.remov
 function setSc(el){document.querySelectorAll('.sch').forEach(c=>c.classList.remove('on'));el.classList.add('on');S.sc=el.dataset.v;}
 
 // ═══ API ═══
-async function orCall(messages,model,max_tokens){
-  const r=await fetch('/api/ai',{
+async function qwenCall(messages,max_tokens){
+  const r=await fetch('https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',{
     method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({messages,model:model||M_TEXT,max_tokens:max_tokens||1400})
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+QWEN_KEY},
+    body:JSON.stringify({model:'qwen-plus',messages,max_tokens:max_tokens||1400})
+  });
+  const d=await r.json();
+  if(!r.ok||d.error){
+    const msg=(d.error&&(d.error.message||d.error.code))||('千问接口错误 '+r.status);
+    throw new Error(msg);
+  }
+  const content=d.choices&&d.choices[0]&&d.choices[0].message&&d.choices[0].message.content;
+  if(!content)throw new Error('千问返回为空，请重试');
+  return content;
+}
+async function orCall(messages,model,max_tokens){
+  const r=await fetch('https://openrouter.ai/api/v1/chat/completions',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+OR_KEY,'HTTP-Referer':'https://aura.zenithsmart.xin','X-Title':'AI爆款工厂'},
+    body:JSON.stringify({model:model||M_IMG,messages,max_tokens:max_tokens||1400})
   });
   const d=await r.json();
   if(!r.ok||d.error){
@@ -750,10 +768,10 @@ async function doGen(){
   const ex=(document.getElementById('tE').value||'').trim();
   const wc=S.pl==='抖音'?'150-250':'300-500';
   const tc=S.pl==='小红书'?'8-12':'5-8';
-  showL('Gemini 2.0 生成爆款文案...','Gemini 2.0 Flash · 文案');
+  showL('Qwen-Plus 生成爆款文案...','Qwen-Plus · 文案');
   const msg='你是中国顶级电商文案大师，精通'+S.pl+'平台。今天'+new Date().toLocaleDateString('zh-CN')+'，为'+S.pl+'创作"'+S.st+'"内容。\n产品：'+p+(ex?'\n要求：'+ex:'')+'\n\n输出JSON（无代码块）：{"title":"三备选标题换行分隔，含emoji/数字/痛点，20-30字","body":"正文，口语化，开头钩子+卖点+感受+互动，'+wc+'字，有emoji","tags":"'+tc+'个#话题","hook":"金句，15字内"}';
   try{
-    const raw=await orCall([{role:'user',content:msg}],M_TEXT,1500);
+    const raw=await qwenCall([{role:'user',content:msg}],1500);
     const r=pJ(raw);
     document.getElementById('rT').textContent=r.title||'—';
     document.getElementById('rB').textContent=r.body||'—';
@@ -779,7 +797,7 @@ async function doTrend(){
   const d=new Date(),ds=d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日';
   const msg='你是中国电商热词情报分析师。今天'+ds+'，结合当前季节节日时事分析趋势。\n输出JSON（无代码块）：{"xhs":[{"w":"热词","tag":"hot/rise/new"},...]10个,"dy":[{"w":"热词","tag":"hot/rise/new"},...]10个,"cats":[{"icon":"emoji","name":"品类","heat":85,"tip":"选品建议一句话"},...]4个,"insight":"200字AI选品深度分析，含品类/人群/内容策略"}';
   try{
-    const raw=await orCall([{role:'user',content:msg}],M_TEXT,1600);
+    const raw=await qwenCall([{role:'user',content:msg}],1600);
     const r=pJ(raw);
     const rl=items=>items.map((x,i)=>'<div class="rr" onclick="ftD(\''+x.w.replace(/'/g,'')+'\')">'+'<div class="rn '+(i<3?'rn'+(i+1):'')+'">'+(i+1)+'</div>'+'<div class="rw">'+x.w+'</div>'+'<div class="rh '+(x.tag==='hot'?'hh':x.tag==='rise'?'hr':'hn')+'">'+(x.tag==='hot'?'🔥热':x.tag==='rise'?'📈飙':'🆕新')+'</div></div>').join('');
     document.getElementById('xL').innerHTML=rl(r.xhs||[]);
@@ -798,10 +816,10 @@ async function doImgs(){
   if(!S.user){toast('请先激活','er');goLp();return;}
   const p=(document.getElementById('tI').value||'').trim();
   if(!p){toast('请描述产品','er');return;}
-  showL('Gemini优化摄影Prompt...','Gemini Flash · 视觉分析');
+  showL('Gemini 2.0 优化摄影Prompt...','Gemini 2.0 Flash → Flux');
   const req='You are a world-class commercial photographer. Product: '+p+'. Scene: '+S.sc+'.\nCreate 4 distinct Flux image prompts with different compositions. Output ONLY JSON:\n{"prompts":["detailed 60-80 word English prompt 1","prompt 2","prompt 3","prompt 4"]}';
   try{
-    const raw=await orCall([{role:'user',content:req}],M_TEXT,700);
+    const raw=await orCall([{role:'user',content:req}],M_IMG,700);
     const r=pJ(raw);const ps=r.prompts||[];
     document.getElementById('ptT').textContent=ps.join('\n\n---\n\n');
     document.getElementById('ptA').style.display='block';
@@ -823,7 +841,7 @@ async function doImgs(){
 async function doScript(){
   const p=(document.getElementById('tV').value||'').trim();
   if(!p){toast('请输入产品信息','er');return;}
-  showL('Claude Haiku 生成视频脚本...','Claude 3.5 Haiku · 创作');
+  showL('Claude Haiku 生成视频脚本...','OpenRouter · Claude Haiku');
   const msg='你是抖音电商口播文案专家。产品：'+p+'。\n创作30秒带货口播脚本（9:16竖屏）+分镜，并为每个分镜生成一个英文图像描述。\n输出JSON（无代码块）：{"script":"完整口播稿，前3秒强钩子，含产品/价格/行动号召，150字","shots":[{"no":1,"desc":"分镜描述中文","img":"英文图像描述，用于AI绘图，30词"},...]4个}';
   try{
     const raw=await orCall([{role:'user',content:msg}],M_SCRIPT,1200);
