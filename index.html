@@ -7,1299 +7,1347 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#07070d;--bg2:#0d0d1a;--card:rgba(255,255,255,.04);--card-s:rgba(14,12,28,.95);
-  --bd:rgba(255,255,255,.09);--bd2:rgba(255,255,255,.16);
-  --tx:#eeeeff;--mt:#7777aa;--mt2:#333355;
-  --pu:#9d71ff;--pk:#ff4db8;--cy:#22d3ee;--gr:#10b981;--rd:#f43f5e;
-  --gold:#f5a623;--gold2:#ffd060;--ora:#ff6b35;
-  --g1:linear-gradient(135deg,#8b5cf6,#e11d8f);
-  --g2:linear-gradient(135deg,#f5a623,#ff6b35);
-  --g3:linear-gradient(135deg,#22d3ee,#8b5cf6);
-  --g4:linear-gradient(135deg,#10b981,#22d3ee);
-  --g5:linear-gradient(135deg,#ff6b35,#e11d8f);
-  --shadow:0 8px 40px rgba(0,0,0,.7);
-  --shadow-sm:0 4px 24px rgba(0,0,0,.5);
+  --bg:#090917;--s1:#0e0e20;--s2:#14142a;
+  --glass:rgba(255,255,255,.07);--glass2:rgba(255,255,255,.05);
+  --bd:rgba(255,255,255,.16);--bd2:rgba(255,255,255,.26);
+  --tx:#f0f0ff;--mt:#9090cc;--mt2:#5c5c88;
+  --pu:#a78bfa;--pk:#f472b6;--cy:#34d399;--bl:#60a5fa;--rd:#f87171;
+  --gold:#fbbf24;--ora:#fb923c;
+  --g1:linear-gradient(135deg,#a78bfa,#f472b6);
+  --g2:linear-gradient(135deg,#fbbf24,#fb923c);
+  --g3:linear-gradient(135deg,#34d399,#60a5fa);
+  --g4:linear-gradient(135deg,#a78bfa,#60a5fa);
+  --gd:linear-gradient(135deg,#fbbf24 0%,#fb923c 50%,#f472b6 100%);
 }
 html,body{height:100%;background:var(--bg);color:var(--tx);
   font-family:"PingFang SC","SF Pro Display",-apple-system,sans-serif;overflow:hidden}
 body{overscroll-behavior:none}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes fadeUp{from{transform:translateY(18px);opacity:0}to{transform:translateY(0);opacity:1}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-@keyframes shimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(245,166,35,.2),0 6px 24px rgba(245,166,35,.15)}50%{box-shadow:0 0 40px rgba(245,166,35,.5),0 6px 32px rgba(245,166,35,.3)}}
-@keyframes twinkle{0%,100%{opacity:.8;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
-@keyframes nebula{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:.9;transform:scale(1.06)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes glow{0%,100%{box-shadow:0 0 30px rgba(251,191,36,.15),0 8px 32px rgba(251,191,36,.1)}
+  50%{box-shadow:0 0 60px rgba(251,191,36,.4),0 8px 40px rgba(251,191,36,.25)}}
+@keyframes borderFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes countUp{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
 
-/* LOGIN */
+/* ═══════════════ LOGIN ═══════════════ */
 #lp{position:fixed;inset:0;z-index:999;overflow-y:auto;
-  background:radial-gradient(ellipse at 25% 20%,rgba(139,92,246,.18) 0%,transparent 55%),
-    radial-gradient(ellipse at 80% 75%,rgba(245,166,35,.12) 0%,transparent 50%),
-    radial-gradient(ellipse at 55% 45%,rgba(225,29,143,.09) 0%,transparent 45%),#07070d;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px}
-.lp-orb{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;animation:nebula 5s ease-in-out infinite}
-.lp-orb1{width:260px;height:260px;background:rgba(139,92,246,.14);top:-80px;left:-80px}
-.lp-orb2{width:200px;height:200px;background:rgba(245,166,35,.1);bottom:60px;right:-60px;animation-delay:2s}
-.lp-orb3{width:140px;height:140px;background:rgba(34,211,238,.08);bottom:220px;left:10px;animation-delay:3.5s}
-.ll{text-align:center;margin-bottom:28px;position:relative;z-index:1}
-.ls{font-size:64px;display:block;animation:float 3.5s ease-in-out infinite;line-height:1;filter:drop-shadow(0 0 20px rgba(245,166,35,.4))}
-.ll h1{font-size:30px;font-weight:900;letter-spacing:3px;margin-top:14px;
-  background:var(--g2);background-size:200% 200%;animation:shimmer 4s ease infinite;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%,rgba(167,139,250,.12) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 80%,rgba(251,191,36,.1) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 40% at 60% 40%,rgba(244,114,182,.07) 0%,transparent 50%),
+    #060610;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;min-height:100%}
+.lp-glow{position:fixed;pointer-events:none}
+.lp-g1{width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.08),transparent 70%);top:-100px;left:-100px}
+.lp-g2{width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(251,191,36,.07),transparent 70%);bottom:-50px;right:-80px}
+.ll{text-align:center;margin-bottom:24px;z-index:1;position:relative}
+.lp-icon{font-size:56px;display:block;animation:float 3s ease-in-out infinite;line-height:1;
+  filter:drop-shadow(0 0 24px rgba(251,191,36,.5))}
+.lp-title{font-size:28px;font-weight:900;letter-spacing:3px;margin-top:12px;
+  background:var(--gd);background-size:200% 200%;animation:borderFlow 3s ease infinite;
   -webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.ll p{font-size:11px;color:var(--mt);margin-top:6px;letter-spacing:2px;text-transform:uppercase}
-.mb-row{display:flex;gap:8px;justify-content:center;margin-bottom:24px;flex-wrap:wrap;position:relative;z-index:1}
-.mb{padding:5px 13px;border-radius:20px;font-size:10px;font-weight:800;border:1px solid;letter-spacing:.5px}
-.mb1{background:rgba(34,211,238,.07);color:var(--cy);border-color:rgba(34,211,238,.2)}
-.mb2{background:rgba(157,113,255,.07);color:var(--pu);border-color:rgba(157,113,255,.2)}
-.mb3{background:rgba(245,166,35,.07);color:var(--gold);border-color:rgba(245,166,35,.2)}
-.mb4{background:rgba(16,185,129,.07);color:var(--gr);border-color:rgba(16,185,129,.2)}
-.lbox{width:100%;max-width:360px;background:rgba(10,9,20,.88);
-  border:1px solid rgba(255,255,255,.09);border-radius:28px;padding:24px;
+.lp-sub{font-size:11px;color:var(--mt);margin-top:5px;letter-spacing:2.5px;text-transform:uppercase}
+.badges{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;z-index:1;position:relative}
+.badge{padding:4px 12px;border-radius:20px;font-size:10px;font-weight:800;border:1px solid;letter-spacing:.5px}
+.b-pu{color:var(--pu);border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.08)}
+.b-go{color:var(--gold);border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.07)}
+.b-cy{color:var(--cy);border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.07)}
+.b-bl{color:var(--bl);border-color:rgba(96,165,250,.3);background:rgba(96,165,250,.07)}
+.lcard{width:100%;max-width:370px;z-index:1;position:relative;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);border-radius:28px;padding:24px;
   backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);
-  box-shadow:0 30px 80px rgba(0,0,0,.7),0 0 0 1px rgba(245,166,35,.05),inset 0 1px 0 rgba(255,255,255,.06);
-  position:relative;z-index:1}
-.lbox::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);border-radius:1px}
-.plan-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
-.plan{border-radius:16px;border:1px solid;padding:14px 12px;text-align:center;cursor:pointer;transition:.2s}
-.plan:active{transform:scale(.97)}
-.plan.std{background:rgba(34,211,238,.05);border-color:rgba(34,211,238,.18)}
-.plan.pro{background:rgba(245,166,35,.07);border-color:rgba(245,166,35,.25);box-shadow:0 0 24px rgba(245,166,35,.07)}
-.plan-price{font-size:22px;font-weight:900;margin-bottom:2px}
-.plan.std .plan-price{color:var(--cy)}
-.plan.pro .plan-price{color:var(--gold)}
-.plan-name{font-size:10px;color:var(--mt);margin-bottom:2px}
-.plan-feat{font-size:10px;color:var(--mt2)}
-.li{width:100%;padding:13px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.09);
-  background:rgba(255,255,255,.04);color:var(--tx);font-size:15px;
-  margin-bottom:10px;outline:none;font-family:inherit;transition:.2s}
-.li:focus{border-color:rgba(245,166,35,.45);background:rgba(245,166,35,.04)}
-.li::placeholder{color:var(--mt2)}
-.lb{width:100%;padding:16px;border-radius:16px;border:none;cursor:pointer;
+  box-shadow:0 40px 100px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.08)}
+.lcard::before{content:'';position:absolute;inset:0;border-radius:28px;padding:1px;
+  background:var(--gd);background-size:200% 200%;animation:borderFlow 4s ease infinite;
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.plan{border-radius:16px;border:1px solid;padding:14px;text-align:center;cursor:pointer;transition:.2s}
+.plan.a{background:rgba(96,165,250,.06);border-color:rgba(96,165,250,.2)}
+.plan.b{background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.28);box-shadow:0 0 28px rgba(251,191,36,.08)}
+.plan-p{font-size:22px;font-weight:900;margin-bottom:2px}
+.plan.a .plan-p{color:var(--bl)}.plan.b .plan-p{color:var(--gold)}
+.plan-n{font-size:10px;color:#8888bb}.plan-f{font-size:10px;color:#7070aa;margin-top:2px}
+.finput{width:100%;padding:13px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.09);
+  background:rgba(255,255,255,.08);color:var(--tx);font-size:15px;margin-bottom:10px;
+  outline:none;font-family:inherit;transition:.2s}
+.finput:focus{border-color:rgba(251,191,36,.5);background:rgba(251,191,36,.05)}
+.finput::placeholder{color:var(--mt2)}
+.lbtn{width:100%;padding:16px;border-radius:16px;border:none;cursor:pointer;
   font-size:16px;font-weight:900;color:#000;letter-spacing:.5px;
-  background:var(--g2);background-size:200% 200%;
-  animation:shimmer 3s ease infinite,glow 3s ease-in-out infinite;margin-bottom:12px}
-.lo2{width:100%;padding:13px;border-radius:14px;border:1px solid rgba(255,255,255,.08);
+  background:var(--g2);background-size:200% 200%;animation:shimmer 3s linear infinite,glow 3s ease-in-out infinite;
+  margin-bottom:12px}
+.gbtn{width:100%;padding:13px;border-radius:14px;border:1px solid rgba(255,255,255,.08);
   background:rgba(255,255,255,.03);color:var(--mt);font-size:14px;font-weight:600;cursor:pointer}
-.lsep{display:flex;align-items:center;gap:10px;margin:12px 0;color:var(--mt2);font-size:12px}
-.lsep::before,.lsep::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.07)}
+.sep{display:flex;align-items:center;gap:10px;margin:12px 0;color:var(--mt2);font-size:12px}
+.sep::before,.sep::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.07)}
 
-/* MAIN APP */
-#app{display:none;height:100%;flex-direction:column;background:var(--bg)}
+/* ═══════════════ APP SHELL ═══════════════ */
+#app{display:none;height:100%;flex-direction:column}
 #app.on{display:flex}
-#hd{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 12px;
-  flex-shrink:0;position:relative;background:rgba(7,7,13,.94);
-  border-bottom:1px solid rgba(255,255,255,.05);
+#hd{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px 12px;position:relative;
+  background:rgba(6,6,16,.92);border-bottom:1px solid rgba(255,255,255,.06);
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
-#hd::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent 0%,rgba(245,166,35,.6) 30%,rgba(255,77,184,.5) 70%,transparent 100%)}
-.hl{font-size:19px;font-weight:900;letter-spacing:1px;
-  background:var(--g2);background-size:200% 200%;animation:shimmer 5s ease infinite;
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  display:flex;align-items:center;gap:6px}
-.hls{font-size:18px;animation:twinkle 2.5s ease-in-out infinite}
-.hb{display:flex;align-items:center;gap:6px;padding:7px 13px;border-radius:20px;
-  border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.04);
-  font-size:12px;font-weight:700;color:var(--tx);cursor:pointer}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--mt2);flex-shrink:0}
-.dot.on{background:#22c55e;box-shadow:0 0 8px rgba(34,197,94,.7)}
-#tc{flex:1;overflow-y:auto;padding-bottom:84px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+#hd::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:var(--gd);background-size:200% 200%;animation:borderFlow 5s ease infinite}
+.logo{font-size:18px;font-weight:900;letter-spacing:1px;display:flex;align-items:center;gap:6px;
+  background:var(--g2);background-size:200% 200%;animation:shimmer 4s linear infinite;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo-i{font-size:18px;animation:float 2.5s ease-in-out infinite}
+.hbtn{display:flex;align-items:center;gap:6px;padding:7px 13px;border-radius:20px;
+  border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.05);
+  font-size:12px;font-weight:700;color:#ddddff;cursor:pointer}
+.dot{width:6px;height:6px;border-radius:50%;background:#6666aa;flex-shrink:0}
+.dot.on{background:#4ade80;box-shadow:0 0 8px rgba(74,222,128,.7)}
+#tc{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:88px}
 #tc::-webkit-scrollbar{display:none}
-.tp2{display:none;animation:fadeUp .25s ease}
-.tp2.ac{display:block}
+.tab{display:none;animation:fadeUp .25s ease}
+.tab.ac{display:block}
 .s{padding:16px}
 
-/* NAVBAR */
-#bn{position:fixed;bottom:0;left:0;right:0;display:flex;
-  background:rgba(7,7,13,.95);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
-  border-top:1px solid rgba(255,255,255,.05);padding:8px 4px env(safe-area-inset-bottom,0);z-index:100}
-#bn::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(245,166,35,.35),rgba(157,113,255,.25),transparent)}
-.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
-  background:none;border:none;padding:6px 0;opacity:.28;cursor:pointer;transition:.25s}
-.nb.on{opacity:1}
-.nb.on .ni{filter:drop-shadow(0 0 8px rgba(245,166,35,.7))}
-.nb.on .nl{color:var(--gold);font-weight:800}
-.ni{font-size:22px;line-height:1}
-.nl{font-size:10px;color:var(--mt);font-weight:600;letter-spacing:.3px}
+/* ═══════════════ BOTTOM NAV ═══════════════ */
+#nav{position:fixed;bottom:0;left:0;right:0;display:flex;
+  background:rgba(6,6,16,.95);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:8px 0 env(safe-area-inset-bottom,0);z-index:100}
+#nav::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:var(--gd);background-size:300% 300%;animation:borderFlow 6s ease infinite}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+  background:none;border:none;padding:6px 2px;opacity:.25;cursor:pointer;transition:.2s}
+.ni.on{opacity:1}
+.ni.on .ni-ico{filter:drop-shadow(0 0 8px rgba(251,191,36,.8))}
+.ni.on .ni-lbl{color:var(--gold);font-weight:800}
+.ni-ico{font-size:22px;line-height:1}
+.ni-lbl{font-size:10px;color:#8888cc;font-weight:600;letter-spacing:.3px}
+
+/* ═══════════════ CARDS ═══════════════ */
+.gc{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:0 2px 20px rgba(0,0,0,.4)}
+.gc-gold{background:rgba(251,191,36,.05);border:1px solid rgba(251,191,36,.18);border-radius:20px;padding:16px;margin-bottom:12px}
+.gc-pu{background:rgba(167,139,250,.05);border:1px solid rgba(167,139,250,.18);border-radius:20px;padding:16px;margin-bottom:12px}
+.gc-cy{background:rgba(52,211,153,.05);border:1px solid rgba(52,211,153,.18);border-radius:20px;padding:16px;margin-bottom:12px}
+.gc-pk{background:rgba(244,114,182,.05);border:1px solid rgba(244,114,182,.18);border-radius:20px;padding:16px;margin-bottom:12px}
+.gc-bl{background:rgba(96,165,250,.05);border:1px solid rgba(96,165,250,.18);border-radius:20px;padding:16px;margin-bottom:12px}
+.sh{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.sh-ico{width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.i-go{background:rgba(251,191,36,.2)}.i-pu{background:rgba(167,139,250,.2)}
+.i-cy{background:rgba(52,211,153,.2)}.i-pk{background:rgba(244,114,182,.18)}
+.i-bl{background:rgba(96,165,250,.18)}.i-rd{background:rgba(248,113,113,.12)}
+.sh-t{font-size:14px;font-weight:800;color:var(--tx)}
+.sh-s{font-size:10px;color:#8888cc;margin-top:2px}
+.lbl{font-size:10px;font-weight:800;color:#9999dd;letter-spacing:1.2px;margin:14px 0 8px;text-transform:uppercase}
+.ta{width:100%;padding:14px;border-radius:16px;border:1px solid var(--bd);
+  background:rgba(255,255,255,.04);color:var(--tx);font-size:15px;resize:none;outline:none;
+  line-height:1.65;min-height:80px;font-family:inherit;transition:.2s}
+.ta:focus{border-color:rgba(251,191,36,.4);background:rgba(251,191,36,.03)}
+.ta::placeholder{color:var(--mt2)}
+.bb{width:100%;padding:15px;border:none;border-radius:18px;cursor:pointer;font-size:15px;font-weight:900;color:#fff;transition:.15s}
+.bb:active{transform:scale(.97)}
+.b1{background:var(--g1);box-shadow:0 6px 28px rgba(167,139,250,.3)}
+.b2{background:var(--g2);color:#000;box-shadow:0 6px 28px rgba(251,191,36,.3)}
+.b3{background:var(--g3);box-shadow:0 6px 24px rgba(52,211,153,.2)}
+.b4{background:var(--g4);box-shadow:0 6px 24px rgba(167,139,250,.25)}
+.rb{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;
+  border:1px solid var(--bd);background:rgba(255,255,255,.04);font-size:12px;color:#aaaadd;cursor:pointer;font-weight:700;transition:.15s}
+.rb:active{opacity:.6}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:800;margin-bottom:10px}
+.cp{color:var(--pu);border:1px solid rgba(167,139,250,.2);background:rgba(167,139,250,.08)}
+.cc{color:var(--cy);border:1px solid rgba(52,211,153,.2);background:rgba(52,211,153,.07)}
+.cg{color:var(--gold);border:1px solid rgba(251,191,36,.2);background:rgba(251,191,36,.07)}
+.cb{color:var(--bl);border:1px solid rgba(96,165,250,.2);background:rgba(96,165,250,.07)}
+.new{padding:2px 7px;border-radius:6px;font-size:9px;font-weight:900;background:rgba(52,211,153,.15);color:#6ee7b7;margin-left:5px}
+
+/* CHIP ROWS */
+.cr{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+.cr::-webkit-scrollbar{display:none}
+.c1{padding:9px 15px;border-radius:16px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);
+  cursor:pointer;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:60px;transition:.2s}
+.c1 span{font-size:20px;display:block}.c1 div{font-size:11px;font-weight:700;color:#aaaadd}
+.c1.on{border-color:rgba(251,191,36,.5);background:rgba(251,191,36,.09);box-shadow:0 0 20px rgba(251,191,36,.12)}
+.c1.on div{color:var(--gold)}
+.c2{padding:8px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);
+  font-size:12px;font-weight:700;color:#aaaadd;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:.2s}
+.c2.on{border-color:rgba(244,114,182,.5);background:rgba(244,114,182,.09);color:var(--pk)}
+.c3{padding:8px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);
+  font-size:12px;font-weight:700;color:#aaaadd;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:.2s}
+.c3.on{border-color:rgba(52,211,153,.5);background:rgba(52,211,153,.09);color:var(--cy)}
+
+/* RESULT CARDS */
+.rx{background:rgba(18,16,40,.95);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:14px;margin-bottom:10px}
+.rl{font-size:10px;font-weight:800;color:var(--mt);letter-spacing:.8px;margin-bottom:8px;text-transform:uppercase}
+.rt{font-size:14px;line-height:1.85;color:var(--tx);white-space:pre-wrap}
+.tc{padding:12px 15px;border-radius:14px;border:1px solid rgba(255,255,255,.18);margin-bottom:8px;
+  cursor:pointer;font-size:14px;line-height:1.6;color:var(--tx);background:rgba(255,255,255,.04);transition:.2s}
+.tc.picked{border-color:rgba(251,191,36,.5);background:rgba(251,191,36,.07)}
+.hbox{background:linear-gradient(135deg,rgba(251,191,36,.1),rgba(251,146,60,.07));
+  border:1px solid rgba(251,191,36,.25);border-radius:18px;padding:16px;margin-bottom:12px}
+.hbox-q{font-size:17px;font-weight:900;color:var(--gold);line-height:1.5}
+
+/* IMAGE GALLERY */
+.ig{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.ic{position:relative;border-radius:16px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);background:rgba(10,8,24,.9);
+  aspect-ratio:1;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.ic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;cursor:pointer;transition:.3s}
+.ic img:hover{transform:scale(1.05)}
+.ic-load{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:6px;color:var(--mt);font-size:10px;padding:8px;text-align:center}
+/* cinematic vignette */
+.ic::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:linear-gradient(to bottom,rgba(0,0,0,.3) 0%,transparent 40%,transparent 60%,rgba(0,0,0,.55) 100%)}
+.ic-badge{position:absolute;top:6px;left:6px;z-index:2;
+  padding:2px 8px;border-radius:8px;font-size:9px;font-weight:900;color:#000;
+  background:linear-gradient(90deg,#fbbf24,#fb923c)}
+.ic-hint{display:none;position:absolute;bottom:8px;right:8px;z-index:2;
+  padding:4px 10px;border-radius:10px;font-size:10px;font-weight:700;color:#fff;
+  background:rgba(0,0,0,.7);backdrop-filter:blur(8px)}
+.pbar{height:3px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:6px}
+.pfill{height:100%;border-radius:3px;background:var(--g2);transition:width .5s ease}
+
+/* MODEL ROW */
+.mr{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+.mr::-webkit-scrollbar{display:none}
+.mc{padding:7px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);
+  font-size:11px;font-weight:800;color:#aaaadd;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:.2s}
+.mc.on{border-color:rgba(167,139,250,.5);background:rgba(167,139,250,.1);color:var(--pu)}
+
+/* STEP FLOW */
+.sf{display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;background:rgba(255,255,255,.03);
+  border:1px solid var(--bd);border-radius:18px;margin-bottom:16px;position:relative}
+.sf::before{content:'';position:absolute;top:50%;left:16px;right:16px;height:1px;background:rgba(255,255,255,.05)}
+.sf-i{display:flex;flex-direction:column;align-items:center;gap:4px;position:relative}
+.sf-d{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;border:1.5px solid}
+.sf-l{font-size:10px;font-weight:700}
+.sf-act .sf-d{background:var(--gold);border-color:var(--gold);color:#000;box-shadow:0 0 16px rgba(251,191,36,.5)}
+.sf-act .sf-l{color:var(--gold)}
+.sf-done .sf-d{background:rgba(52,211,153,.15);border-color:var(--cy);color:var(--cy)}
+.sf-done .sf-l{color:var(--cy)}
+.sf-wait .sf-d{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);color:var(--mt)}
+.sf-wait .sf-l{color:var(--mt2)}
+
+/* TELEPROMPTER */
+.tp{position:relative;height:170px;overflow:hidden;border-radius:16px;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.07);margin-bottom:4px}
+.tp-ft{position:absolute;top:0;left:0;right:0;height:55px;background:linear-gradient(to bottom,rgba(0,0,0,.95),transparent);z-index:2;pointer-events:none}
+.tp-fb{position:absolute;bottom:0;left:0;right:0;height:55px;background:linear-gradient(to top,rgba(0,0,0,.95),transparent);z-index:2;pointer-events:none}
+.tp-in{padding:60px 18px;font-size:18px;font-weight:700;line-height:1.75;color:var(--tx);transition:transform .1s linear;position:relative}
+.tp-ln{position:absolute;left:12px;right:12px;height:2px;top:50%;background:rgba(251,191,36,.55);display:none;z-index:3;box-shadow:0 0 10px rgba(251,191,36,.7)}
+.tp-h{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--mt);z-index:4;flex-direction:column;gap:6px}
+
+/* VOICE PICKER */
+.vg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.vi{padding:14px 12px;border-radius:16px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);text-align:center;cursor:pointer;transition:.2s}
+.vi.on{border-color:rgba(167,139,250,.5);background:rgba(167,139,250,.1);box-shadow:0 0 20px rgba(167,139,250,.15)}
+.ve{font-size:24px;display:block;margin-bottom:6px}
+.vn{font-size:12px;font-weight:800;color:var(--tx)}
+.vd{font-size:10px;color:#8888cc;margin-top:2px}
+
+/* AUDIO VIZ */
+.wv{width:100%;height:48px;border-radius:8px;background:rgba(255,255,255,.03);display:block;margin-bottom:8px}
+.vt{font-size:32px;font-weight:900;color:var(--gold);text-align:center;margin-bottom:4px;font-variant-numeric:tabular-nums}
+.vs{font-size:12px;color:#9090cc;text-align:center;margin-bottom:12px}
+.vw{display:flex;justify-content:center;gap:14px;margin-bottom:8px}
+.vb{width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:.2s}
+.vb:active{transform:scale(.88)}
+.vb-rec{background:rgba(248,113,113,.12);border:1.5px solid rgba(248,113,113,.4)}
+.vb-stp{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.18)}
+.vb-ply{background:rgba(52,211,153,.12);border:1.5px solid rgba(52,211,153,.4)}
+
+/* VIDEO CLIPS */
+.vc{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);margin-bottom:8px}
+.vct{width:52px;height:52px;border-radius:10px;object-fit:cover;flex-shrink:0;border:1px solid rgba(255,255,255,.08)}
+.vci{flex:1;min-width:0}
+.vcl{font-size:11px;font-weight:800;color:#9090cc;margin-bottom:3px}
+.vcs{font-size:12px;color:var(--tx)}
+.vcd{display:inline-block;margin-top:8px;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:800;color:var(--gold);border:1px solid rgba(251,191,36,.4);background:rgba(251,191,36,.08);cursor:pointer;text-decoration:none}
+
+/* TREND */
+.trsec{margin-bottom:14px}
+.trh{font-size:10px;font-weight:800;color:#9090cc;margin-bottom:8px;letter-spacing:1px;text-transform:uppercase}
+.trw{display:flex;flex-wrap:wrap;gap:6px}
+.tw1{padding:6px 13px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;transition:.2s;color:var(--pk);border:1px solid rgba(244,114,182,.2);background:rgba(244,114,182,.07)}
+.tw2{padding:6px 13px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;transition:.2s;color:var(--cy);border:1px solid rgba(52,211,153,.2);background:rgba(52,211,153,.07)}
+
+/* LOCK */
+.lk{text-align:center;padding:40px 24px;border-radius:24px;background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.18);margin-bottom:12px}
+.lki{font-size:52px;display:block;margin-bottom:14px;opacity:.35}
+.lkt{font-size:18px;font-weight:900;color:var(--tx);margin-bottom:8px}
+.lkd{font-size:13px;color:#9090cc;line-height:1.7;margin-bottom:18px}
+.lku{padding:13px 28px;border-radius:22px;border:none;cursor:pointer;background:var(--g2);color:#000;font-size:14px;font-weight:900;box-shadow:0 6px 24px rgba(251,191,36,.25)}
+
+/* STATS */
+.sw{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.sb{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:16px 10px;text-align:center}
+.sn{font-size:30px;font-weight:900;color:var(--gold);animation:countUp .4s ease}
+.sl{font-size:10px;color:#9090cc;margin-top:3px;letter-spacing:.5px}
+
+/* PRICING */
+.pw{border-radius:20px;padding:18px;margin-bottom:12px;border:1px solid}
+.ps{background:rgba(96,165,250,.04);border-color:rgba(96,165,250,.18)}
+.pp{background:rgba(251,191,36,.05);border-color:rgba(251,191,36,.22);box-shadow:0 0 40px rgba(251,191,36,.05)}
+.plb{font-size:10px;font-weight:800;color:var(--mt);margin-bottom:4px;letter-spacing:1.2px;text-transform:uppercase}
+.plp{font-size:28px;font-weight:900;margin-bottom:12px}
+.ps .plp{color:var(--bl)}.pp .plp{color:var(--gold)}
+.pks{display:flex;flex-direction:column;gap:7px}
+.pk{font-size:13px;color:#9090cc;display:flex;align-items:flex-start;gap:8px;line-height:1.4}
+.poc{color:var(--cy);font-size:14px;font-weight:900;flex-shrink:0;margin-top:1px}
+.pstep{display:flex;flex-direction:column;gap:10px}
+.pe{display:flex;align-items:flex-start;gap:12px;font-size:13px;color:#9090cc;line-height:1.5}
+.pn{width:24px;height:24px;border-radius:50%;background:rgba(251,191,36,.12);color:var(--gold);font-size:11px;font-weight:900;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px}
+
+/* GUEST BANNER */
+#gb{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.3);border-radius:14px;padding:11px 16px;margin:0 16px 12px;font-size:13px;color:var(--mt);display:none}
 
 /* LOADING */
-#lo{position:fixed;inset:0;z-index:400;background:rgba(7,7,13,.93);
-  backdrop-filter:blur(24px);display:none;flex-direction:column;
-  align-items:center;justify-content:center;gap:16px}
+#lo{position:fixed;inset:0;z-index:400;background:rgba(6,6,16,.93);backdrop-filter:blur(24px);display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px}
 #lo.on{display:flex}
-.ls2{width:52px;height:52px;border-radius:50%;
-  border:2px solid rgba(245,166,35,.12);border-top-color:var(--gold);border-right-color:var(--pk);
-  animation:spin .7s linear infinite}
-#lm{font-size:14px;color:var(--tx);font-weight:700;text-align:center;max-width:220px;line-height:1.5}
-#bwl{font-size:11px;color:var(--mt);letter-spacing:.5px}
+.sp{width:52px;height:52px;border-radius:50%;border:2px solid rgba(251,191,36,.12);border-top-color:var(--gold);border-right-color:var(--pk);animation:spin .7s linear infinite}
+#lmsg{font-size:14px;color:var(--tx);font-weight:700;text-align:center;max-width:220px;line-height:1.5}
+#lsub{font-size:11px;color:#9090cc;letter-spacing:.5px}
 
 /* TOAST */
 #tt{position:fixed;top:-64px;left:50%;transform:translateX(-50%);
   padding:11px 22px;border-radius:24px;font-size:13px;font-weight:700;
   white-space:nowrap;z-index:999;transition:top .36s cubic-bezier(.34,1.56,.64,1);
-  background:rgba(10,9,20,.96);border:1px solid rgba(255,255,255,.1);
-  color:var(--tx);backdrop-filter:blur(24px);box-shadow:0 10px 40px rgba(0,0,0,.6)}
+  background:rgba(10,10,25,.96);border:1px solid rgba(255,255,255,.1);
+  color:var(--tx);backdrop-filter:blur(24px);box-shadow:0 12px 40px rgba(0,0,0,.6)}
 #tt.sh{top:max(env(safe-area-inset-top,0px),18px)}
-#tt.ok{border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.1);color:#6ee7b7}
-#tt.er{border-color:rgba(244,63,94,.35);background:rgba(244,63,94,.08);color:#fda4af}
-
-/* CARDS */
-.gc{background:var(--card-s);border:1px solid var(--bd);border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow-sm)}
-.gc-pu{background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.18);border-radius:20px;padding:16px;margin-bottom:12px}
-.gc-gold{background:rgba(245,166,35,.05);border:1px solid rgba(245,166,35,.2);border-radius:20px;padding:16px;margin-bottom:12px}
-.gc-cy{background:rgba(34,211,238,.05);border:1px solid rgba(34,211,238,.17);border-radius:20px;padding:16px;margin-bottom:12px}
-.gc-gr{background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.17);border-radius:20px;padding:16px;margin-bottom:12px}
-.gc-pk{background:rgba(255,77,184,.05);border:1px solid rgba(255,77,184,.17);border-radius:20px;padding:16px;margin-bottom:12px}
-
-/* SECTION HEADER */
-.sh2{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.sh2-icon{width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
-.ico-pu{background:rgba(139,92,246,.15)}.ico-pk{background:rgba(255,77,184,.12)}
-.ico-cy{background:rgba(34,211,238,.12)}.ico-gr{background:rgba(16,185,129,.12)}.ico-go{background:rgba(245,166,35,.13)}
-.sh2-title{font-size:14px;font-weight:800;color:var(--tx)}
-.sh2-sub{font-size:10px;color:var(--mt);margin-top:2px}
-
-/* INPUTS */
-.ta{width:100%;padding:14px;border-radius:16px;border:1px solid var(--bd);
-  background:rgba(255,255,255,.04);color:var(--tx);font-size:15px;resize:none;outline:none;
-  line-height:1.6;min-height:80px;font-family:inherit;transition:.2s}
-.ta:focus{border-color:rgba(245,166,35,.4);background:rgba(245,166,35,.03)}
-.ta::placeholder{color:var(--mt2)}
-
-/* BUTTONS */
-.bb{width:100%;padding:15px;border:none;border-radius:18px;cursor:pointer;
-  font-size:15px;font-weight:900;color:#fff;letter-spacing:.5px;transition:.15s}
-.bb:active{transform:scale(.97)}
-.b1{background:var(--g1);background-size:200% 200%;animation:shimmer 3s ease infinite;box-shadow:0 6px 28px rgba(139,92,246,.3)}
-.b2{background:var(--g2);background-size:200% 200%;animation:shimmer 3s ease infinite;color:#000;box-shadow:0 6px 28px rgba(245,166,35,.3)}
-.b3{background:var(--g3);box-shadow:0 6px 24px rgba(34,211,238,.2)}
-.b4{background:var(--g4);box-shadow:0 6px 24px rgba(16,185,129,.22)}
-.rb{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:20px;
-  border:1px solid var(--bd);background:rgba(255,255,255,.04);font-size:12px;color:var(--mt);cursor:pointer;font-weight:700}
-
-/* LABELS / CHIPS */
-.lbl{font-size:11px;font-weight:800;color:var(--mt);letter-spacing:1px;margin:14px 0 8px;text-transform:uppercase}
-.chip{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:800;margin-bottom:12px}
-.chip-pu{background:rgba(157,113,255,.09);color:var(--pu);border:1px solid rgba(157,113,255,.2)}
-.chip-cy{background:rgba(34,211,238,.08);color:var(--cy);border:1px solid rgba(34,211,238,.2)}
-.chip-go{background:rgba(245,166,35,.08);color:var(--gold);border:1px solid rgba(245,166,35,.2)}
-.new-tag{padding:2px 7px;border-radius:6px;font-size:9px;font-weight:900;background:rgba(16,185,129,.15);color:#6ee7b7;margin-left:5px}
-
-/* PLATFORM CHIPS */
-.pc-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
-.pc-row::-webkit-scrollbar{display:none}
-.pc{display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 16px;border-radius:16px;
-  border:1px solid var(--bd);background:rgba(255,255,255,.04);cursor:pointer;flex-shrink:0;transition:.2s;min-width:64px}
-.pc.on{border-color:rgba(245,166,35,.45);background:rgba(245,166,35,.08);box-shadow:0 0 18px rgba(245,166,35,.15)}
-.pc span{font-size:22px;line-height:1}.pc div{font-size:11px;font-weight:700;color:var(--mt)}.pc.on div{color:var(--gold)}
-.sc-row{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
-.sc-row::-webkit-scrollbar{display:none}
-.sc{padding:8px 14px;border-radius:20px;border:1px solid var(--bd);background:rgba(255,255,255,.04);
-  font-size:12px;font-weight:700;color:var(--mt);cursor:pointer;white-space:nowrap;flex-shrink:0;transition:.2s}
-.sc.on{border-color:rgba(255,77,184,.45);background:rgba(255,77,184,.08);color:var(--pk)}
-.sch-row{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
-.sch-row::-webkit-scrollbar{display:none}
-.sch{padding:8px 14px;border-radius:20px;border:1px solid var(--bd);background:rgba(255,255,255,.04);
-  font-size:12px;font-weight:700;color:var(--mt);cursor:pointer;white-space:nowrap;flex-shrink:0;transition:.2s}
-.sch.on{border-color:rgba(34,211,238,.45);background:rgba(34,211,238,.08);color:var(--cy)}
-
-/* RESULT CARDS */
-.rx{background:rgba(12,10,24,.95);border:1px solid var(--bd);border-radius:16px;padding:14px;margin-bottom:10px}
-.rl{font-size:11px;font-weight:800;color:var(--mt);letter-spacing:.5px;margin-bottom:8px;text-transform:uppercase}
-.rt{font-size:14px;line-height:1.8;color:var(--tx);white-space:pre-wrap}
-.title-card{padding:13px 15px;border-radius:16px;border:1px solid var(--bd);margin-bottom:8px;
-  cursor:pointer;transition:.2s;font-size:14px;line-height:1.6;color:var(--tx);background:rgba(255,255,255,.04)}
-.title-card:active{transform:scale(.99)}
-.title-card.picked{border-color:rgba(245,166,35,.5);background:rgba(245,166,35,.07)}
-.hook-box{background:linear-gradient(135deg,rgba(245,166,35,.09),rgba(255,107,53,.06));
-  border:1px solid rgba(245,166,35,.25);border-radius:18px;padding:16px;margin-bottom:12px}
-.hook-q{font-size:17px;font-weight:900;color:var(--gold);line-height:1.5}
-
-/* IMAGE GRID — 影视级展示 */
-.ig{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}
-.is{position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);
-  background:rgba(10,8,20,.9);aspect-ratio:1/1;box-shadow:var(--shadow-sm)}
-.is img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;cursor:pointer;transition:.3s}
-.is img:hover{transform:scale(1.04)}
-.is .ip{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  flex-direction:column;gap:6px;color:var(--mt);font-size:10px;padding:8px;text-align:center}
-.is::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
-  background:linear-gradient(to bottom,rgba(0,0,0,.25) 0%,transparent 35%,transparent 65%,rgba(0,0,0,.5) 100%)}
-.fs-hint{display:none;position:absolute;bottom:8px;right:8px;z-index:2;
-  padding:4px 10px;border-radius:10px;font-size:10px;font-weight:700;color:#fff;
-  background:rgba(0,0,0,.65);backdrop-filter:blur(8px)}
-.img-quality-badge{position:absolute;top:6px;left:6px;z-index:2;
-  padding:2px 8px;border-radius:8px;font-size:9px;font-weight:900;
-  background:rgba(245,166,35,.85);color:#000}
-
-/* PROGRESS */
-.wx-prog{margin-top:8px;width:100%}
-.wx-bar{height:3px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden}
-.wx-fill{height:100%;border-radius:3px;background:var(--g2);background-size:200% 200%;
-  animation:shimmer 2s ease infinite;transition:width .6s ease}
-.wx-txt{font-size:10px;color:var(--mt);margin-top:4px;text-align:center}
-
-/* MODEL SELECTOR */
-.model-row{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:12px}
-.model-row::-webkit-scrollbar{display:none}
-.model-chip{padding:7px 14px;border-radius:20px;border:1px solid var(--bd);background:rgba(255,255,255,.04);
-  font-size:11px;font-weight:800;color:var(--mt);cursor:pointer;white-space:nowrap;flex-shrink:0;transition:.2s}
-.model-chip.on{border-color:rgba(157,113,255,.45);background:rgba(157,113,255,.09);color:var(--pu)}
+#tt.ok{border-color:rgba(52,211,153,.35);background:rgba(52,211,153,.1);color:#6ee7b7}
+#tt.er{border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.08);color:#fca5a5}
 
 /* FULLSCREEN */
-#fsO{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.97);
-  display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px}
-#fsO.on{display:flex}
-.fs-close{position:absolute;top:max(env(safe-area-inset-top,0px),20px);right:16px;
-  background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);border-radius:50%;
-  width:38px;height:38px;font-size:16px;color:#fff;cursor:pointer;
-  display:flex;align-items:center;justify-content:center}
-#fsImg{max-width:96%;max-height:78vh;object-fit:contain;border-radius:10px;box-shadow:0 20px 80px rgba(0,0,0,.8)}
-.fs-dl{padding:12px 28px;border-radius:22px;border:1px solid rgba(245,166,35,.4);
-  background:rgba(245,166,35,.1);color:var(--gold);font-size:14px;font-weight:800;cursor:pointer}
+#fs{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.98);display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+#fs.on{display:flex}
+.fs-x{position:absolute;top:max(env(safe-area-inset-top,0px),20px);right:16px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);border-radius:50%;width:38px;height:38px;font-size:16px;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+#fsimg{max-width:96%;max-height:78vh;object-fit:contain;border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,.9)}
+.fs-dl{padding:12px 28px;border-radius:22px;border:1px solid rgba(251,191,36,.4);background:rgba(251,191,36,.1);color:var(--gold);font-size:14px;font-weight:800;cursor:pointer}
 
-/* VIDEO MAKER */
-#vmO{position:fixed;inset:0;z-index:450;background:rgba(7,7,13,.97);
-  display:none;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
-#vmO.on{display:flex}
-.vm-title{font-size:18px;font-weight:900;color:var(--tx);margin-bottom:4px}
-.vm-sub{font-size:12px;color:var(--mt);margin-bottom:20px;letter-spacing:.5px}
-.vm-bar-wrap{width:200px;height:4px;background:rgba(255,255,255,.08);border-radius:4px;margin-bottom:8px;overflow:hidden}
-.vm-bar{height:100%;border-radius:4px;background:var(--g2);background-size:200% 200%;
-  animation:shimmer 2s ease infinite;transition:width .3s ease;width:0%}
-.vm-pct{font-size:32px;font-weight:900;color:var(--gold);margin-bottom:4px;font-variant-numeric:tabular-nums}
-.vm-eta{font-size:12px;color:var(--mt);margin-bottom:20px}
-.vm-done-icon{font-size:52px;margin-bottom:10px;animation:float 3s ease-in-out infinite}
-.vm-done-t{font-size:19px;font-weight:900;color:var(--tx);margin-bottom:5px}
-.vm-done-s{font-size:12px;color:var(--mt);margin-bottom:18px;line-height:1.7}
-.vm-dl{padding:14px 28px;border-radius:22px;border:none;background:var(--g2);color:#000;
-  font-size:15px;font-weight:900;cursor:pointer;margin-bottom:10px;width:100%;max-width:280px}
-.vm-back{background:none;border:1px solid var(--bd);border-radius:16px;
-  padding:11px 24px;color:var(--mt);font-size:14px;cursor:pointer;width:100%;max-width:280px}
-.vm-note{font-size:11px;color:var(--mt);margin-top:10px;line-height:1.6}
-
-/* STEP FLOW */
-.sf{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;
-  background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:18px;margin-bottom:16px;position:relative}
-.sf::before{content:'';position:absolute;top:50%;left:16px;right:16px;height:1px;background:rgba(255,255,255,.05);z-index:0}
-.sf-item{display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;z-index:1}
-.sf-dot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;border:1.5px solid}
-.sf-label{font-size:10px;font-weight:700}
-.sf-act .sf-dot{background:var(--gold);border-color:var(--gold);color:#000;box-shadow:0 0 14px rgba(245,166,35,.5)}
-.sf-act .sf-label{color:var(--gold)}
-.sf-done .sf-dot{background:rgba(16,185,129,.15);border-color:var(--gr);color:var(--gr)}
-.sf-done .sf-label{color:var(--gr)}
-.sf-wait .sf-dot{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);color:var(--mt)}
-.sf-wait .sf-label{color:var(--mt2)}
-
-/* TELEPROMPTER */
-.tp-box{position:relative;height:170px;overflow:hidden;border-radius:16px;
-  background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.07);margin-bottom:4px}
-.tp-fade-t{position:absolute;top:0;left:0;right:0;height:55px;background:linear-gradient(to bottom,rgba(0,0,0,.95),transparent);z-index:2;pointer-events:none}
-.tp-fade-b{position:absolute;bottom:0;left:0;right:0;height:55px;background:linear-gradient(to top,rgba(0,0,0,.95),transparent);z-index:2;pointer-events:none}
-.tp-inner{padding:60px 18px;font-size:18px;font-weight:700;line-height:1.75;color:var(--tx);transition:transform .1s linear;position:relative}
-.tp-line{position:absolute;left:12px;right:12px;height:2px;top:50%;background:rgba(245,166,35,.5);display:none;z-index:3;box-shadow:0 0 8px rgba(245,166,35,.6)}
-.tp-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--mt);z-index:4}
-
-/* VOICE PICKER */
-.vp-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
-.vp-item{padding:14px 12px;border-radius:16px;border:1px solid var(--bd);background:rgba(255,255,255,.04);text-align:center;cursor:pointer;transition:.2s}
-.vp-item.on{border-color:rgba(157,113,255,.45);background:rgba(157,113,255,.09);box-shadow:0 0 18px rgba(157,113,255,.15)}
-.vp-emoji{font-size:24px;display:block;margin-bottom:6px}
-.vp-name{font-size:12px;font-weight:800;color:var(--tx)}
-.vp-desc{font-size:10px;color:var(--mt);margin-top:2px}
-
-/* VIDEO CLIPS */
-.vc-card{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;border:1px solid var(--bd);background:rgba(255,255,255,.04);margin-bottom:8px}
-.vc-thumb{width:54px;height:54px;border-radius:10px;object-fit:cover;flex-shrink:0;border:1px solid rgba(255,255,255,.08)}
-.vc-info{flex:1;min-width:0}
-.vc-clabel{font-size:11px;font-weight:800;color:var(--mt);margin-bottom:3px}
-.vc-vstatus{font-size:12px;color:var(--tx)}
-.vc-dl-btn{display:inline-block;margin-top:8px;padding:6px 16px;border-radius:20px;font-size:11px;font-weight:800;color:var(--gold);border:1px solid rgba(245,166,35,.4);background:rgba(245,166,35,.08);cursor:pointer;text-decoration:none}
-.vc-vis{width:100%;height:48px;border-radius:8px;background:rgba(255,255,255,.03);margin-bottom:8px}
-.vc-timer{font-size:32px;font-weight:900;color:var(--gold);text-align:center;margin-bottom:4px;font-variant-numeric:tabular-nums}
-.vc-status{font-size:12px;color:var(--mt);text-align:center;margin-bottom:12px}
-.vc-wrap{display:flex;justify-content:center;gap:14px;margin-bottom:8px}
-.vc-btn{width:54px;height:54px;border-radius:50%;border:none;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;transition:.2s}
-.vc-btn:active{transform:scale(.9)}
-.vc-rec{background:rgba(244,63,94,.12);border:1.5px solid rgba(244,63,94,.4)}
-.vc-stop{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.18)}
-.vc-play{background:rgba(16,185,129,.12);border:1.5px solid rgba(16,185,129,.4)}
-
-/* TREND */
-.trend-section{margin-bottom:14px}
-.trend-section-title{font-size:11px;font-weight:800;color:var(--mt);margin-bottom:8px;letter-spacing:.8px;text-transform:uppercase}
-.trend-items{display:flex;flex-wrap:wrap;gap:6px}
-.trend-item{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;transition:.2s}
-.trend-item:active{transform:scale(.95)}
-.trend-xhs{background:rgba(255,77,184,.08);color:var(--pk);border:1px solid rgba(255,77,184,.2)}
-.trend-dy{background:rgba(34,211,238,.08);color:var(--cy);border:1px solid rgba(34,211,238,.2)}
-
-/* LOCK */
-.lk{text-align:center;padding:40px 24px;border-radius:24px;background:rgba(255,255,255,.02);border:1px dashed rgba(255,255,255,.1);margin-bottom:12px}
-.lic{font-size:52px;display:block;margin-bottom:14px;opacity:.4}
-.lt{font-size:18px;font-weight:900;color:var(--tx);margin-bottom:8px}
-.ld{font-size:13px;color:var(--mt);line-height:1.7;margin-bottom:18px}
-.uc{padding:13px 28px;border-radius:22px;border:none;cursor:pointer;background:var(--g2);color:#000;font-size:14px;font-weight:900;box-shadow:0 6px 24px rgba(245,166,35,.25)}
-
-/* STATS */
-.sgw{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
-.sb2{background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:16px;padding:16px 10px;text-align:center}
-.sn{font-size:30px;font-weight:900;color:var(--gold)}
-.sl{font-size:10px;color:var(--mt);margin-top:3px;letter-spacing:.5px}
-
-/* PRICING */
-.pw{border-radius:20px;padding:18px;margin-bottom:12px;border:1px solid}
-.ps{background:rgba(34,211,238,.04);border-color:rgba(34,211,238,.18)}
-.pp{background:rgba(245,166,35,.05);border-color:rgba(245,166,35,.22);box-shadow:0 0 40px rgba(245,166,35,.05)}
-.plb{font-size:11px;font-weight:800;color:var(--mt);margin-bottom:4px;letter-spacing:1px;text-transform:uppercase}
-.plp{font-size:28px;font-weight:900;color:var(--gold);margin-bottom:12px}
-.ps .plp{color:var(--cy)}
-.pks{display:flex;flex-direction:column;gap:7px}
-.pk2{font-size:13px;color:var(--mt);display:flex;align-items:flex-start;gap:8px;line-height:1.4}
-.poc{color:var(--gr);font-size:14px;font-weight:900;flex-shrink:0;margin-top:1px}
-.pstep{display:flex;flex-direction:column;gap:10px}
-.pe{display:flex;align-items:flex-start;gap:12px;font-size:13px;color:var(--mt);line-height:1.5}
-.pn2{width:24px;height:24px;border-radius:50%;background:rgba(245,166,35,.12);color:var(--gold);font-size:11px;font-weight:900;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px}
-#guestBanner{background:rgba(245,166,35,.05);border:1px solid rgba(245,166,35,.18);border-radius:14px;padding:11px 16px;margin:0 16px 12px;font-size:13px;color:var(--mt)}
+/* VIDEO OVERLAY */
+#vmo{position:fixed;inset:0;z-index:450;background:rgba(6,6,16,.98);display:none;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
+#vmo.on{display:flex}
+.vm-t{font-size:18px;font-weight:900;color:var(--tx);margin-bottom:4px}
+.vm-s{font-size:12px;color:var(--mt);margin-bottom:20px;letter-spacing:.5px}
+.vm-bw{width:220px;height:4px;background:rgba(255,255,255,.08);border-radius:4px;margin-bottom:8px;overflow:hidden}
+.vm-bf{height:100%;border-radius:4px;background:var(--g2);transition:width .3s ease;width:0%}
+.vm-p{font-size:34px;font-weight:900;color:var(--gold);margin-bottom:4px;font-variant-numeric:tabular-nums}
+.vm-e{font-size:12px;color:#9090cc;margin-bottom:20px}
+.vm-di{font-size:52px;margin-bottom:10px;animation:float 3s ease-in-out infinite}
+.vm-dt{font-size:18px;font-weight:900;color:var(--tx);margin-bottom:5px}
+.vm-ds{font-size:12px;color:var(--mt);margin-bottom:18px;line-height:1.7}
+.vm-dl{padding:14px 28px;border-radius:22px;border:none;background:var(--g2);color:#000;font-size:15px;font-weight:900;cursor:pointer;margin-bottom:10px;width:100%;max-width:280px}
+.vm-bk{background:none;border:1px solid var(--bd);border-radius:16px;padding:11px 24px;color:var(--mt);font-size:14px;cursor:pointer;width:100%;max-width:280px}
+.vm-n{font-size:11px;color:var(--mt);margin-top:10px;line-height:1.6}
 </style>
 </head>
 <body>
+<!-- LOGIN -->
 <div id="lp">
-  <div class="lp-orb lp-orb1"></div><div class="lp-orb lp-orb2"></div><div class="lp-orb lp-orb3"></div>
-  <div class="ll"><span class="ls">🎬</span><h1>AI爆款工厂</h1><p>Cinema Grade · 影视级内容创作引擎</p></div>
-  <div class="mb-row">
-    <span class="mb mb1">✦ Gemini 2.0</span><span class="mb mb2">✦ 通义万象</span>
-    <span class="mb mb3">✦ FLUX Pro</span><span class="mb mb4">✦ CosyVoice</span>
+  <div class="lp-glow lp-g1"></div><div class="lp-glow lp-g2"></div>
+  <div class="ll">
+    <span class="lp-icon">🎬</span>
+    <div class="lp-title">AI爆款工厂</div>
+    <div class="lp-sub">Cinema Grade · 影视级内容创作引擎</div>
   </div>
-  <div class="lbox">
-    <div class="plan-row">
-      <div class="plan std"><div class="plan-price">¥49.9</div><div class="plan-name">标准版/月</div><div class="plan-feat">文案+图片</div></div>
-      <div class="plan pro"><div class="plan-price">¥99.9</div><div class="plan-name">专业版/月</div><div class="plan-feat">全功能解锁</div></div>
+  <div class="badges">
+    <span class="badge b-pu">✦ Gemini 2.0</span>
+    <span class="badge b-go">✦ FLUX Pro</span>
+    <span class="badge b-cy">✦ 通义万象</span>
+    <span class="badge b-bl">✦ CosyVoice</span>
+  </div>
+  <div class="lcard">
+    <div class="plans">
+      <div class="plan a"><div class="plan-p">¥49.9</div><div class="plan-n">标准版/月</div><div class="plan-f">文案+图片</div></div>
+      <div class="plan b"><div class="plan-p">¥99.9</div><div class="plan-n">专业版/月</div><div class="plan-f">全功能解锁</div></div>
     </div>
-    <input class="li" id="iN" type="text" placeholder="昵称（可选）">
-    <input class="li" id="iC" type="text" placeholder="输入激活码" autocapitalize="characters">
-    <button class="lb" onclick="doLogin()">⚡ 立即激活</button>
-    <div class="lsep">或</div>
-    <button class="lo2" onclick="guestMode()">游客体验（功能受限）</button>
+    <input class="finput" id="iN" type="text" placeholder="昵称（可选）">
+    <input class="finput" id="iC" type="text" placeholder="输入激活码" autocapitalize="characters">
+    <button class="lbtn" onclick="doLogin()">⚡ 立即激活</button>
+    <div class="sep">或</div>
+    <button class="gbtn" onclick="guestMode()">游客体验（功能受限）</button>
   </div>
 </div>
 
+<!-- APP -->
 <div id="app">
   <div id="hd">
-    <div class="hl"><span class="hls">🎬</span>AI爆款工厂</div>
-    <div class="hb" onclick="goLp()"><div class="dot" id="dot"></div><span id="ul">游客</span></div>
+    <div class="logo"><span class="logo-i">🎬</span>AI爆款工厂</div>
+    <div class="hbtn" onclick="goLp()"><div class="dot" id="dot"></div><span id="ul">游客</span></div>
   </div>
-  <div id="guestBanner" style="display:none">⚠️ 游客模式 — 激活会员解锁全部功能</div>
+  <div id="gb">⚠️ 游客模式 — 激活会员解锁全部功能</div>
   <div id="tc">
 
-    <!-- 生成 TAB -->
-    <div class="tp2 ac" id="t-gen"><div class="s">
+    <!-- ══ TAB: 生成 ══ -->
+    <div class="tab ac" id="t-gen"><div class="s">
       <div class="gc">
-        <div class="sh2"><div class="sh2-icon ico-go">🚀</div><div><div class="sh2-title">爆款文案工厂</div><div class="sh2-sub">Qwen Plus · 顶级电商文案引擎</div></div></div>
+        <div class="sh"><div class="sh-ico i-go">🚀</div><div><div class="sh-t">爆款文案工厂</div><div class="sh-s">Qwen Plus · 顶级电商文案引擎</div></div></div>
         <div class="lbl">目标平台</div>
-        <div class="pc-row" id="platRow">
-          <div class="pc on" onclick="setPl(this,'小红书')"><span>📱</span><div>小红书</div></div>
-          <div class="pc" onclick="setPl(this,'抖音')"><span>🎵</span><div>抖音</div></div>
-          <div class="pc" onclick="setPl(this,'视频号')"><span>📹</span><div>视频号</div></div>
-          <div class="pc" onclick="setPl(this,'淘宝')"><span>🛒</span><div>淘宝</div></div>
-          <div class="pc" onclick="setPl(this,'拼多多')"><span>🛍</span><div>拼多多</div></div>
+        <div class="cr" id="platRow">
+          <div class="c1 on" onclick="setPl(this,'小红书')"><span>📱</span><div>小红书</div></div>
+          <div class="c1" onclick="setPl(this,'抖音')"><span>🎵</span><div>抖音</div></div>
+          <div class="c1" onclick="setPl(this,'视频号')"><span>📹</span><div>视频号</div></div>
+          <div class="c1" onclick="setPl(this,'淘宝')"><span>🛒</span><div>淘宝</div></div>
+          <div class="c1" onclick="setPl(this,'拼多多')"><span>🛍</span><div>拼多多</div></div>
+          <div class="c1" onclick="setPl(this,'微信')"><span>💬</span><div>微信</div></div>
         </div>
         <div class="lbl">内容风格</div>
-        <div class="sc-row" id="styleRow">
-          <div class="sc on" onclick="setSt(this,'种草笔记')">种草笔记</div>
-          <div class="sc" onclick="setSt(this,'测评分享')">测评分享</div>
-          <div class="sc" onclick="setSt(this,'带货脚本')">带货脚本</div>
-          <div class="sc" onclick="setSt(this,'品牌故事')">品牌故事</div>
-          <div class="sc" onclick="setSt(this,'限时促销')">限时促销</div>
+        <div class="cr" id="styleRow">
+          <div class="c2 on" onclick="setSt(this,'种草笔记')">种草笔记</div>
+          <div class="c2" onclick="setSt(this,'测评分享')">测评分享</div>
+          <div class="c2" onclick="setSt(this,'带货脚本')">带货脚本</div>
+          <div class="c2" onclick="setSt(this,'品牌故事')">品牌故事</div>
+          <div class="c2" onclick="setSt(this,'限时促销')">限时促销</div>
+          <div class="c2" onclick="setSt(this,'直播话术')">直播话术</div>
         </div>
         <div class="lbl">产品信息</div>
-        <textarea class="ta" id="tP" rows="3" placeholder="例：磨砂质感黑色保温杯，24小时保温，199元，极简设计感，目标25-35岁职场女性"></textarea>
+        <textarea class="ta" id="tP" rows="3" placeholder="例：磨砂质感黑色保温杯，24小时保温，199元，极简设计感，目标：25-35岁职场女性"></textarea>
         <div class="lbl" style="margin-top:2px">补充要求（可选）</div>
         <textarea class="ta" id="tE" rows="2" placeholder="促销活动、特殊卖点、目标受众、竞品对比..."></textarea>
         <button class="bb b1" onclick="doGen()" style="margin-top:14px">🚀 生成爆款文案</button>
       </div>
+
       <div id="gr2" style="display:none">
-        <div class="hook-box"><div class="rl" style="color:var(--gold)">⚡ 爆款金句</div><div class="hook-q" id="rH"></div><button class="rb" onclick="cpEl('rH')" style="margin-top:8px">📋 复制</button></div>
-        <div class="gc"><div class="rl">📝 候选标题</div><div id="rTcards"></div></div>
-        <div class="gc"><div class="rl">✍️ 正文内容 <span id="rBcount" style="color:var(--mt);font-weight:400;font-size:10px;text-transform:none;letter-spacing:0"></span></div><div class="rt" id="rB"></div><button class="rb" onclick="cpEl('rB')" style="margin-top:10px">📋 复制正文</button></div>
-        <div class="gc"><div class="rl">🏷 话题标签</div><div class="rt" id="rTg" style="font-size:13px;color:var(--cy)"></div><button class="rb" onclick="cpEl('rTg')" style="margin-top:8px">复制标签</button></div>
+        <div class="hbox"><div class="rl" style="color:var(--gold)">⚡ 爆款金句</div><div class="hbox-q" id="rH"></div><button class="rb" onclick="cpEl('rH')" style="margin-top:8px">📋 复制金句</button></div>
+        <div class="gc"><div class="rl">📝 候选标题（点击选中复制）</div><div id="rTcards"></div></div>
+        <div class="gc"><div class="rl">✍️ 正文 <span id="rBcnt" style="color:var(--mt);font-weight:400;font-size:10px;text-transform:none;letter-spacing:0"></span></div><div class="rt" id="rB"></div><button class="rb" onclick="cpEl('rB')" style="margin-top:10px">📋 复制正文</button></div>
+        <div class="gc"><div class="rl">🏷 话题标签</div><div class="rt" id="rTg" style="font-size:13px;color:var(--bl)"></div><button class="rb" onclick="cpEl('rTg')" style="margin-top:8px">复制标签</button></div>
       </div>
+
+      <!-- 直播话术生成器 -->
+      <div class="gc-pk" style="margin-top:4px">
+        <div class="sh" style="margin-bottom:8px"><div class="sh-ico i-pk">🎙</div><div><div class="sh-t">直播话术生成器 <span class="new">NEW</span></div><div class="sh-s">开场/留人/促单/催付 四段式话术</div></div></div>
+        <textarea class="ta" id="tLive" rows="2" placeholder="产品+价格+卖点（如：羊绒毛衣199元，限量100件，买一送一）"></textarea>
+        <button class="bb b1" onclick="doLive()" style="margin-top:10px;padding:12px">🎙 生成直播话术</button>
+        <div id="liveR" style="display:none;margin-top:10px">
+          <div class="rx"><div class="rl" style="color:var(--pk)">📢 直播话术</div><div class="rt" id="rLive" style="font-size:13px"></div><button class="rb" onclick="cpEl('rLive')" style="margin-top:8px">复制话术</button></div>
+        </div>
+      </div>
+
+      <!-- 评论回复 -->
       <div class="gc" style="margin-top:4px">
-        <div class="sh2"><div class="sh2-icon ico-cy">💬</div><div><div class="sh2-title">评论回复助手</div><div class="sh2-sub">买家评论一键专业回复</div></div></div>
+        <div class="sh" style="margin-bottom:8px"><div class="sh-ico i-cy">💬</div><div><div class="sh-t">评论回复助手</div><div class="sh-s">买家评论一键专业回复</div></div></div>
         <textarea class="ta" id="tCmt" rows="2" placeholder="粘贴买家评论..."></textarea>
         <button class="bb b3" onclick="doReply()" style="margin-top:10px;padding:12px">💬 生成专业回复</button>
         <div id="replyR" style="display:none;margin-top:10px">
-          <div class="rx"><div class="rl">买家评论</div><div class="rt" id="rCmtIn" style="color:var(--mt)"></div></div>
-          <div class="rx"><div class="rl" style="color:var(--gr)">✓ 回复建议</div><div class="rt" id="rCmtOut"></div><button class="rb" onclick="cpEl('rCmtOut')" style="margin-top:8px">复制回复</button></div>
+          <div class="rx"><div class="rl">买家评论</div><div class="rt" id="rCI" style="color:var(--mt)"></div></div>
+          <div class="rx"><div class="rl" style="color:var(--cy)">✓ 专业回复</div><div class="rt" id="rCO"></div><button class="rb" onclick="cpEl('rCO')" style="margin-top:8px">复制</button></div>
         </div>
       </div>
     </div></div>
 
-    <!-- 热榜 TAB -->
-    <div class="tp2" id="t-hot"><div class="s">
+    <!-- ══ TAB: 热榜 ══ -->
+    <div class="tab" id="t-hot"><div class="s">
       <div class="gc">
-        <div class="sh2"><div class="sh2-icon ico-pk">🔥</div><div><div class="sh2-title">热榜趋势雷达</div><div class="sh2-sub">Qwen Plus · 实时选品情报</div></div></div>
+        <div class="sh"><div class="sh-ico i-pk">🔥</div><div><div class="sh-t">热榜趋势雷达</div><div class="sh-s">Qwen Plus · 实时选品情报</div></div></div>
         <div class="lbl">品类</div>
-        <div class="sch-row" id="catRow">
-          <div class="sch on" onclick="setSc(this,'美妆护肤')">美妆护肤</div>
-          <div class="sch" onclick="setSc(this,'服饰穿搭')">服饰穿搭</div>
-          <div class="sch" onclick="setSc(this,'食品饮料')">食品饮料</div>
-          <div class="sch" onclick="setSc(this,'家居生活')">家居生活</div>
-          <div class="sch" onclick="setSc(this,'数码3C')">数码3C</div>
-          <div class="sch" onclick="setSc(this,'母婴亲子')">母婴亲子</div>
-          <div class="sch" onclick="setSc(this,'健康养生')">健康养生</div>
+        <div class="cr" id="catRow">
+          <div class="c3 on" onclick="setSc(this,'美妆护肤')">美妆护肤</div>
+          <div class="c3" onclick="setSc(this,'服饰穿搭')">服饰穿搭</div>
+          <div class="c3" onclick="setSc(this,'食品饮料')">食品饮料</div>
+          <div class="c3" onclick="setSc(this,'家居生活')">家居生活</div>
+          <div class="c3" onclick="setSc(this,'数码3C')">数码3C</div>
+          <div class="c3" onclick="setSc(this,'母婴亲子')">母婴亲子</div>
+          <div class="c3" onclick="setSc(this,'健康养生')">健康养生</div>
+          <div class="c3" onclick="setSc(this,'宠物')">宠物</div>
         </div>
         <button class="bb b2" onclick="doTrend()" style="margin-top:12px"><span id="rsp">🔥</span> 更新热词雷达</button>
       </div>
       <div id="tt2" style="display:none">
-        <div class="gc"><div class="trend-section"><div class="trend-section-title">📖 小红书热词</div><div class="trend-items" id="xL"></div></div><div class="trend-section" style="margin-top:12px"><div class="trend-section-title">🎵 抖音热词</div><div class="trend-items" id="dL"></div></div></div>
+        <div class="gc"><div class="trsec"><div class="trh">📖 小红书热词</div><div class="trw" id="xL"></div></div><div class="trsec" style="margin-top:12px"><div class="trh">🎵 抖音热词</div><div class="trw" id="dL"></div></div></div>
         <div class="gc"><div class="rl">💡 品类推荐</div><div class="rt" id="cG"></div></div>
         <div class="gc"><div class="rl">🎯 选品分析</div><div class="rt" id="aI"></div></div>
       </div>
     </div></div>
 
-    <!-- 图片 TAB -->
-    <div class="tp2" id="t-img"><div class="s">
-      <div id="iLock"><div class="lk"><span class="lic">🎨</span><div class="lt">标准版解锁</div><div class="ld">AI商业摄影大片 · 影视级布光<br>FLUX Pro · Gemini 2.0 · 电影质感</div><button class="uc" onclick="goLp()">立即解锁 →</button></div></div>
+    <!-- ══ TAB: 图片 ══ -->
+    <div class="tab" id="t-img"><div class="s">
+      <div id="iLock"><div class="lk"><span class="lki">🎨</span><div class="lkt">标准版解锁</div><div class="lkd">AI商业摄影大片 · 影视级布光<br>FLUX Pro · Gemini规划 · 电影质感</div><button class="lku" onclick="goLp()">立即解锁 →</button></div></div>
       <div id="iPro" style="display:none">
         <div class="gc-cy">
-          <div class="sh2"><div class="sh2-icon ico-cy">🎨</div><div><div class="sh2-title">AI影视大片工坊</div><div class="sh2-sub">FLUX Pro · Gemini规划 · 电影布光</div></div></div>
+          <div class="sh"><div class="sh-ico i-cy">🎨</div><div><div class="sh-t">AI影视大片工坊</div><div class="sh-s">FLUX Pro · Gemini 2.0规划 · 电影级布光</div></div></div>
           <div class="lbl">场景风格</div>
-          <div class="pc-row" style="margin-bottom:12px">
-            <div class="pc on" id="sc0" onclick="setScene(this,'简约北欧')"><span>🏔</span><div>简约北欧</div></div>
-            <div class="pc" id="sc1" onclick="setScene(this,'生活场景')"><span>🏡</span><div>生活场景</div></div>
-            <div class="pc" id="sc2" onclick="setScene(this,'时尚大片')"><span>💎</span><div>时尚大片</div></div>
-            <div class="pc" id="sc3" onclick="setScene(this,'白底商业')"><span>🛍</span><div>白底商业</div></div>
-            <div class="pc" id="sc4" onclick="setScene(this,'烟火气息')"><span>🌅</span><div>烟火气息</div></div>
-            <div class="pc" id="sc5" onclick="setScene(this,'科技感')"><span>🔮</span><div>科技感</div></div>
+          <div class="cr" id="sceneRow" style="margin-bottom:12px">
+            <div class="c1 on" id="sc0" onclick="setScene(this,'简约北欧')"><span>🏔</span><div>简约北欧</div></div>
+            <div class="c1" id="sc1" onclick="setScene(this,'生活场景')"><span>🏡</span><div>生活场景</div></div>
+            <div class="c1" id="sc2" onclick="setScene(this,'时尚大片')"><span>💎</span><div>时尚大片</div></div>
+            <div class="c1" id="sc3" onclick="setScene(this,'白底商业')"><span>🛍</span><div>白底商业</div></div>
+            <div class="c1" id="sc4" onclick="setScene(this,'夜光科技')"><span>🔮</span><div>夜光科技</div></div>
+            <div class="c1" id="sc5" onclick="setScene(this,'烟火气息')"><span>🌅</span><div>烟火气息</div></div>
           </div>
-          <div class="lbl">图片质量</div>
-          <div class="model-row" id="qualityRow">
-            <div class="model-chip on" onclick="setQuality(this,'flux','FLUX标准')">⚡ FLUX标准</div>
-            <div class="model-chip" onclick="setQuality(this,'flux-realism','FLUX写实')">📸 FLUX写实</div>
-            <div class="model-chip" onclick="setQuality(this,'turbo','极速出图')">🚀 极速出图</div>
+          <div class="lbl">图片模型</div>
+          <div class="mr" id="modelRow">
+            <div class="mc on" onclick="setModel(this,'flux')">⚡ FLUX标准</div>
+            <div class="mc" onclick="setModel(this,'flux-realism')">📸 FLUX写实</div>
+            <div class="mc" onclick="setModel(this,'turbo')">🚀 极速出图</div>
           </div>
-          <span class="chip chip-cy">✦ Gemini 2.0 规划 → FLUX渲染 · 1024px</span>
+          <span class="chip cc">✦ Gemini 2.0 规划 → FLUX 渲染 · 1024×1024</span>
           <div class="lbl">产品描述</div>
           <textarea class="ta" id="tI" rows="2" placeholder="输入产品描述（如：磨砂质感黑色保温杯，极简风格，高端商务）"></textarea>
-          <button class="bb b3" onclick="doImgs()" style="margin-top:12px">🎨 生成3张产品大片</button>
+          <button class="bb b3" onclick="doImgs()" style="margin-top:12px">🎨 生成3张影视大片</button>
         </div>
         <div class="ig" id="iG"></div>
+        <!-- 批量下载 -->
+        <div id="dlAllWrap" style="display:none;margin-top:8px">
+          <button class="rb" onclick="dlAllImgs()" style="width:100%;justify-content:center">⬇ 批量下载全部图片</button>
+        </div>
       </div>
     </div></div>
 
-    <!-- 视频 TAB -->
-    <div class="tp2" id="t-vid"><div class="s">
-      <div id="vLock"><div class="lk"><span class="lic">🎬</span><div class="lt">专业版专属</div><div class="ld">AI真实视频 · CosyVoice声音克隆<br>口播提词器 · 影视级配图 · 本地合成</div><button class="uc" onclick="goTab('t-mem')">升级专业版 →</button></div></div>
+    <!-- ══ TAB: 视频 ══ -->
+    <div class="tab" id="t-vid"><div class="s">
+      <div id="vLock"><div class="lk"><span class="lki">🎬</span><div class="lkt">专业版专属</div><div class="lkd">AI真实视频 · CosyVoice声音克隆<br>口播提词器 · 影视级配图 · 本地合成</div><button class="lku" onclick="goTab('t-mem')">升级专业版 →</button></div></div>
       <div id="vPro" style="display:none">
         <div class="sf">
-          <div class="sf-item sf-act" id="vstep1"><div class="sf-dot">1</div><div class="sf-label">脚本</div></div>
-          <div class="sf-item sf-wait" id="vstep2"><div class="sf-dot">2</div><div class="sf-label">录音</div></div>
-          <div class="sf-item sf-wait" id="vstep3"><div class="sf-dot">3</div><div class="sf-label">配图</div></div>
-          <div class="sf-item sf-wait" id="vstep4"><div class="sf-dot">4</div><div class="sf-label">出片</div></div>
+          <div class="sf-i sf-act" id="vstep1"><div class="sf-d">1</div><div class="sf-l">脚本</div></div>
+          <div class="sf-i sf-wait" id="vstep2"><div class="sf-d">2</div><div class="sf-l">录音</div></div>
+          <div class="sf-i sf-wait" id="vstep3"><div class="sf-d">3</div><div class="sf-l">配图</div></div>
+          <div class="sf-i sf-wait" id="vstep4"><div class="sf-d">4</div><div class="sf-l">出片</div></div>
         </div>
-        <div id="vStep1">
+
+        <div id="vS1">
           <div class="gc">
-            <div class="sh2"><div class="sh2-icon ico-pu">🎬</div><div><div class="sh2-title">口播脚本创作</div><div class="sh2-sub">Gemini 2.0 Flash · 爆款带货脚本</div></div></div>
-            <span class="chip chip-pu">✦ Gemini 2.0 · 30秒带货脚本+分镜</span>
+            <div class="sh"><div class="sh-ico i-pu">🎬</div><div><div class="sh-t">口播脚本创作</div><div class="sh-s">Gemini 2.0 Flash · 爆款带货脚本</div></div></div>
+            <span class="chip cp">✦ Gemini 2.0 · 30秒带货脚本+分镜</span>
             <textarea class="ta" id="tV" rows="3" placeholder="输入产品信息（如：磨砂保温杯199元，24小时保温，极简风格，目标：25-35岁职场女性）" style="margin-top:8px"></textarea>
             <button class="bb b2" onclick="doVidScript()" style="margin-top:12px">🎬 生成爆款口播脚本</button>
           </div>
         </div>
-        <div id="vStep2" style="display:none">
+
+        <div id="vS2" style="display:none">
           <div class="gc">
-            <div class="sh2"><div class="sh2-icon ico-pk">🎙</div><div><div class="sh2-title">提词器 · 录制口播</div><div class="sh2-sub">文字自动滚动，保持自然语速</div></div></div>
-            <div class="tp-box"><div class="tp-fade-t"></div><div class="tp-inner" id="tpInner"></div><div class="tp-line" id="tpLine"></div><div class="tp-fade-b"></div><div class="tp-hint" id="tpHint">点击「开始录制」后文字自动滚动</div></div>
+            <div class="sh"><div class="sh-ico i-pk">🎙</div><div><div class="sh-t">提词器 · 录制口播</div><div class="sh-s">文字自动滚动，保持自然语速</div></div></div>
+            <div class="tp"><div class="tp-ft"></div><div class="tp-in" id="tpIn"></div><div class="tp-ln" id="tpLn"></div><div class="tp-fb"></div><div class="tp-h" id="tpH">点击「开始录制」后文字自动滚动</div></div>
           </div>
           <div class="gc">
-            <canvas class="vc-vis" id="waveCV"></canvas>
-            <div class="vc-timer" id="vcT">00:00</div>
-            <div class="vc-status" id="vcS">准备录音</div>
-            <div class="vc-wrap">
-              <button class="vc-btn vc-rec" id="bRec" onclick="startVidRec()">🎙</button>
-              <button class="vc-btn vc-stop" id="bStop" onclick="stopVidRec()" style="opacity:.4;pointer-events:none">⏹</button>
-              <button class="vc-btn vc-play" id="bPlay" onclick="playVidRec()" style="opacity:.4;pointer-events:none">▶</button>
+            <canvas class="wv" id="wvCv"></canvas>
+            <div class="vt" id="vcT">00:00</div>
+            <div class="vs" id="vcS">准备录音</div>
+            <div class="vw">
+              <button class="vb vb-rec" id="bRec" onclick="startRec()">🎙</button>
+              <button class="vb vb-stp" id="bStp" onclick="stopRec()" style="opacity:.4;pointer-events:none">⏹</button>
+              <button class="vb vb-ply" id="bPly" onclick="playRec()" style="opacity:.4;pointer-events:none">▶</button>
             </div>
             <audio id="ap2" style="display:none;width:100%;border-radius:10px;margin-top:8px"></audio>
           </div>
-          <button class="bb b3" id="bNextImg" onclick="nextToVidImages()" style="display:none;margin-top:4px">🎨 录制完成 → AI生成配图</button>
-          <button class="rb" onclick="backToScript()" style="width:100%;justify-content:center;margin-top:8px">← 重新生成脚本</button>
+          <button class="bb b3" id="bNxtImg" onclick="toVidImgs()" style="display:none;margin-top:4px">🎨 录制完成 → AI生成配图</button>
+          <button class="rb" onclick="setVS(1)" style="width:100%;justify-content:center;margin-top:8px">← 重新生成脚本</button>
         </div>
-        <div id="vStep3" style="display:none">
+
+        <div id="vS3" style="display:none">
           <div class="gc">
-            <div class="sh2"><div class="sh2-icon ico-cy">🖼</div><div><div class="sh2-title">AI影视级配图</div><div class="sh2-sub">FLUX Pro · 9:16竖屏 · 电影质感</div></div></div>
-            <span class="chip chip-cy">✦ 慢推/环绕/仰拍/微距 · 电影运镜</span>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px" id="vImgWrap"></div>
-            <button class="bb b3" id="bNextPrev" onclick="nextToPreview()" style="display:none;margin-top:14px">🎬 进入出片工坊 →</button>
+            <div class="sh"><div class="sh-ico i-bl">🖼</div><div><div class="sh-t">AI影视级配图</div><div class="sh-s">FLUX Pro · 9:16竖屏 · 电影质感</div></div></div>
+            <span class="chip cc">✦ 慢推/环绕/仰拍/微距 · 电影运镜</span>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px" id="vImgGrid"></div>
+            <button class="bb b3" id="bNxtPrv" onclick="toVidOut()" style="display:none;margin-top:14px">🎬 进入出片工坊 →</button>
           </div>
         </div>
-        <div id="vStep4" style="display:none">
+
+        <div id="vS4" style="display:none">
           <div class="gc-pu" style="margin-bottom:12px">
-            <div class="sh2" style="margin-bottom:8px"><div class="sh2-icon ico-pk">🔊</div><div><div class="sh2-title">AI声音克隆配音 <span class="new-tag">CosyVoice</span></div><div class="sh2-sub">4种专业音色 · 一键配音</div></div></div>
-            <div class="vp-grid">
-              <div class="vp-item on" onclick="pickVoice('longxiaochun_v2',this)"><span class="vp-emoji">🌸</span><div class="vp-name">温柔女声</div><div class="vp-desc">种草利器</div></div>
-              <div class="vp-item" onclick="pickVoice('longcheng_v2',this)"><span class="vp-emoji">🎤</span><div class="vp-name">磁性男声</div><div class="vp-desc">高端品牌</div></div>
-              <div class="vp-item" onclick="pickVoice('longhua_v2',this)"><span class="vp-emoji">💼</span><div class="vp-name">专业女声</div><div class="vp-desc">知识产品</div></div>
-              <div class="vp-item" onclick="pickVoice('longshuo_v2',this)"><span class="vp-emoji">🔥</span><div class="vp-name">活力男声</div><div class="vp-desc">运动食品</div></div>
+            <div class="sh" style="margin-bottom:8px"><div class="sh-ico i-pk">🔊</div><div><div class="sh-t">AI声音克隆配音 <span class="new">CosyVoice</span></div><div class="sh-s">4种专业音色 · 一键配音</div></div></div>
+            <div class="vg">
+              <div class="vi on" onclick="pickV('longxiaochun_v2',this)"><span class="ve">🌸</span><div class="vn">温柔女声</div><div class="vd">种草利器</div></div>
+              <div class="vi" onclick="pickV('longcheng_v2',this)"><span class="ve">🎤</span><div class="vn">磁性男声</div><div class="vd">高端品牌</div></div>
+              <div class="vi" onclick="pickV('longhua_v2',this)"><span class="ve">💼</span><div class="vn">专业女声</div><div class="vd">知识产品</div></div>
+              <div class="vi" onclick="pickV('longshuo_v2',this)"><span class="ve">🔥</span><div class="vn">活力男声</div><div class="vd">运动食品</div></div>
             </div>
-            <button class="bb b1" onclick="doAIVoice()" style="padding:13px">🔊 AI一键配音</button>
-            <div id="aiVoiceR" style="display:none;margin-top:10px">
-              <audio id="aiVoiceAudio" controls style="width:100%;border-radius:10px;margin-bottom:8px"></audio>
-              <button onclick="dlAIVoice()" style="width:100%;padding:12px;border-radius:14px;font-size:13px;font-weight:800;border:none;background:var(--g4);color:#fff;cursor:pointer">⬇ 下载AI配音 (MP3)</button>
+            <button class="bb b1" onclick="doVoice()" style="padding:13px">🔊 AI一键配音</button>
+            <div id="aVR" style="display:none;margin-top:10px">
+              <audio id="aVA" controls style="width:100%;border-radius:10px;margin-bottom:8px"></audio>
+              <button onclick="dlVoice()" style="width:100%;padding:12px;border-radius:14px;font-size:13px;font-weight:800;border:none;background:var(--g3);color:#fff;cursor:pointer">⬇ 下载AI配音 (MP3)</button>
             </div>
           </div>
+
           <div class="gc" style="margin-bottom:12px">
-            <div class="sh2" style="margin-bottom:8px"><div class="sh2-icon ico-cy">🎬</div><div><div class="sh2-title">万象AI视频 <span class="new-tag">i2v</span></div><div class="sh2-sub">配图→4秒电影运镜→MP4</div></div></div>
-            <button class="bb b2" id="bWanxVid" onclick="doWanxVideo()" style="padding:13px;margin-bottom:8px">🎬 生成AI视频片段</button>
-            <div id="vidClipsWrap" style="display:none"><div class="rl" style="margin-bottom:8px">📹 视频片段</div><div id="vidClipsList"></div></div>
+            <div class="sh" style="margin-bottom:8px"><div class="sh-ico i-bl">🎬</div><div><div class="sh-t">万象AI视频 <span class="new">i2v</span></div><div class="sh-s">配图→4秒电影运镜→真实MP4</div></div></div>
+            <button class="bb b2" id="bWx" onclick="doWanx()" style="padding:13px;margin-bottom:8px">🎬 生成AI视频片段</button>
+            <div id="wxWrap" style="display:none"><div class="rl" style="margin-bottom:8px">📹 视频片段</div><div id="wxList"></div></div>
           </div>
+
           <div class="gc-gold">
             <div class="rl" style="color:var(--gold);margin-bottom:8px">📋 口播稿</div>
             <div class="rt" id="rSc" style="font-size:13px;line-height:1.8"></div>
             <button class="rb" onclick="cpEl('rSc')" style="margin-top:8px">📋 复制稿件</button>
           </div>
           <div class="gc">
-            <div class="sh2" style="margin-bottom:8px"><div class="sh2-icon ico-gr">🖥</div><div><div class="sh2-title">本地视频合成</div><div class="sh2-sub">录音+配图即刻合成 · 秒级下载</div></div></div>
-            <button class="bb b4" onclick="startVideoMake()" style="padding:12px">🎞 本地合成带货视频</button>
+            <div class="sh" style="margin-bottom:8px"><div class="sh-ico i-cy">🖥</div><div><div class="sh-t">本地视频合成</div><div class="sh-s">录音+配图即刻合成·秒级下载</div></div></div>
+            <button class="bb b3" onclick="startVM()" style="padding:12px">🎞 本地合成带货视频</button>
           </div>
           <button class="rb" onclick="restartVid()" style="width:100%;justify-content:center;margin-top:8px">🔄 重新制作</button>
         </div>
       </div>
     </div></div>
 
-    <!-- 会员 TAB -->
-    <div class="tp2" id="t-mem"><div class="s">
+    <!-- ══ TAB: 会员 ══ -->
+    <div class="tab" id="t-mem"><div class="s">
       <div id="cpW"></div>
-      <div class="sgw">
-        <div class="sb2"><div class="sn" id="sG">0</div><div class="sl">文案生成</div></div>
-        <div class="sb2"><div class="sn" id="sI">0</div><div class="sl">图片大片</div></div>
-        <div class="sb2"><div class="sn" id="sT">0</div><div class="sl">热榜查询</div></div>
+      <div class="sw">
+        <div class="sb"><div class="sn" id="sG">0</div><div class="sl">文案生成</div></div>
+        <div class="sb"><div class="sn" id="sI">0</div><div class="sl">图片大片</div></div>
+        <div class="sb"><div class="sn" id="sT">0</div><div class="sl">热榜查询</div></div>
       </div>
       <div class="lbl">套餐对比</div>
       <div class="pw ps">
         <div class="plb">标准版</div><div class="plp">¥49.9<span style="font-size:14px;color:var(--mt);font-weight:400">/月</span></div>
         <div class="pks">
-          <div class="pk2"><span class="poc">✓</span>Qwen Plus · 爆款文案无限生成</div>
-          <div class="pk2"><span class="poc">✓</span>FLUX Pro · AI产品大片3张/次</div>
-          <div class="pk2"><span class="poc">✓</span>全网热词雷达 · 选品情报</div>
-          <div class="pk2"><span class="poc">✓</span>评论回复助手</div>
+          <div class="pk"><span class="poc">✓</span>Qwen Plus · 爆款文案无限生成</div>
+          <div class="pk"><span class="poc">✓</span>直播话术 + 评论回复助手</div>
+          <div class="pk"><span class="poc">✓</span>FLUX Pro · AI产品大片3张/次</div>
+          <div class="pk"><span class="poc">✓</span>全网热词雷达 · 选品情报</div>
         </div>
       </div>
       <div class="pw pp">
         <div class="plb">专业版</div><div class="plp">👑 ¥99.9<span style="font-size:14px;color:var(--mt);font-weight:400">/月</span></div>
         <div class="pks">
-          <div class="pk2"><span class="poc">✓</span>包含标准版全部功能</div>
-          <div class="pk2"><span class="poc">✓</span>Gemini 2.0 · 30秒带货脚本+分镜</div>
-          <div class="pk2"><span class="poc">✓</span>通义万象i2v · AI真实视频片段</div>
-          <div class="pk2"><span class="poc">✓</span>CosyVoice · AI声音克隆配音</div>
-          <div class="pk2"><span class="poc">✓</span>口播提词器 · 本地视频合成</div>
+          <div class="pk"><span class="poc">✓</span>包含标准版全部功能</div>
+          <div class="pk"><span class="poc">✓</span>Gemini 2.0 · 30秒带货脚本+分镜</div>
+          <div class="pk"><span class="poc">✓</span>通义万象 · AI真实视频片段</div>
+          <div class="pk"><span class="poc">✓</span>CosyVoice · AI声音克隆配音</div>
+          <div class="pk"><span class="poc">✓</span>口播提词器 · 本地视频合成</div>
         </div>
       </div>
       <div class="lbl">购买流程</div>
       <div class="pstep">
-        <div class="pe"><div class="pn2">1</div><div>扫码付款，备注：标准版 或 专业版</div></div>
-        <div class="pe"><div class="pn2">2</div><div>截图发给微信「晴天 (*磊)」</div></div>
-        <div class="pe"><div class="pn2">3</div><div>收到激活码后回到登录页激活</div></div>
+        <div class="pe"><div class="pn">1</div><div>扫码付款，备注：标准版 或 专业版</div></div>
+        <div class="pe"><div class="pn">2</div><div>截图发给微信「晴天 (*磊)」</div></div>
+        <div class="pe"><div class="pn">3</div><div>收到激活码后回到登录页激活</div></div>
       </div>
       <button class="bb b2" style="margin-top:14px" onclick="goLp()">我已有激活码 · 立即激活</button>
     </div></div>
 
   </div><!-- /tc -->
-  <nav id="bn">
-    <button class="nb on" id="n-gen" onclick="goTab('t-gen')"><span class="ni">🚀</span><span class="nl">生成</span></button>
-    <button class="nb" id="n-hot" onclick="goTab('t-hot')"><span class="ni">🔥</span><span class="nl">热榜</span></button>
-    <button class="nb" id="n-img" onclick="goTab('t-img')"><span class="ni">🎨</span><span class="nl">图片</span></button>
-    <button class="nb" id="n-vid" onclick="goTab('t-vid')"><span class="ni">🎬</span><span class="nl">视频</span></button>
-    <button class="nb" id="n-mem" onclick="goTab('t-mem')"><span class="ni">💎</span><span class="nl">会员</span></button>
+  <nav id="nav">
+    <button class="ni on" id="n-gen" onclick="goTab('t-gen')"><span class="ni-ico">🚀</span><span class="ni-lbl">生成</span></button>
+    <button class="ni" id="n-hot" onclick="goTab('t-hot')"><span class="ni-ico">🔥</span><span class="ni-lbl">热榜</span></button>
+    <button class="ni" id="n-img" onclick="goTab('t-img')"><span class="ni-ico">🎨</span><span class="ni-lbl">图片</span></button>
+    <button class="ni" id="n-vid" onclick="goTab('t-vid')"><span class="ni-ico">🎬</span><span class="ni-lbl">视频</span></button>
+    <button class="ni" id="n-mem" onclick="goTab('t-mem')"><span class="ni-ico">💎</span><span class="ni-lbl">会员</span></button>
   </nav>
 </div>
 
-<div id="lo"><div class="ls2"></div><div id="lm">处理中…</div><div id="bwl">AI思考中</div></div>
+<div id="lo"><div class="sp"></div><div id="lmsg">处理中…</div><div id="lsub">AI思考中</div></div>
 <div id="tt"></div>
-<div id="fsO"><button class="fs-close" onclick="closeFsPrev()">✕</button><img id="fsImg" src="" alt=""><button class="fs-dl" onclick="dlFsImg()">⬇ 下载大图</button></div>
-<div id="vmO">
-  <div class="vm-title" id="vmSubTxt">正在合成带货视频</div>
-  <div class="vm-sub">请勿离开页面</div>
-  <canvas id="vmCv" width="540" height="960" style="width:135px;height:240px;margin-bottom:16px;border-radius:10px;border:1px solid rgba(255,255,255,.08)"></canvas>
-  <div class="vm-bar-wrap"><div class="vm-bar" id="vmFill"></div></div>
-  <div class="vm-pct" id="vmPct">0%</div>
-  <div class="vm-eta" id="vmEta">计算中...</div>
+<div id="fs"><button class="fs-x" onclick="closeFs()">✕</button><img id="fsimg" src="" alt=""><button class="fs-dl" onclick="dlFs()">⬇ 下载大图</button></div>
+<div id="vmo">
+  <div class="vm-t" id="vmT">正在合成影视级带货视频</div>
+  <div class="vm-s">请勿离开页面</div>
+  <canvas id="vmCv" width="540" height="960" style="width:130px;height:231px;margin-bottom:16px;border-radius:10px;border:1px solid rgba(255,255,255,.08)"></canvas>
+  <div class="vm-bw"><div class="vm-bf" id="vmBf"></div></div>
+  <div class="vm-p" id="vmPct">0%</div>
+  <div class="vm-e" id="vmEta">计算中...</div>
   <div id="vmDone" style="display:none">
-    <div class="vm-done-icon">🎉</div>
-    <div class="vm-done-t">带货视频已生成！</div>
-    <div class="vm-done-s">口播录音 · AI产品大片 · 文案字幕<br>直接上传抖音/小红书/视频号</div>
+    <div class="vm-di">🎉</div>
+    <div class="vm-dt">带货视频已生成！</div>
+    <div class="vm-ds">口播录音 · AI产品大片 · 文案字幕<br>直接上传抖音/小红书/视频号</div>
     <button class="vm-dl" id="vmDlBtn">⬇ 下载带货视频</button>
-    <button class="vm-back" onclick="closeVmO()">← 返回继续编辑</button>
-    <div class="vm-note" id="vmNote"></div>
+    <button class="vm-bk" onclick="closeVm()">← 返回继续编辑</button>
+    <div class="vm-n" id="vmNote"></div>
   </div>
 </div>
 <script>
-var QWEN_KEY='sk-cfb5319ee5a24f7b9361608b7615a79b';
-var OR_KEY='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';
-var M_SCRIPT='google/gemini-2.0-flash-001';
-var M_IMG='google/gemini-2.0-flash-001';
+// ══ KEYS ══
+var QK='sk-cfb5319ee5a24f7b9361608b7615a79b';
+var OK='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';
+var MS='google/gemini-2.0-flash-001';
 
-// ── 激活码校验 ──
-function _dh(s){var h=5381,i=0,c;s=(s||'').toUpperCase().trim();for(;i<s.length;i++){c=s.charCodeAt(i);h=((h*33)+c)>>>0;}return h.toString(16);}
-var _PH=["d15df62f","c064e412","c73a8465","2ee9fb28","e0ce462","cb7ffacc","58e8832c","eb0ba5a5","bbb7d4ee","bbb7d4ef","bbb7d4f0","bbb7d4f1","bbb7d4f2","bbb7d4f3","bbb7d4f4","bbb7d4f5","bbb7d4f6","bbb7d50e","bbb7d50f","bbb7d510","bbb7d511","bbb7d512","bbb7d513","bbb7d514","bbb7d515","bbb7d516","bbb7d517","bbb7d52f","bbb7d530","bbb7d531","bbb7d532","bbb7d533","bbb7d534","bbb7d535","bbb7d536","bbb7d537","bbb7d538","bbb7d550","bbb7d551","bbb7d552","bbb7d553","bbb7d554","bbb7d555","bbb7d556","bbb7d557","bbb7d558","bbb7d559","bbb7d571","bbb7d572","bbb7d573","bbb7d574","bbb7d575","bbb7d576","bbb7d577","bbb7d578","bbb7d579","bbb7d57a","bbb7d592"];
-var _SH=["66e807d8","66e807d9","66e807da","66e807db","66e807dc","66e807dd","66e807de","66e807df","66e807e0","66e807f8","66e807f9","66e807fa","66e807fb","66e807fc","66e807fd","66e807fe","66e807ff","66e80800","66e80801","66e80819","66e8081a","66e8081b","66e8081c","66e8081d","66e8081e","66e8081f","66e80820","66e80821","66e80822","66e8083a","66e8083b","66e8083c","66e8083d","66e8083e","66e8083f","66e80840","66e80841","66e80842","66e80843","66e8085b","66e8085c","66e8085d","66e8085e","66e8085f","66e80860","66e80861","66e80862","66e80863","66e80864","66e8087c"];
-function validateCode(code){var h=_dh(code);if(_PH.indexOf(h)>=0)return 'pro';if(_SH.indexOf(h)>=0)return 'standard';return null;}
+// ══ AUTH ══
+function _h(s){var h=5381,i=0,c;s=(s||'').toUpperCase().trim();for(;i<s.length;i++){c=s.charCodeAt(i);h=((h*33)+c)>>>0;}return h.toString(16);}
+var PH=["d15df62f","c064e412","c73a8465","2ee9fb28","e0ce462","cb7ffacc","58e8832c","eb0ba5a5","bbb7d4ee","bbb7d4ef","bbb7d4f0","bbb7d4f1","bbb7d4f2","bbb7d4f3","bbb7d4f4","bbb7d4f5","bbb7d4f6","bbb7d50e","bbb7d50f","bbb7d510","bbb7d511","bbb7d512","bbb7d513","bbb7d514","bbb7d515","bbb7d516","bbb7d517","bbb7d52f","bbb7d530","bbb7d531","bbb7d532","bbb7d533","bbb7d534","bbb7d535","bbb7d536","bbb7d537","bbb7d538","bbb7d550","bbb7d551","bbb7d552","bbb7d553","bbb7d554","bbb7d555","bbb7d556","bbb7d557","bbb7d558","bbb7d559","bbb7d571","bbb7d572","bbb7d573","bbb7d574","bbb7d575","bbb7d576","bbb7d577","bbb7d578","bbb7d579","bbb7d57a","bbb7d592"];
+var SH=["66e807d8","66e807d9","66e807da","66e807db","66e807dc","66e807dd","66e807de","66e807df","66e807e0","66e807f8","66e807f9","66e807fa","66e807fb","66e807fc","66e807fd","66e807fe","66e807ff","66e80800","66e80801","66e80819","66e8081a","66e8081b","66e8081c","66e8081d","66e8081e","66e8081f","66e80820","66e80821","66e80822","66e8083a","66e8083b","66e8083c","66e8083d","66e8083e","66e8083f","66e80840","66e80841","66e80842","66e80843","66e8085b","66e8085c","66e8085d","66e8085e","66e8085f","66e80860","66e80861","66e80862","66e80863","66e80864","66e8087c"];
+function vCode(c){var h=_h(c);if(PH.indexOf(h)>=0)return 'pro';if(SH.indexOf(h)>=0)return 'std';return null;}
 
-// ── 状态 ──
-var S={user:null,plan:null,name:'',pl:'小红书',st:'种草笔记',sc:'美妆护肤',scene:'简约北欧',imgModel:'flux',stats:{g:0,i:0,t:0}};
-function saveSt(){try{localStorage.setItem('vf6',JSON.stringify(S));}catch(e){}}
-function loadSt(){try{var d=JSON.parse(localStorage.getItem('vf6')||'{}');if(d.user)S=Object.assign(S,d);}catch(e){}}
+// ══ STATE ══
+var S={user:null,plan:null,name:'',pl:'小红书',st:'种草笔记',sc:'美妆护肤',scene:'简约北欧',model:'flux',stats:{g:0,i:0,t:0}};
+function sv(){try{localStorage.setItem('ai7',JSON.stringify(S));}catch(e){}}
+function ld(){try{var d=JSON.parse(localStorage.getItem('ai7')||'{}');if(d.user)S=Object.assign(S,d);}catch(e){}}
+var collectedImgs=[];
 
-// ── 认证 ──
 function doLogin(){
   var code=(document.getElementById('iC').value||'').trim().toUpperCase();
   var name=(document.getElementById('iN').value||'').trim();
-  var tier=validateCode(code);
-  if(!tier){toast('激活码无效，请检查后重试','er');return;}
-  S.user=code;S.plan=tier;S.name=name||'创作者';saveSt();enterApp();
+  var t=vCode(code);
+  if(!t){toast('激活码无效，请检查后重试','er');return;}
+  S.user=code;S.plan=t;S.name=name||'创作者';sv();enterApp();
 }
 function guestMode(){S.user=null;S.plan=null;S.name='游客';enterApp();}
 function goLp(){document.getElementById('lp').style.display='flex';document.getElementById('app').classList.remove('on');}
 function enterApp(){document.getElementById('lp').style.display='none';document.getElementById('app').classList.add('on');syncUI();}
 function syncUI(){
-  var isPro=S.plan==='pro',isStd=S.plan==='standard'||isPro,isGuest=!S.user;
-  document.getElementById('ul').textContent=S.name||(isGuest?'游客':'会员');
-  document.getElementById('dot').className='dot'+(isGuest?'':' on');
-  document.getElementById('guestBanner').style.display=isGuest?'block':'none';
+  var isPro=S.plan==='pro',isStd=S.plan==='std'||isPro,isG=!S.user;
+  document.getElementById('ul').textContent=S.name||(isG?'游客':'会员');
+  document.getElementById('dot').className='dot'+(isG?'':' on');
+  document.getElementById('gb').style.display=isG?'block':'none';
   document.getElementById('iLock').style.display=isStd?'none':'block';
   document.getElementById('iPro').style.display=isStd?'block':'none';
   document.getElementById('vLock').style.display=isPro?'none':'block';
   document.getElementById('vPro').style.display=isPro?'block':'none';
-  renderPlan();renderStats();
+  rPlan();rStats();
 }
-function renderPlan(){
+function rPlan(){
   var w=document.getElementById('cpW');if(!S.user){w.innerHTML='';return;}
-  w.innerHTML='<div class="gc-pu" style="margin-bottom:14px;display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:11px;font-weight:800;color:var(--mt);text-transform:uppercase;letter-spacing:.5px">当前套餐</div><div style="font-size:18px;font-weight:900;margin-top:4px;color:var(--tx)">'+(S.plan==='pro'?'👑 专业版':'⭐ 标准版')+'</div></div><div style="font-size:13px;font-weight:700;color:var(--mt)">'+S.name+'</div></div>';
+  var c=S.plan==='pro'?'var(--gold)':'var(--bl)';
+  w.innerHTML='<div class="gc-gold" style="margin-bottom:14px;display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:10px;font-weight:800;color:var(--mt);text-transform:uppercase;letter-spacing:1px">当前套餐</div><div style="font-size:20px;font-weight:900;margin-top:4px;color:'+c+'">'+(S.plan==='pro'?'👑 专业版':'⭐ 标准版')+'</div></div><div style="font-size:13px;font-weight:700;color:var(--mt)">'+S.name+'</div></div>';
 }
-function renderStats(){document.getElementById('sG').textContent=S.stats.g;document.getElementById('sI').textContent=S.stats.i;document.getElementById('sT').textContent=S.stats.t;}
+function rStats(){document.getElementById('sG').textContent=S.stats.g;document.getElementById('sI').textContent=S.stats.i;document.getElementById('sT').textContent=S.stats.t;}
 
-// ── 导航 ──
-var tabMap={'t-gen':'n-gen','t-hot':'n-hot','t-img':'n-img','t-vid':'n-vid','t-mem':'n-mem'};
+// ══ NAV ══
+var TM={'t-gen':'n-gen','t-hot':'n-hot','t-img':'n-img','t-vid':'n-vid','t-mem':'n-mem'};
 function goTab(id){
-  document.querySelectorAll('.tp2').forEach(function(p){p.classList.remove('ac');});
-  document.querySelectorAll('.nb').forEach(function(b){b.classList.remove('on');});
+  document.querySelectorAll('.tab').forEach(function(p){p.classList.remove('ac');});
+  document.querySelectorAll('.ni').forEach(function(b){b.classList.remove('on');});
   document.getElementById(id).classList.add('ac');
-  var nb=tabMap[id];if(nb)document.getElementById(nb).classList.add('on');
+  var n=TM[id];if(n)document.getElementById(n).classList.add('on');
   document.getElementById('tc').scrollTop=0;
 }
-function setPl(el,v){S.pl=v;document.querySelectorAll('#platRow .pc').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}
-function setSt(el,v){S.st=v;document.querySelectorAll('#styleRow .sc').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}
-function setSc(el,v){S.sc=v;document.querySelectorAll('#catRow .sch').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}
-function setScene(el,v){S.scene=v;document.querySelectorAll('[id^="sc"]').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}
-function setQuality(el,v,label){S.imgModel=v;document.querySelectorAll('#qualityRow .model-chip').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}
+function setPl(el,v){S.pl=v;document.querySelectorAll('#platRow .c1').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}
+function setSt(el,v){S.st=v;document.querySelectorAll('#styleRow .c2').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}
+function setSc(el,v){S.sc=v;document.querySelectorAll('#catRow .c3').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}
+function setScene(el,v){S.scene=v;document.querySelectorAll('#sceneRow .c1').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}
+function setModel(el,v){S.model=v;document.querySelectorAll('#modelRow .mc').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}
 
-// ── API 调用 ──
-async function qwenCall(msgs,maxT){
+// ══ API ══
+async function qCall(msgs,maxT){
   var r=await fetch('https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',{
-    method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+QWEN_KEY},
+    method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+QK},
     body:JSON.stringify({model:'qwen-plus',messages:msgs,max_tokens:maxT||1000,temperature:0.8})
   });
   var d=await r.json();if(d.error)throw new Error(d.error.message);
   return (d.choices[0].message.content||'').trim();
 }
-async function orCall(msgs,model,maxT){
+async function orCall(msgs,maxT){
   var r=await fetch('https://openrouter.ai/api/v1/chat/completions',{
     method:'POST',
-    headers:{'Content-Type':'application/json','Authorization':'Bearer '+OR_KEY,'HTTP-Referer':'https://viral.zenithsmart.xin','X-Title':'AI-Viral-Factory'},
-    body:JSON.stringify({model:model||M_IMG,messages:msgs,max_tokens:maxT||800})
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+OK,'HTTP-Referer':'https://viral.zenithsmart.xin','X-Title':'AIFactory'},
+    body:JSON.stringify({model:MS,messages:msgs,max_tokens:maxT||1000})
   });
   var d=await r.json();if(d.error)throw new Error(d.error.message);
   return (d.choices[0].message.content||'').trim();
 }
 function pJ(raw){
   try{
-    var c=raw.replace(/```json[\s\S]*?```/g,function(m){return m.slice(7,-3);}).replace(/```/g,'').trim();
-    var s=c.indexOf('{'),e=c.lastIndexOf('}');if(s<0||e<0)throw new Error('无JSON');
-    return JSON.parse(c.slice(s,e+1));
-  }catch(ex){throw new Error('解析失败：'+ex.message);}
+    var s=raw.indexOf('{'),e=raw.lastIndexOf('}');
+    if(s<0||e<0)throw new Error('no json');
+    return JSON.parse(raw.slice(s,e+1));
+  }catch(ex){throw new Error('解析失败');}
 }
 
-// ── 万象 APIs (图生视频) ──
-async function wanxPoll(taskId,progressCb,maxMs){
-  maxMs=maxMs||180000;var elapsed=0,interval=4000;
-  while(elapsed<maxMs){
-    await new Promise(function(r){setTimeout(r,interval);});elapsed+=interval;
-    if(progressCb)progressCb(Math.min(elapsed/maxMs*90,88));
-    try{
-      var r=await fetch('https://dashscope.aliyuncs.com/api/v1/tasks/'+taskId,{headers:{'Authorization':'Bearer '+QWEN_KEY}});
-      var d=await r.json();var st=d.output&&d.output.task_status;
-      if(st==='SUCCEEDED'){if(progressCb)progressCb(100);
-        if(d.output.results&&d.output.results[0])return d.output.results[0].url;
-        if(d.output.video_url)return d.output.video_url;}
-      if(st==='FAILED'||st==='CANCELED')throw new Error('任务失败');
-    }catch(e){if(e.message==='任务失败')throw e;}
-  }
-  throw new Error('超时，请重试');
-}
-async function wanxVideoI2V(imageUrl,prompt,progressCb){
-  var r=await fetch('https://dashscope.aliyuncs.com/api/v1/services/aigc/video-generation/video-synthesis',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','Authorization':'Bearer '+QWEN_KEY,'X-DashScope-Async':'enable'},
-    body:JSON.stringify({model:'wanx2.1-i2v-turbo',input:{image_url:imageUrl,prompt:prompt},parameters:{duration:4}})
-  });
-  var d=await r.json();if(!d.output||!d.output.task_id)throw new Error('提交失败:'+(d.message||'网络错误'));
-  return await wanxPoll(d.output.task_id,progressCb,200000);
-}
-async function cosyVoiceTTS(text,voice){
-  var r=await fetch('https://dashscope.aliyuncs.com/api/v1/services/aigc/text2audio/synthesis',{
-    method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+QWEN_KEY},
-    body:JSON.stringify({model:'cosyvoice-v1',input:{text:text},parameters:{voice:voice||'longxiaochun_v2',format:'mp3',sample_rate:22050,volume:50,rate:1.0}})
-  });
-  if(!r.ok){var e=await r.json();throw new Error('配音失败:'+(e.message||r.status));}
-  return URL.createObjectURL(await r.blob());
-}
-
-// ── 全屏预览 ──
-var curFsUrl='';
-function openFsPrev(url){curFsUrl=url;document.getElementById('fsImg').src=url;document.getElementById('fsO').classList.add('on');}
-function closeFsPrev(){document.getElementById('fsO').classList.remove('on');}
-function dlFsImg(){if(!curFsUrl)return;var a=document.createElement('a');a.href=curFsUrl;a.download='product_'+Date.now()+'.jpg';a.target='_blank';a.click();toast('图片下载中','ok');}
-
-// ── 场景提示词库 ──
-var SCENE_MAP={
-  '简约北欧':'Nordic minimal studio, matte white seamless background, diffused soft window light, clean Scandinavian aesthetic, subtle shadows',
-  '生活场景':'authentic warm lifestyle home setting, natural morning light through sheer linen curtains, cozy ambient bokeh, warm lived-in texture',
-  '时尚大片':'high fashion editorial studio, dramatic chiaroscuro lighting, single hard key light at 45 degrees, deep cinematic shadows, high contrast',
-  '白底商业':'pure white seamless infinity background, professional triple softbox lighting, crisp shadows, clean commercial product shot',
-  '烟火气息':'vibrant night market, warm neon bokeh background, orange tungsten glow, authentic urban texture, street food atmosphere',
-  '科技感':'dark tech laboratory, neon blue and purple accent lighting, holographic reflections, futuristic minimalist surface, cyberpunk aesthetic'
+// ══ SCENE PROMPTS ══
+var SM={
+  '简约北欧':'Nordic minimalist studio, matte white seamless backdrop, soft diffused north window light, clean Scandinavian aesthetic, barely-there shadows, airy breathing space',
+  '生活场景':'authentic cozy home lifestyle, morning golden hour through sheer linen curtains, bokeh depth, warm 3200K ambient, lived-in warmth and intimacy',
+  '时尚大片':'high-fashion editorial, dramatic single key light, deep chiaroscuro shadows, high contrast monochromatic, Vogue-worthy composition, dark luxury aesthetic',
+  '白底商业':'pure white seamless infinity cove, triple LED softbox array, zero shadows, crisp ecommerce hero shot, Pantone perfect color accuracy',
+  '夜光科技':'dark futuristic lab environment, electric neon cyan and violet accent lights, holographic surface reflections, cyberpunk premium, glowing edges',
+  '烟火气息':'vibrant night market atmosphere, warm tungsten neon bokeh, orange and amber glow, authentic street energy, human warmth and texture'
 };
 
-// ★★★ 图片生成 — FLUX Pro (无CORS · 影视级)
+// ══ IMAGE GENERATION (核心修复：直接设置img.src，零CORS) ══
 async function doImgs(){
   if(!S.user){toast('请先激活会员','er');goLp();return;}
   var p=(document.getElementById('tI').value||'').trim();
   if(!p){toast('请描述产品','er');return;}
   var g=document.getElementById('iG');g.innerHTML='';
-  showL('Gemini 2.0 规划影视摄影方案...','Gemini 2.0 Flash · 商业摄影师');
-  var sceneDesc=SCENE_MAP[S.scene]||S.scene;
-
-  // Gemini生成三个专业摄影提示词
-  var req='You are a world-class commercial photographer and cinematographer. Product: '+p+'. Scene style: '+sceneDesc+'.\nCreate 3 distinct cinematic product shots with different compositions:\n[1] HERO SHOT: wide environmental establishing shot, product as subject, powerful composition\n[2] LIFESTYLE MOMENT: intimate human-scale interaction, emotional connection\n[3] MACRO DETAIL: extreme close-up texture/craftsmanship, artisan quality\nFor each (80-100 words): Sony FX6 85mm f/1.4 OR 100mm macro, exact lighting (Rembrandt/butterfly/rim), Kodak Vision3 500T film color grade, atmosphere.\nJSON only, absolutely no markdown: {"prompts":["p1","p2","p3"]}';
-
-  // 三种默认提示词（Gemini失败时使用）
-  var prompts=[
-    p+', hero product shot, warm golden hour studio lighting, Sony 85mm f1.4, Rembrandt lighting setup, Kodak film color grade',
-    p+', lifestyle product moment, natural window light, shallow depth of field bokeh, warm neutral tones, human-scale',
-    p+', extreme macro texture detail, rim lighting, artisan craftsmanship close-up, 100mm macro lens, film grain'
+  collectedImgs=[];
+  document.getElementById('dlAllWrap').style.display='none';
+  showL('Gemini 2.0 规划影视摄影方案…','Gemini 2.0 Flash · 商业摄影师');
+  var sd=SM[S.scene]||S.scene;
+  // 三种镜头类型
+  var fallbacks=[
+    p+', cinematic hero product shot, '+sd+', Sony FX6 85mm f1.4, warm Rembrandt lighting',
+    p+', intimate lifestyle moment, '+sd+', natural depth of field bokeh, warm ambient',
+    p+', extreme macro texture detail, '+sd+', 100mm macro, rim lighting, artisan quality'
   ];
-
+  var prompts=fallbacks;
   try{
-    var raw=await orCall([{role:'user',content:req}],M_IMG,700);
+    var req='Commercial photographer. Product: '+p+'. Scene: '+sd+'.\n3 cinematic shots:\n1.HERO: establishing environmental, powerful composition\n2.LIFESTYLE: intimate human-scale moment, emotion\n3.MACRO: texture extreme close-up, artisan craft\nEach prompt 70-90 words: Sony FX6 85mm f/1.4 or 100mm macro lens, lighting rig details, Kodak Vision3 500T film color grade, atmosphere.\nReturn JSON only, no markdown: {"prompts":["p1","p2","p3"]}';
+    var raw=await orCall([{role:'user',content:req}],600);
     var r=pJ(raw);if(r.prompts&&r.prompts.length>=3)prompts=r.prompts;
   }catch(e){}
   hideL();
-  S.stats.i+=3;saveSt();renderStats();
-  toast('FLUX Pro 渲染中，约30-60秒','ok');
+  S.stats.i+=3;sv();rStats();
+  toast('FLUX渲染中，约30-60秒…','ok');
+  var model=S.model||'flux';
+  var shots=['HERO','LIFE','MACRO'];
 
-  var model=S.imgModel||'flux';
-  var useEnhance=model!=='turbo';
-
-  prompts.forEach(function(prompt,i){
-    var wrap=document.createElement('div');wrap.className='is';
-
-    // 质量徽章
-    var badge=document.createElement('div');badge.className='img-quality-badge';
-    badge.textContent='FLUX '+(model==='flux-realism'?'写实':model==='turbo'?'极速':'Pro');
-
-    var loader=document.createElement('div');loader.className='ip';
-    loader.innerHTML='<div style="width:26px;height:26px;border:2px solid rgba(245,166,35,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite"></div>'
-      +'<div style="font-size:10px;color:var(--mt);margin-top:6px">第'+(i+1)+'张 · 渲染中</div>'
-      +'<div class="wx-prog" style="padding:0 4px"><div class="wx-bar"><div class="wx-fill" id="wxf'+i+'" style="width:3%"></div></div><div class="wx-txt" id="wxt'+i+'">提交中...</div></div>';
-
+  prompts.forEach(function(pmt,i){
+    var wrap=document.createElement('div');wrap.className='ic';
+    var badge=document.createElement('div');badge.className='ic-badge';badge.textContent=shots[i]||'SHOT';
+    var loader=document.createElement('div');loader.className='ic-load';
+    loader.innerHTML='<div style="width:24px;height:24px;border:2px solid rgba(251,191,36,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite"></div>'
+      +'<div style="font-size:10px;color:var(--mt);margin-top:5px">渲染中 '+(i+1)+'/3</div>'
+      +'<div style="width:80%;margin-top:4px"><div class="pbar"><div class="pfill" id="pf'+i+'" style="width:5%"></div></div></div>';
     var img=document.createElement('img');
-    var hint=document.createElement('div');hint.className='fs-hint';hint.textContent='🔍 全屏查看';
+    var hint=document.createElement('div');hint.className='ic-hint';hint.textContent='🔍 全屏';
 
-    (function(imgEl,loaderEl,hintEl,badgeEl,idx,pmt){
-      var attempts=0;
-      var progTimer=null;
-
-      function startProgress(){
-        var prog=3;
-        progTimer=setInterval(function(){
-          prog=Math.min(prog+2,90);
-          var f=document.getElementById('wxf'+idx);if(f)f.style.width=prog+'%';
-          var t=document.getElementById('wxt'+idx);if(t)t.textContent=prog+'%';
-        },1500);
+    (function(el,lo,ba,hi,idx,pm){
+      var tries=0;
+      var timer=null;
+      function startBar(){
+        var p=5;
+        timer=setInterval(function(){
+          p=Math.min(p+1.5,90);
+          var f=document.getElementById('pf'+idx);if(f)f.style.width=p+'%';
+        },1200);
       }
-      function stopProgress(){clearInterval(progTimer);}
+      function stopBar(){clearInterval(timer);}
 
-      function buildUrl(seed){
-        // 影视级超高质量提示词增强
-        var cinematic=' ultra cinematic, masterpiece commercial photography, professional advertising, 8K resolution, perfect composition, award-winning, photorealistic';
-        var fullPmt=pmt+', '+sceneDesc+cinematic;
-        var width=1024,height=1024;
-        return 'https://image.pollinations.ai/prompt/'+encodeURIComponent(fullPmt)
-          +'?width='+width+'&height='+height
-          +'&model='+model
-          +(useEnhance?'&enhance=true':'')
-          +'&nologo=true&seed='+(seed||Date.now()+idx*7337);
+      // ★ 直接设置img.src — 无CORS，浏览器原生图片加载
+      function load(seed){
+        var extra=' ultra cinematic, masterpiece, commercial photography, 8K, award-winning, photorealistic, perfect focus, studio quality';
+        var full=pm+', '+sd+extra;
+        el.src='https://image.pollinations.ai/prompt/'+encodeURIComponent(full)
+          +'?width=1024&height=1024&model='+model
+          +(model!=='turbo'?'&enhance=true':'')
+          +'&nologo=true&seed='+(seed||(Date.now()+idx*7777+Math.floor(Math.random()*9999)));
       }
 
-      imgEl.onload=function(){
-        stopProgress();
-        var f=document.getElementById('wxf'+idx);if(f)f.style.width='100%';
-        imgEl.style.display='block';loaderEl.style.display='none';
-        badgeEl.style.display='block';hintEl.style.display='block';
-        imgEl.onclick=function(){openFsPrev(imgEl.src);};
+      el.onload=function(){
+        stopBar();
+        var f=document.getElementById('pf'+idx);if(f)f.style.width='100%';
+        el.style.display='block';lo.style.display='none';
+        ba.style.display='block';hi.style.display='block';
+        el.onclick=function(){openFs(el.src);};
+        collectedImgs[idx]=el.src;
+        if(collectedImgs.filter(Boolean).length>=3)document.getElementById('dlAllWrap').style.display='block';
         toast('第'+(idx+1)+'张影视大片完成 ✨','ok');
       };
-      imgEl.onerror=function(){
-        stopProgress();attempts++;
-        if(attempts===1){
-          loaderEl.innerHTML='<span style="font-size:10px;color:var(--mt)">换种子重试...</span>';
-          setTimeout(function(){startProgress();imgEl.src=buildUrl(Date.now()+idx*4444+99999);},1800);
-        }else if(attempts===2){
-          // 降级到标准flux
-          loaderEl.innerHTML='<span style="font-size:10px;color:var(--mt)">备用模型生成...</span>';
+      el.onerror=function(){
+        stopBar();tries++;
+        if(tries===1){
+          lo.innerHTML='<span style="font-size:10px;color:var(--mt)">换种子重试中…</span>';
+          setTimeout(function(){startBar();load(Date.now()+idx*3333+88888);},2000);
+        }else if(tries===2){
+          // 降级标准flux无enhance
+          lo.innerHTML='<span style="font-size:10px;color:var(--mt)">备用渲染中…</span>';
           setTimeout(function(){
-            startProgress();
-            var fb='https://image.pollinations.ai/prompt/'+encodeURIComponent(pmt+', '+sceneDesc+', commercial photography, high quality')+'?width=512&height=512&model=flux&nologo=true&seed='+(Date.now()+idx*2211);
-            imgEl.src=fb;
-          },2000);
+            startBar();
+            el.src='https://image.pollinations.ai/prompt/'+encodeURIComponent(pm+', '+sd+', commercial photography, product shot, high quality')
+              +'?width=768&height=768&model=flux&nologo=true&seed='+(Date.now()+idx*1111+77777);
+          },2500);
         }else{
-          loaderEl.innerHTML='<span style="font-size:22px">⚠️</span><span style="font-size:10px;color:var(--mt);display:block;margin-top:4px">网络超时</span>';
+          lo.innerHTML='<span style="font-size:22px">⚠️</span><span style="font-size:10px;color:var(--mt);display:block;margin-top:4px">网络超时，请重试</span>';
         }
       };
 
-      // 错开请求间隔，避免被限流
-      setTimeout(function(){startProgress();imgEl.src=buildUrl();},idx*2200);
-
-    })(img,loader,hint,badge,i,prompt);
+      setTimeout(function(){startBar();load();},idx*2800);
+    })(img,loader,badge,hint,i,pmt);
 
     wrap.appendChild(badge);wrap.appendChild(loader);wrap.appendChild(img);wrap.appendChild(hint);
     g.appendChild(wrap);
   });
 }
 
-// ── 文案生成 ──
+// 批量下载
+function dlAllImgs(){
+  collectedImgs.filter(Boolean).forEach(function(url,i){
+    setTimeout(function(){
+      var a=document.createElement('a');a.href=url;a.download='product_'+(i+1)+'_'+Date.now()+'.jpg';a.target='_blank';a.click();
+    },i*800);
+  });
+  toast('批量下载中…','ok');
+}
+
+// ══ TEXT GENERATION ══
 async function doGen(){
   if(!S.user){toast('请先激活会员','er');goLp();return;}
   var p=(document.getElementById('tP').value||'').trim();
   if(!p){toast('请输入产品信息','er');return;}
   var extra=(document.getElementById('tE').value||'').trim();
-  showL('Qwen Plus 生成爆款文案...','Qwen Plus · 文案引擎');
-  var prompt='你是顶级电商文案专家，专精'+S.pl+'爆款内容创作。\n产品：'+p+(extra?'\n特殊要求：'+extra:'')+'\n风格：'+S.st+'\n\n请创作一套完整的'+S.pl+'爆款文案，严格输出JSON，无代码块：\n{"title":"三个候选标题，用换行分隔，每个35字内，含数字/符号/爆点","body":"正文内容，'+S.st+'风格，300-400字，段落分明，含emoji，真实感强","tags":"15-20个话题标签，#开头，空格分隔","hook":"最具冲击力的单句金句，25字内，能直接用作开屏文字"}';
+  showL('Qwen Plus 生成爆款文案…','Qwen Plus · 文案引擎');
+  var prompt='你是顶级电商文案专家，专精'+S.pl+'爆款内容创作。\n产品：'+p+(extra?'\n特殊要求：'+extra:'')+'\n风格：'+S.st+'\n\n创作完整'+S.pl+'爆款文案，严格JSON无代码块：\n{"title":"三个候选标题换行分隔，每个35字内含数字符号爆点","body":"正文300-400字段落分明含emoji真实感强","tags":"15-20个话题标签#开头空格分隔","hook":"最冲击力单句金句25字内"}';
   try{
-    var raw=await qwenCall([{role:'user',content:prompt}],1200);
+    var raw=await qCall([{role:'user',content:prompt}],1200);
     var r=pJ(raw);
     document.getElementById('rH').textContent=r.hook||'';
     document.getElementById('rB').textContent=r.body||'';
-    document.getElementById('rBcount').textContent=(r.body||'').length+'字';
+    document.getElementById('rBcnt').textContent=(r.body||'').length+'字';
     document.getElementById('rTg').textContent=r.tags||'';
     var cards=document.getElementById('rTcards');cards.innerHTML='';
     (r.title||'').split('\n').filter(function(t){return t.trim();}).forEach(function(t){
-      var d=document.createElement('div');d.className='title-card';d.textContent=t.trim();
+      var d=document.createElement('div');d.className='tc';d.textContent=t.trim();
       d.onclick=function(){
-        document.querySelectorAll('.title-card').forEach(function(x){x.classList.remove('picked');});
+        document.querySelectorAll('.tc').forEach(function(x){x.classList.remove('picked');});
         d.classList.add('picked');
         if(navigator.clipboard)navigator.clipboard.writeText(t.trim()).then(function(){toast('标题已复制','ok');});
       };
       cards.appendChild(d);
     });
     document.getElementById('gr2').style.display='block';
-    S.stats.g++;saveSt();renderStats();toast('爆款文案生成完成 ✨','ok');
+    S.stats.g++;sv();rStats();toast('爆款文案生成完成 ✨','ok');
   }catch(e){toast('失败：'+e.message,'er');}
   finally{hideL();}
 }
 
-// ── 热榜 ──
-async function doTrend(){
-  showL('Qwen Plus 分析热词...','Qwen Plus · 趋势雷达');
-  var el=document.getElementById('rsp');if(el)el.style.animation='spin .6s linear infinite';
-  var msg='你是电商选品专家。品类：'+S.sc+'。\n分析今日'+S.sc+'领域热门内容，严格输出JSON：\n{"xhs":["小红书热词1","热词2","热词3","热词4","热词5","热词6","热词7","热词8"],"dy":["抖音热词1","热词2","热词3","热词4","热词5","热词6"],"recommend":"品类推荐和选品建议200字","analysis":"消费者心理和流量密码分析150字"}';
+// 直播话术
+async function doLive(){
+  var p=(document.getElementById('tLive').value||'').trim();
+  if(!p){toast('请输入产品信息','er');return;}
+  showL('生成直播四段式话术…','Qwen Plus · 直播运营专家');
+  var msg='你是顶级直播电商运营专家。产品：'+p+'。\n生成专业的四段式直播话术，每段30-50字，语气真实自然有节奏感：\n\n开场钩子（前3秒留住观众）：\n产品介绍（核心卖点+场景）：\n促单冲动（制造紧迫感）：\n催付收单（行动号召）：\n\n输出格式：直接输出四段话术，用"---"分隔，不要标题。';
   try{
-    var raw=await qwenCall([{role:'user',content:msg}],1000);
+    var raw=await qCall([{role:'user',content:msg}],800);
+    document.getElementById('rLive').textContent=raw;
+    document.getElementById('liveR').style.display='block';
+    toast('直播话术生成完成','ok');
+  }catch(e){toast('失败：'+e.message,'er');}
+  finally{hideL();}
+}
+
+async function doTrend(){
+  showL('Qwen Plus 分析热词…','Qwen Plus · 趋势雷达');
+  var el=document.getElementById('rsp');if(el)el.style.animation='spin .6s linear infinite';
+  var msg='你是电商选品专家。品类：'+S.sc+'。分析今日'+S.sc+'领域热门内容，严格JSON：\n{"xhs":["热词1","热词2","热词3","热词4","热词5","热词6","热词7","热词8"],"dy":["热词1","热词2","热词3","热词4","热词5","热词6"],"recommend":"品类推荐选品建议200字","analysis":"消费者心理流量密码分析150字"}';
+  try{
+    var raw=await qCall([{role:'user',content:msg}],1000);
     var r=pJ(raw);
     var xL=document.getElementById('xL');xL.innerHTML='';
-    (r.xhs||[]).forEach(function(w){var el2=document.createElement('div');el2.className='trend-item trend-xhs';el2.textContent=w;el2.onclick=function(){var ta=document.getElementById('tE');if(ta){ta.value=(ta.value?ta.value+' ':'')+w;}goTab('t-gen');toast('热词已加入','ok');};xL.appendChild(el2);});
+    (r.xhs||[]).forEach(function(w){var e=document.createElement('div');e.className='tw1';e.textContent=w;e.onclick=function(){var ta=document.getElementById('tE');if(ta)ta.value=(ta.value?ta.value+' ':'')+w;goTab('t-gen');toast('热词已加入','ok');};xL.appendChild(e);});
     var dL=document.getElementById('dL');dL.innerHTML='';
-    (r.dy||[]).forEach(function(w){var el3=document.createElement('div');el3.className='trend-item trend-dy';el3.textContent=w;el3.onclick=function(){var ta=document.getElementById('tE');if(ta){ta.value=(ta.value?ta.value+' ':'')+w;}goTab('t-gen');toast('热词已加入','ok');};dL.appendChild(el3);});
+    (r.dy||[]).forEach(function(w){var e=document.createElement('div');e.className='tw2';e.textContent=w;e.onclick=function(){var ta=document.getElementById('tE');if(ta)ta.value=(ta.value?ta.value+' ':'')+w;goTab('t-gen');toast('热词已加入','ok');};dL.appendChild(e);});
     document.getElementById('cG').textContent=r.recommend||'';
     document.getElementById('aI').textContent=r.analysis||'';
     document.getElementById('tt2').style.display='block';
-    S.stats.t++;saveSt();renderStats();toast('热词雷达更新完成','ok');
+    S.stats.t++;sv();rStats();toast('热词雷达更新完成','ok');
   }catch(e){toast('失败：'+e.message,'er');}
   finally{hideL();if(el)el.style.animation='';}
 }
 
-// ── 评论回复 ──
 async function doReply(){
   var cmt=(document.getElementById('tCmt').value||'').trim();
   if(!cmt){toast('请输入买家评论','er');return;}
   var product=(document.getElementById('tP').value||'产品').trim();
-  showL('生成专业回复...','Qwen Plus');
-  var msg='你是电商客服运营专家。平台：'+S.pl+'\n产品：'+product+'\n买家评论：「'+cmt+'」\n生成专业亲切的回复，60-80字，结尾引导复购或关注。只输出回复内容。';
+  showL('生成专业回复…','Qwen Plus');
+  var msg='电商客服专家。平台：'+S.pl+'，产品：'+product+'，评论：「'+cmt+'」。生成60-80字专业亲切回复，结尾引导复购/关注。只输出回复内容。';
   try{
-    var raw=await qwenCall([{role:'user',content:msg}],300);
-    document.getElementById('rCmtIn').textContent=cmt;
-    document.getElementById('rCmtOut').textContent=raw.trim();
+    var raw=await qCall([{role:'user',content:msg}],300);
+    document.getElementById('rCI').textContent=cmt;
+    document.getElementById('rCO').textContent=raw.trim();
     document.getElementById('replyR').style.display='block';
     toast('回复生成完成','ok');
   }catch(e){toast('失败：'+e.message,'er');}
   finally{hideL();}
 }
 
-// ── 视频工作流 ──
-var vidScript='',vidAudioBlob=null,vidAudioUrl=null,vImgs=[],sbImgs=[];
-var tpRAF=null,tpStartTime=null,tpDuration=33000;
-var vidMr=null,vidChunks=[],vidVcSec=0,vidVcInt=null;
-var vidAudioCtx=null,vidAnalyser=null,vidSrcNode=null,vidWaveRAF=null;
+// ══ VIDEO WORKFLOW ══
+var vidSc='',audBlob=null,audUrl=null,vImgs=[],sbImgs=[];
+var tpRaf=null,tpT0=null,tpDur=33000;
+var mr=null,mChunks=[],recSec=0,recInt=null;
+var aCtx=null,aNz=null,aSrc=null,wRaf=null;
 
-function setVStep(n){
+function setVS(n){
   for(var i=1;i<=4;i++){
     var el=document.getElementById('vstep'+i);if(!el)continue;
-    el.className='sf-item '+(i<n?'sf-done':i===n?'sf-act':'sf-wait');
-    el.querySelector('.sf-dot').textContent=i<n?'✓':String(i);
+    el.className='sf-i '+(i<n?'sf-done':i===n?'sf-act':'sf-wait');
+    el.querySelector('.sf-d').textContent=i<n?'✓':String(i);
   }
-  for(var j=1;j<=4;j++){var s=document.getElementById('vStep'+j);if(s)s.style.display=(j===n)?'block':'none';}
+  for(var j=1;j<=4;j++){var s=document.getElementById('vS'+j);if(s)s.style.display=j===n?'block':'none';}
 }
 
 async function doVidScript(){
   var p=(document.getElementById('tV').value||'').trim();
   if(!p){toast('请输入产品信息','er');return;}
-  showL('Gemini 2.0 生成口播脚本...','Gemini 2.0 Flash');
-  var msg='你是抖音电商口播文案专家。产品：'+p+'。\n严格输出JSON，无代码块：\n{"script":"30秒带货口播稿，前3秒强钩子开场，中段讲核心卖点，结尾行动号召，约150字，节奏感强","shots":[{"no":1,"desc":"分镜1描述"},{"no":2,"desc":"分镜2描述"},{"no":3,"desc":"分镜3描述"},{"no":4,"desc":"分镜4描述"}]}';
+  showL('Gemini 2.0 生成口播脚本…','Gemini 2.0 Flash');
+  var msg='抖音电商口播文案专家。产品：'+p+'。JSON无代码块：{"script":"30秒带货口播稿，前3秒强钩子，含价格行动号召，约150字节奏感强","shots":[{"no":1,"desc":""},{"no":2,"desc":""},{"no":3,"desc":""},{"no":4,"desc":""}]}';
   try{
-    var raw=await orCall([{role:'user',content:msg}],M_SCRIPT,1200);
-    var r=pJ(raw);vidScript=r.script||'';
-    document.getElementById('rSc').textContent=vidScript;
-    var inner=document.getElementById('tpInner');inner.textContent=vidScript;inner.style.transform='translateY(0)';
-    document.getElementById('tpHint').style.display='none';
-    setVStep(2);toast('脚本生成完成，准备录音','ok');
+    var raw=await orCall([{role:'user',content:msg}],1200);
+    var r=pJ(raw);vidSc=r.script||'';
+    document.getElementById('rSc').textContent=vidSc;
+    var inn=document.getElementById('tpIn');inn.textContent=vidSc;inn.style.transform='translateY(0)';
+    document.getElementById('tpH').style.display='none';
+    setVS(2);toast('脚本生成完成，准备录音','ok');
   }catch(e){toast('失败：'+e.message,'er');}
   finally{hideL();}
 }
-function backToScript(){setVStep(1);stopVidRec();}
-function startTeleprompter(){
-  var inner=document.getElementById('tpInner');
-  var maxScroll=Math.max(inner.scrollHeight-170+40,0);
-  tpStartTime=Date.now();
-  function tick(){var prog=Math.min((Date.now()-tpStartTime)/tpDuration,1);inner.style.transform='translateY(-'+Math.round(prog*maxScroll)+'px)';if(prog<1)tpRAF=requestAnimationFrame(tick);}
-  tpRAF=requestAnimationFrame(tick);document.getElementById('tpLine').style.display='block';
+
+function startTp(){
+  var inn=document.getElementById('tpIn');
+  var mx=Math.max(inn.scrollHeight-170+40,0);
+  tpT0=Date.now();
+  function tick(){var p=Math.min((Date.now()-tpT0)/tpDur,1);inn.style.transform='translateY(-'+Math.round(p*mx)+'px)';if(p<1)tpRaf=requestAnimationFrame(tick);}
+  tpRaf=requestAnimationFrame(tick);
+  document.getElementById('tpLn').style.display='block';
 }
-function stopTeleprompter(){if(tpRAF)cancelAnimationFrame(tpRAF);tpRAF=null;document.getElementById('tpLine').style.display='none';}
-async function startVidRec(){
+function stopTp(){if(tpRaf)cancelAnimationFrame(tpRaf);tpRaf=null;document.getElementById('tpLn').style.display='none';}
+
+async function startRec(){
   try{
     var stream=await navigator.mediaDevices.getUserMedia({audio:true});
-    vidAudioCtx=new(window.AudioContext||window.webkitAudioContext)();
-    vidAnalyser=vidAudioCtx.createAnalyser();vidAnalyser.fftSize=256;
-    vidSrcNode=vidAudioCtx.createMediaStreamSource(stream);vidSrcNode.connect(vidAnalyser);
-    drawVidWave();
-    vidMr=new MediaRecorder(stream);vidChunks=[];
-    vidMr.ondataavailable=function(e){vidChunks.push(e.data);};
-    vidMr.onstop=function(){
-      vidAudioBlob=new Blob(vidChunks,{type:'audio/webm'});vidAudioUrl=URL.createObjectURL(vidAudioBlob);
-      var ap=document.getElementById('ap2');ap.src=vidAudioUrl;ap.style.display='block';
-      document.getElementById('bPlay').style.cssText='opacity:1;pointer-events:auto';
+    aCtx=new(window.AudioContext||window.webkitAudioContext)();
+    aNz=aCtx.createAnalyser();aNz.fftSize=256;
+    aSrc=aCtx.createMediaStreamSource(stream);aSrc.connect(aNz);
+    drawWave();
+    mr=new MediaRecorder(stream);mChunks=[];
+    mr.ondataavailable=function(e){mChunks.push(e.data);};
+    mr.onstop=function(){
+      audBlob=new Blob(mChunks,{type:'audio/webm'});audUrl=URL.createObjectURL(audBlob);
+      var ap=document.getElementById('ap2');ap.src=audUrl;ap.style.display='block';
+      document.getElementById('bPly').style.cssText='opacity:1;pointer-events:auto';
       document.getElementById('vcS').textContent='录音完成 ✓';document.getElementById('vcS').style.animation='none';
-      document.getElementById('bNextImg').style.display='block';
-      stream.getTracks().forEach(function(t){t.stop();});stopTeleprompter();stopVidWave();
+      document.getElementById('bNxtImg').style.display='block';
+      stream.getTracks().forEach(function(t){t.stop();});stopTp();stopWave();
     };
-    vidMr.start(100);vidVcSec=0;clearInterval(vidVcInt);
-    vidVcInt=setInterval(function(){vidVcSec++;var m=String(Math.floor(vidVcSec/60)).padStart(2,'0'),sc=String(vidVcSec%60).padStart(2,'0');document.getElementById('vcT').textContent=m+':'+sc;},1000);
+    mr.start(100);recSec=0;clearInterval(recInt);
+    recInt=setInterval(function(){recSec++;var m=String(Math.floor(recSec/60)).padStart(2,'0'),s=String(recSec%60).padStart(2,'0');document.getElementById('vcT').textContent=m+':'+s;},1000);
     document.getElementById('bRec').style.cssText='opacity:.4;pointer-events:none';
-    document.getElementById('bStop').style.cssText='opacity:1;pointer-events:auto';
-    document.getElementById('vcS').textContent='🔴 录音中...';document.getElementById('vcS').style.animation='pulse .8s infinite';
-    startTeleprompter();toast('开始录音，跟着提词器朗读','ok');
+    document.getElementById('bStp').style.cssText='opacity:1;pointer-events:auto';
+    document.getElementById('vcS').textContent='🔴 录音中…';document.getElementById('vcS').style.animation='pulse .8s infinite';
+    startTp();toast('开始录音，跟着提词器朗读','ok');
   }catch(e){toast('麦克风权限被拒绝','er');}
 }
-function stopVidRec(){if(vidMr&&vidMr.state!=='inactive')vidMr.stop();clearInterval(vidVcInt);document.getElementById('bRec').style.cssText='opacity:1;pointer-events:auto';document.getElementById('bStop').style.cssText='opacity:.4;pointer-events:none';stopTeleprompter();stopVidWave();}
-function playVidRec(){document.getElementById('ap2').play();}
-function drawVidWave(){
-  var cv=document.getElementById('waveCV'),ctx=cv.getContext('2d');
+function stopRec(){
+  if(mr&&mr.state!=='inactive')mr.stop();clearInterval(recInt);
+  document.getElementById('bRec').style.cssText='opacity:1;pointer-events:auto';
+  document.getElementById('bStp').style.cssText='opacity:.4;pointer-events:none';
+  stopTp();stopWave();
+}
+function playRec(){document.getElementById('ap2').play();}
+function drawWave(){
+  var cv=document.getElementById('wvCv'),ctx=cv.getContext('2d');
   var W=cv.width=cv.offsetWidth||280,H=cv.height=48;
   function draw(){
-    vidWaveRAF=requestAnimationFrame(draw);
-    var buf=new Uint8Array(vidAnalyser.frequencyBinCount);vidAnalyser.getByteTimeDomainData(buf);
+    wRaf=requestAnimationFrame(draw);
+    var buf=new Uint8Array(aNz.frequencyBinCount);aNz.getByteTimeDomainData(buf);
     ctx.clearRect(0,0,W,H);
-    var grad=ctx.createLinearGradient(0,0,W,0);grad.addColorStop(0,'#f5a623');grad.addColorStop(.5,'#ff6b35');grad.addColorStop(1,'#ff4db8');
-    ctx.lineWidth=2;ctx.strokeStyle=grad;ctx.beginPath();
+    var gr=ctx.createLinearGradient(0,0,W,0);gr.addColorStop(0,'#fbbf24');gr.addColorStop(.5,'#fb923c');gr.addColorStop(1,'#f472b6');
+    ctx.lineWidth=2;ctx.strokeStyle=gr;ctx.beginPath();
     var sl=W/buf.length,x=0;
     for(var i=0;i<buf.length;i++){var v=buf[i]/128,y=v*H/2;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);x+=sl;}
     ctx.stroke();
   }
   draw();
 }
-function stopVidWave(){if(vidWaveRAF){cancelAnimationFrame(vidWaveRAF);vidWaveRAF=null;}}
+function stopWave(){if(wRaf){cancelAnimationFrame(wRaf);wRaf=null;}}
 
-// ★★★ 视频配图 — FLUX Pro 影视级 9:16
-var VID_MOTIONS=[
-  'slow cinematic dolly push-in toward product, shallow DOF bokeh, warm dramatic key lighting, premium luxury commercial feel',
-  'elegant orbital arc 180 degrees around product, rim light traces product edges, high-end product showcase cinematography',
-  'dramatic low-angle upward crane reveal, product emerges majestically from below, epic scale, cinematic breathing',
-  'intimate macro detail crawl across surface and texture, rack focus pull, reveals artisan craftsmanship, luxury close-up'
-];
+// ★★★ 视频配图 — FLUX (直接img.src，无CORS)
+var MOTIONS=['slow cinematic dolly push-in toward product, shallow DOF golden bokeh, warm dramatic key light, premium commercial cinema',
+  'elegant 180° orbital arc around product, rim light traces edges, luxury product showcase, high-end advertising',
+  'dramatic low-angle upward crane reveal, product emerges majestically, epic scale establishing shot, cinematic scope',
+  'intimate extreme macro crawl across texture and surface, rack focus pull, reveals artisan craftsmanship, luxury close-up'];
 
-async function nextToVidImages(){
-  setVStep(3);
-  var wrap=document.getElementById('vImgWrap');wrap.innerHTML='';vImgs=[];
-  var productInfo=(document.getElementById('tV').value||'产品').trim();
-  showL('Gemini 2.0 生成分镜配图方案...','Gemini 2.0 Flash · 商业导演');
-  var prompts=[
-    productInfo+', cinematic vertical product hero shot 9:16, golden hour lighting',
-    productInfo+', lifestyle vertical product moment 9:16, warm natural light',
-    productInfo+', macro detail vertical shot 9:16, rim lighting texture',
-    productInfo+', atmospheric product scene vertical 9:16, moody cinematic'
-  ];
+async function toVidImgs(){
+  setVS(3);
+  var grid=document.getElementById('vImgGrid');grid.innerHTML='';vImgs=[];
+  var pi=(document.getElementById('tV').value||'产品').trim();
+  showL('Gemini 2.0 生成分镜配图方案…','Gemini 2.0 Flash · 商业导演');
+  var fallback=[pi+', cinematic 9:16 hero shot, warm golden lighting',pi+', lifestyle 9:16 product use moment',pi+', macro texture 9:16 detail shot',pi+', atmospheric 9:16 product scene moody'];
+  var prompts=fallback;
   try{
-    var req='You are a commercial video director. Product: '+productInfo+'.\nCreate 4 distinct vertical 9:16 cinematic product video frame prompts:\n[1] Hero wide shot\n[2] Lifestyle use moment\n[3] Close macro texture\n[4] Atmospheric mood shot\nEach 70 words: Sony FX6 85mm, lighting setup, Kodak film grade, mood.\nJSON only: {"prompts":["p1","p2","p3","p4"]}';
-    var raw=await orCall([{role:'user',content:req}],M_IMG,600);
+    var req='Commercial video director. Product: '+pi+'. 4 vertical 9:16 cinematic product frame prompts. Each 60 words: Sony FX6 85mm, lighting, Kodak film grade, mood. JSON: {"prompts":["p1","p2","p3","p4"]}';
+    var raw=await orCall([{role:'user',content:req}],500);
     var r=pJ(raw);if(r.prompts&&r.prompts.length>=4)prompts=r.prompts;
   }catch(e){}
-  hideL();toast('影视级配图生成中，约30秒','ok');
-  document.getElementById('bNextPrev').style.display='block';
+  hideL();
+  toast('影视配图生成中，约40秒','ok');
+  document.getElementById('bNxtPrv').style.display='block';
+  var labels=['🎬 主镜头','🏡 生活','🔬 微距','🎭 氛围'];
 
   prompts.forEach(function(pmt,i){
     var card=document.createElement('div');
-    card.style.cssText='border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:rgba(10,8,20,.9);aspect-ratio:9/16;position:relative;box-shadow:0 4px 20px rgba(0,0,0,.5);';
-    var loader=document.createElement('div');
-    loader.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--mt);';
-    loader.innerHTML='<div style="width:22px;height:22px;border:2px solid rgba(245,166,35,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite"></div>'
+    card.style.cssText='border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:rgba(10,8,24,.9);aspect-ratio:9/16;position:relative;box-shadow:0 8px 32px rgba(0,0,0,.5)';
+    var lbl=document.createElement('div');
+    lbl.style.cssText='position:absolute;top:6px;left:6px;z-index:2;padding:2px 8px;border-radius:8px;font-size:9px;font-weight:900;color:#000;background:linear-gradient(90deg,#fbbf24,#fb923c)';
+    lbl.textContent=labels[i]||'SHOT';
+    var lo=document.createElement('div');
+    lo.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--mt)';
+    lo.innerHTML='<div style="width:22px;height:22px;border:2px solid rgba(251,191,36,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite"></div>'
       +'<span style="font-size:10px">镜头 '+(i+1)+'/4</span>'
-      +'<div style="width:70%;padding:0 4px"><div class="wx-bar"><div class="wx-fill" id="vwf'+i+'" style="width:5%"></div></div></div>';
+      +'<div style="width:75%;padding:0 4px"><div class="pbar"><div class="pfill" id="vp'+i+'" style="width:5%"></div></div></div>';
     var img=document.createElement('img');
-    img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;cursor:pointer;';
+    img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;cursor:pointer';
 
-    (function(imgEl,loaderEl,idx,prompt2){
+    (function(el,loEl,idx,pm){
       var retried=false;
-      imgEl.onload=function(){
-        imgEl.style.display='block';loaderEl.style.display='none';
-        imgEl.onclick=function(){openFsPrev(imgEl.src);};
-        addVidImg(idx,imgEl.src);checkVidImgsDone(prompts.length);
+      var t=null;
+      el.onload=function(){
+        clearInterval(t);var f=document.getElementById('vp'+idx);if(f)f.style.width='100%';
+        el.style.display='block';loEl.style.display='none';
+        el.onclick=function(){openFs(el.src);};
+        vImgs[idx]=el.src;
+        if(vImgs.filter(Boolean).length>=prompts.length)toast('4张影视配图全部完成 ✅','ok');
       };
-      imgEl.onerror=function(){
-        if(!retried){retried=true;loaderEl.innerHTML='<span style="font-size:10px;color:var(--mt)">重试中...</span>';
-          setTimeout(function(){imgEl.src='https://image.pollinations.ai/prompt/'+encodeURIComponent(prompt2+', vertical 9:16, cinematic product, film color grade')+'?width=270&height=480&model=flux&nologo=true&seed='+(Date.now()+idx*3737+50000);},2000);
-        }else{loaderEl.innerHTML='<span style="font-size:20px">⚠️</span>';}
+      el.onerror=function(){
+        clearInterval(t);
+        if(!retried){retried=true;loEl.innerHTML='<span style="font-size:10px;color:var(--mt)">重试中…</span>';
+          setTimeout(function(){
+            var p2=Math.min;
+            t=setInterval(function(){var f=document.getElementById('vp'+idx);if(f&&p2(parseInt(f.style.width||'30'),89)<89){f.style.width=(parseInt(f.style.width||'30')+2)+'%';}},1500);
+            el.src='https://image.pollinations.ai/prompt/'+encodeURIComponent(pm+', vertical 9:16, cinematic product photography, film color grade')+'?width=270&height=480&model=flux&nologo=true&seed='+(Date.now()+idx*4444+99999);
+          },2000);
+        }else{loEl.innerHTML='<span style="font-size:20px">⚠️</span>';}
       };
       setTimeout(function(){
-        var pBar=document.getElementById('vwf'+idx);if(pBar)pBar.style.width='30%';
-        imgEl.src='https://image.pollinations.ai/prompt/'+encodeURIComponent(prompt2+', vertical 9:16, cinematic commercial photography, film color grade, professional lighting, masterpiece')+'?width=270&height=480&model=flux&nologo=true&enhance=true&seed='+(Date.now()+idx*2531);
-      },idx*2500);
-    })(img,loader,i,pmt);
+        var pb=0;
+        t=setInterval(function(){pb=Math.min(pb+2,88);var f=document.getElementById('vp'+idx);if(f)f.style.width=pb+'%';},1500);
+        el.src='https://image.pollinations.ai/prompt/'+encodeURIComponent(pm+', vertical 9:16, cinematic commercial product photography, film color grade, professional lighting, masterpiece')+'?width=270&height=480&model=flux&nologo=true&enhance=true&seed='+(Date.now()+idx*3131);
+      },idx*2800);
+    })(img,lo,i,pmt);
 
-    card.appendChild(loader);card.appendChild(img);wrap.appendChild(card);
+    card.appendChild(lbl);card.appendChild(lo);card.appendChild(img);grid.appendChild(card);
   });
 }
-function addVidImg(idx,src){vImgs[idx]=src;}
-function checkVidImgsDone(total){if(vImgs.filter(function(v){return v;}).length>=total)toast('4张影视配图全部完成 ✅','ok');}
-function nextToPreview(){setVStep(4);sbImgs=vImgs.filter(function(v){return v;});toast('素材就绪！可以开始配音或生成视频','ok');}
+function toVidOut(){setVS(4);sbImgs=vImgs.filter(Boolean);toast('素材就绪！选择AI配音或生成视频','ok');}
+
 function restartVid(){
-  vidScript='';vidAudioBlob=null;vidAudioUrl=null;vImgs=[];sbImgs=[];
-  document.getElementById('tV').value='';document.getElementById('tpInner').textContent='';
-  document.getElementById('tpHint').style.display='block';document.getElementById('vcT').textContent='00:00';
-  document.getElementById('vcS').textContent='准备录音';document.getElementById('ap2').src='';document.getElementById('ap2').style.display='none';
-  document.getElementById('bNextImg').style.display='none';document.getElementById('bPlay').style.cssText='opacity:.4;pointer-events:none';
-  document.getElementById('vImgWrap').innerHTML='';document.getElementById('bNextPrev').style.display='none';
-  document.getElementById('aiVoiceR').style.display='none';document.getElementById('vidClipsWrap').style.display='none';
-  document.getElementById('vidClipsList').innerHTML='';setVStep(1);
+  vidSc='';audBlob=null;audUrl=null;vImgs=[];sbImgs=[];
+  ['tV','tpIn'].forEach(function(id){var e=document.getElementById(id);if(e)e.value=e.textContent=''});
+  document.getElementById('tpH').style.display='block';
+  document.getElementById('vcT').textContent='00:00';
+  document.getElementById('vcS').textContent='准备录音';
+  document.getElementById('ap2').src='';document.getElementById('ap2').style.display='none';
+  document.getElementById('bNxtImg').style.display='none';
+  document.getElementById('bPly').style.cssText='opacity:.4;pointer-events:none';
+  document.getElementById('vImgGrid').innerHTML='';
+  document.getElementById('bNxtPrv').style.display='none';
+  document.getElementById('aVR').style.display='none';
+  document.getElementById('wxWrap').style.display='none';
+  document.getElementById('wxList').innerHTML='';
+  setVS(1);
 }
 
-// ── AI配音 ──
-var selectedVoice='longxiaochun_v2',aiVoiceUrl=null;
-function pickVoice(voice,el){selectedVoice=voice;document.querySelectorAll('.vp-item').forEach(function(e){e.classList.remove('on');});el.classList.add('on');}
-async function doAIVoice(){
-  var script=vidScript||document.getElementById('rSc').textContent||'';
-  if(!script){toast('请先完成第1步生成口播脚本','er');return;}
-  showL('CosyVoice AI配音生成中...','阿里云 CosyVoice · 声音克隆');
+// AI配音
+var selV='longxiaochun_v2',voiceUrl=null;
+function pickV(v,el){selV=v;document.querySelectorAll('.vi').forEach(function(e){e.classList.remove('on');});el.classList.add('on');}
+async function doVoice(){
+  var sc=vidSc||document.getElementById('rSc').textContent||'';
+  if(!sc){toast('请先完成第1步生成口播脚本','er');return;}
+  showL('CosyVoice AI配音生成中…','阿里云 CosyVoice');
   try{
-    var url=await cosyVoiceTTS(script,selectedVoice);aiVoiceUrl=url;
-    document.getElementById('aiVoiceAudio').src=url;document.getElementById('aiVoiceR').style.display='block';
+    var r=await fetch('https://dashscope.aliyuncs.com/api/v1/services/aigc/text2audio/synthesis',{
+      method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+QK},
+      body:JSON.stringify({model:'cosyvoice-v1',input:{text:sc},parameters:{voice:selV,format:'mp3',sample_rate:22050,volume:50,rate:1.0}})
+    });
+    if(!r.ok){var e=await r.json();throw new Error(e.message||r.status);}
+    voiceUrl=URL.createObjectURL(await r.blob());
+    document.getElementById('aVA').src=voiceUrl;document.getElementById('aVR').style.display='block';
     hideL();toast('AI配音生成完成 🎙','ok');
   }catch(e){hideL();toast('配音失败：'+e.message,'er');}
 }
-function dlAIVoice(){if(!aiVoiceUrl){toast('请先生成AI配音','er');return;}var a=document.createElement('a');a.download='AI配音_'+Date.now()+'.mp3';a.href=aiVoiceUrl;a.click();toast('配音下载中','ok');}
+function dlVoice(){if(!voiceUrl){toast('请先生成AI配音','er');return;}var a=document.createElement('a');a.download='AI配音_'+Date.now()+'.mp3';a.href=voiceUrl;a.click();toast('下载中…','ok');}
 
-// ★★★ 万象视频 — 完整CORS处理+智能回退
-async function doWanxVideo(){
-  var imgs=vImgs.filter(function(v){return v;});
+// ★★★ 万象视频 — 完整CORS处理
+async function wxPoll(tid,cb,max){
+  max=max||180000;var el=0,iv=4500;
+  while(el<max){
+    await new Promise(function(r){setTimeout(r,iv);});el+=iv;
+    if(cb)cb(Math.min(el/max*90,88));
+    try{
+      var r=await fetch('https://dashscope.aliyuncs.com/api/v1/tasks/'+tid,{headers:{'Authorization':'Bearer '+QK}});
+      var d=await r.json();var st=d.output&&d.output.task_status;
+      if(st==='SUCCEEDED'){if(cb)cb(100);
+        if(d.output.results&&d.output.results[0])return d.output.results[0].url;
+        if(d.output.video_url)return d.output.video_url;}
+      if(st==='FAILED'||st==='CANCELED')throw new Error('任务失败');
+    }catch(e){if(e.message==='任务失败')throw e;}
+  }
+  throw new Error('超时');
+}
+async function doWanx(){
+  var imgs=vImgs.filter(Boolean);
   if(!imgs.length){toast('请先完成第3步生成配图','er');return;}
-  document.getElementById('vidClipsWrap').style.display='block';
-  document.getElementById('vidClipsList').innerHTML='';
-  var btn=document.getElementById('bWanxVid');btn.disabled=true;btn.textContent='⏳ 生成中...';
+  document.getElementById('wxWrap').style.display='block';
+  document.getElementById('wxList').innerHTML='';
+  var btn=document.getElementById('bWx');btn.disabled=true;btn.textContent='⏳ 生成中…';
   toast('万象AI视频生成中，每段约90秒','ok');
 
   imgs.forEach(function(imgUrl,i){
-    var card=document.createElement('div');card.className='vc-card';
-    var thumb=document.createElement('img');thumb.className='vc-thumb';thumb.src=imgUrl;
-    var info=document.createElement('div');info.className='vc-info';
-    info.innerHTML='<div class="vc-clabel">镜头 '+(i+1)+' / '+imgs.length+'</div>'
-      +'<div class="vc-vstatus" id="vs'+i+'">⏳ 等待生成...</div>'
-      +'<div style="margin-top:5px"><div class="wx-bar"><div class="wx-fill" id="vf'+i+'" style="width:0%"></div></div></div>';
-    var dlWrap=document.createElement('div');dlWrap.id='vdl'+i;
-    card.appendChild(thumb);card.appendChild(info);card.appendChild(dlWrap);
-    document.getElementById('vidClipsList').appendChild(card);
+    var card=document.createElement('div');card.className='vc';
+    var th=document.createElement('img');th.className='vct';th.src=imgUrl;
+    var info=document.createElement('div');info.className='vci';
+    info.innerHTML='<div class="vcl">镜头 '+(i+1)+'/'+imgs.length+'</div>'
+      +'<div class="vcs" id="ws'+i+'">⏳ 等待…</div>'
+      +'<div style="margin-top:5px"><div class="pbar"><div class="pfill" id="wp'+i+'" style="width:0%"></div></div></div>';
+    var dw=document.createElement('div');dw.id='wd'+i;
+    card.appendChild(th);card.appendChild(info);card.appendChild(dw);
+    document.getElementById('wxList').appendChild(card);
 
     setTimeout(async function(){
-      var st=document.getElementById('vs'+i);
-      var pFn=function(p){var f=document.getElementById('vf'+i);if(f)f.style.width=p+'%';};
+      var st=document.getElementById('ws'+i);
+      var pf=function(p){var f=document.getElementById('wp'+i);if(f)f.style.width=p+'%';};
       try{
-        if(st)st.textContent='🎬 万象渲染中...';pFn(5);
-        var vidUrl=await wanxVideoI2V(imgUrl,VID_MOTIONS[i%VID_MOTIONS.length],pFn);
-        if(st)st.innerHTML='<span style="color:var(--gr)">✅ 完成</span>';
-        var dl=document.getElementById('vdl'+i);
-        if(dl){var a=document.createElement('a');a.className='vc-dl-btn';a.href=vidUrl;a.target='_blank';a.textContent='⬇ 下载';dl.appendChild(a);}
-        S.stats.g++;saveSt();renderStats();
+        if(st)st.textContent='🎬 万象渲染中…';pf(5);
+        var r=await fetch('https://dashscope.aliyuncs.com/api/v1/services/aigc/video-generation/video-synthesis',{
+          method:'POST',
+          headers:{'Content-Type':'application/json','Authorization':'Bearer '+QK,'X-DashScope-Async':'enable'},
+          body:JSON.stringify({model:'wanx2.1-i2v-turbo',input:{image_url:imgUrl,prompt:MOTIONS[i%MOTIONS.length]},parameters:{duration:4}})
+        });
+        var d=await r.json();
+        if(!d.output||!d.output.task_id)throw new Error(d.message||'提交失败');
+        var vUrl=await wxPoll(d.output.task_id,pf,200000);
+        if(st)st.innerHTML='<span style="color:var(--cy)">✅ 完成</span>';
+        var dw2=document.getElementById('wd'+i);
+        if(dw2){var a=document.createElement('a');a.className='vcd';a.href=vUrl;a.target='_blank';a.textContent='⬇ 下载';dw2.appendChild(a);}
+        S.stats.g++;sv();rStats();
       }catch(err){
         var em=err.message||'';
-        var isCors=em.indexOf('Failed to fetch')>=0||em.indexOf('NetworkError')>=0||em.indexOf('CORS')>=0||em.indexOf('fetch')>=0;
-        if(st)st.innerHTML='<span style="color:var(--rd)">⚠️ '+(isCors?'需后端部署':em)+'</span>';
-        if(isCors&&i===0){
-          var dl2=document.getElementById('vdl'+i);
-          if(dl2){var tip=document.createElement('div');tip.style.cssText='font-size:10px;color:var(--mt);margin-top:6px;line-height:1.5';tip.textContent='万象视频需后端代理。请使用下方「本地合成」功能';dl2.appendChild(tip);}
-          setTimeout(function(){toast('万象受CORS限制，请使用本地视频合成','er');},600);
+        var cors=em.indexOf('fetch')>=0||em.indexOf('Network')>=0||em.indexOf('Failed')>=0;
+        if(st)st.innerHTML='<span style="color:var(--rd)">⚠️ '+(cors?'CORS限制':em)+'</span>';
+        if(cors&&i===0){
+          setTimeout(function(){toast('万象受CORS限制，请使用本地视频合成','er');},500);
         }
       }
-    },i*2500);
+    },i*2800);
   });
-  setTimeout(function(){btn.disabled=false;btn.textContent='🔄 重新生成';},imgs.length*2500+imgs.length*100000);
+  setTimeout(function(){btn.disabled=false;btn.textContent='🔄 重新生成';},imgs.length*2800+imgs.length*120000);
 }
 
-// ── 本地视频合成 ──
-var vmRecorder=null,vmChunks=[],vmVideoBlob=null,vmVideoUrl=null,vmRAF=null,vmAEl=null;
-var VM_W=540,VM_H=960,VM_FPS=30,VM_DUR=30;
+// ══ LOCAL VIDEO MAKER ══
+var vmR=null,vmCh=[],vmBlob=null,vmUrl=null,vmRaf=null,vmAEl=null;
+var VW=540,VH=960,VFPS=30,VDUR=30;
 function getMime(){var t=['video/mp4;codecs=avc1,mp4a.40.2','video/mp4','video/webm;codecs=vp9,opus','video/webm'];for(var i=0;i<t.length;i++){try{if(MediaRecorder.isTypeSupported(t[i]))return t[i];}catch(e){}}return '';}
-function closeVmO(){if(vmRecorder&&vmRecorder.state==='recording')vmRecorder.stop();if(vmRAF){cancelAnimationFrame(vmRAF);vmRAF=null;}if(vmAEl){vmAEl.pause();vmAEl=null;}document.getElementById('vmO').classList.remove('on');}
-function loadImg(src){return new Promise(function(resolve){var img=new Image();img.crossOrigin='anonymous';img.onload=function(){resolve(img);};img.onerror=function(){resolve(null);};img.src=src;});}
-function splitScr(s){var q=Math.floor((s||'').length/4),r=[];for(var i=0;i<4;i++)r.push((s||'').slice(i*q,i===3?undefined:(i+1)*q).trim());return r;}
+function closeVm(){if(vmR&&vmR.state==='recording')vmR.stop();if(vmRaf){cancelAnimationFrame(vmRaf);vmRaf=null;}if(vmAEl){vmAEl.pause();vmAEl=null;}document.getElementById('vmo').classList.remove('on');}
+function loadImg2(src){return new Promise(function(res){var img=new Image();img.crossOrigin='anonymous';img.onload=function(){res(img);};img.onerror=function(){res(null);};img.src=src;});}
+function splitSc(s){var q=Math.floor((s||'').length/4),r=[];for(var i=0;i<4;i++)r.push((s||'').slice(i*q,i===3?undefined:(i+1)*q).trim());return r;}
 
-async function startVideoMake(){
-  var imgs=sbImgs.filter(function(v){return v;});if(!imgs.length){toast('请先生成AI配图','er');return;}
-  var ov=document.getElementById('vmO');ov.classList.add('on');
-  document.getElementById('vmFill').style.width='0%';document.getElementById('vmPct').textContent='0%';
-  document.getElementById('vmEta').textContent='准备中...';document.getElementById('vmDone').style.display='none';
-  document.getElementById('vmSubTxt').textContent='正在合成影视级带货视频';
-  vmVideoBlob=null;vmVideoUrl=null;vmChunks=[];
-  var loaded=[];for(var i=0;i<imgs.length;i++)loaded.push(await loadImg(imgs[i]));
-  loaded=loaded.filter(function(v){return v;});if(!loaded.length){toast('图片加载失败','er');closeVmO();return;}
-  var parts=splitScr(vidScript||document.getElementById('rSc').textContent||'');
-  var cv=document.getElementById('vmCv'),ctx=cv.getContext('2d');cv.width=VM_W;cv.height=VM_H;
-  var mime=getMime();var hasRec=(typeof MediaRecorder!=='undefined')&&mime!=='';
+async function startVM(){
+  var imgs=sbImgs.filter(Boolean);if(!imgs.length){toast('请先生成AI配图','er');return;}
+  var ov=document.getElementById('vmo');ov.classList.add('on');
+  document.getElementById('vmBf').style.width='0%';document.getElementById('vmPct').textContent='0%';
+  document.getElementById('vmEta').textContent='准备中…';document.getElementById('vmDone').style.display='none';
+  document.getElementById('vmT').textContent='正在合成影视级带货视频';
+  vmBlob=null;vmUrl=null;vmCh=[];
+
+  var loaded=[];for(var i=0;i<imgs.length;i++)loaded.push(await loadImg2(imgs[i]));
+  loaded=loaded.filter(Boolean);if(!loaded.length){toast('图片加载失败','er');closeVm();return;}
+  var parts=splitSc(vidSc||document.getElementById('rSc').textContent||'');
+  var cv=document.getElementById('vmCv'),ctx=cv.getContext('2d');cv.width=VW;cv.height=VH;
+
+  var mime=getMime(),hasRec=(typeof MediaRecorder!=='undefined')&&mime!=='';
   if(hasRec){
     try{
-      var cs=cv.captureStream(VM_FPS);var combined=cs;
-      if(vidAudioUrl){vmAEl=new Audio(vidAudioUrl);var actx=new(window.AudioContext||window.webkitAudioContext)();var src2=actx.createMediaElementSource(vmAEl);var dest=actx.createMediaStreamDestination();src2.connect(dest);src2.connect(actx.destination);combined=new MediaStream([].concat(cs.getVideoTracks(),dest.stream.getAudioTracks()));}
-      vmRecorder=new MediaRecorder(combined,{mimeType:mime,videoBitsPerSecond:3500000});
-      vmRecorder.ondataavailable=function(e){if(e.data&&e.data.size>0)vmChunks.push(e.data);};
-      vmRecorder.onstop=function(){vmVideoBlob=new Blob(vmChunks,{type:mime});vmVideoUrl=URL.createObjectURL(vmVideoBlob);showVmDone(mime);};
-      vmRecorder.start(200);if(vmAEl)vmAEl.play();
+      var cs=cv.captureStream(VFPS),comb=cs;
+      if(audUrl){
+        vmAEl=new Audio(audUrl);
+        var ac=new(window.AudioContext||window.webkitAudioContext)();
+        var src=ac.createMediaElementSource(vmAEl),dst=ac.createMediaStreamDestination();
+        src.connect(dst);src.connect(ac.destination);
+        comb=new MediaStream([].concat(cs.getVideoTracks(),dst.stream.getAudioTracks()));
+      }
+      vmR=new MediaRecorder(comb,{mimeType:mime,videoBitsPerSecond:4000000});
+      vmR.ondataavailable=function(e){if(e.data&&e.data.size>0)vmCh.push(e.data);};
+      vmR.onstop=function(){vmBlob=new Blob(vmCh,{type:mime});vmUrl=URL.createObjectURL(vmBlob);showVmDone(mime);};
+      vmR.start(200);if(vmAEl)vmAEl.play();
     }catch(ex){hasRec=false;}
   }
-  var vmStart=Date.now();var totalMs=VM_DUR*1000;var slideMs=totalMs/loaded.length;
-  function renderLoop(){
-    var elapsed=Date.now()-vmStart;var si=Math.min(Math.floor(elapsed/slideMs),loaded.length-1);
-    var sEl=elapsed-si*slideMs;var prog=Math.min(elapsed/totalMs,1);
-    vmDrawFrame(ctx,loaded,si,sEl,slideMs,parts,prog);
-    var pct=Math.round(prog*100);document.getElementById('vmFill').style.width=pct+'%';document.getElementById('vmPct').textContent=pct+'%';
-    var rem=Math.max(0,Math.round((totalMs-elapsed)/1000));document.getElementById('vmEta').textContent=rem>0?('还剩 '+rem+' 秒'):'即将完成...';
-    if(prog<1)vmRAF=requestAnimationFrame(renderLoop);
-    else{if(vmRecorder&&vmRecorder.state==='recording')vmRecorder.stop();else showVmDone('');if(vmAEl)vmAEl.pause();}
+
+  var t0=Date.now(),total=VDUR*1000,slide=total/loaded.length;
+  function loop(){
+    var el=Date.now()-t0,si=Math.min(Math.floor(el/slide),loaded.length-1),sEl=el-si*slide,prog=Math.min(el/total,1);
+    drawFrame(ctx,loaded,si,sEl,slide,parts,prog);
+    var pct=Math.round(prog*100);
+    document.getElementById('vmBf').style.width=pct+'%';document.getElementById('vmPct').textContent=pct+'%';
+    var rem=Math.max(0,Math.round((total-el)/1000));
+    document.getElementById('vmEta').textContent=rem>0?('还剩 '+rem+' 秒'):'即将完成…';
+    if(prog<1)vmRaf=requestAnimationFrame(loop);
+    else{if(vmR&&vmR.state==='recording')vmR.stop();else showVmDone('');if(vmAEl)vmAEl.pause();}
   }
-  vmRAF=requestAnimationFrame(renderLoop);
+  vmRaf=requestAnimationFrame(loop);
 }
 
-// ★★ 影视级Canvas绘制
-function vmDrawFrame(ctx,imgs,si,sEl,slideMs,parts,totalProg){
-  var W=VM_W,H=VM_H,t=Math.min(sEl/slideMs,1);
+// ★★ 影视级Canvas绘制 (Ken Burns + 色调 + 字幕动画)
+function drawFrame(ctx,imgs,si,sEl,slideMs,parts,totalP){
+  var W=VW,H=VH,t=Math.min(sEl/slideMs,1);
   ctx.clearRect(0,0,W,H);
   var img=imgs[si]||imgs[0];
   if(img){
-    // Ken Burns 运镜：慢推 + 轻微平移
-    var scale=1+t*0.07;
+    // Ken Burns: slow push + lateral drift
+    var scale=1+t*0.06;
     var iw=img.naturalWidth||img.width,ih=img.naturalHeight||img.height;
-    var fw,fh;
-    if(iw/ih>W/H){fh=H*scale;fw=fh*(iw/ih);}else{fw=W*scale;fh=fw*(ih/iw);}
-    var ox=(W-fw)/2 - t*18;
-    var oy=(H-fh)/2 - t*8;
-    ctx.drawImage(img,ox,oy,fw,fh);
+    var fw,fh;if(iw/ih>W/H){fh=H*scale;fw=fh*(iw/ih);}else{fw=W*scale;fh=fw*(ih/iw);}
+    // Alternate drift direction per slide
+    var drift=(si%2===0?-1:1)*t*20;
+    ctx.drawImage(img,(W-fw)/2+drift,(H-fh)/2,fw,fh);
   }else{
-    // 暗黑渐变背景
-    var bgGr=ctx.createLinearGradient(0,0,0,H);bgGr.addColorStop(0,'#0a0818');bgGr.addColorStop(1,'#1a0f2e');
-    ctx.fillStyle=bgGr;ctx.fillRect(0,0,W,H);
+    var bg=ctx.createLinearGradient(0,0,0,H);bg.addColorStop(0,'#0a0618');bg.addColorStop(1,'#1a0e2e');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
   }
 
-  // 电影级渐变遮罩（上暗+下更暗）
-  var gr=ctx.createLinearGradient(0,0,0,H);
-  gr.addColorStop(0,'rgba(0,0,0,.55)');
-  gr.addColorStop(.42,'rgba(0,0,0,0)');
-  gr.addColorStop(.68,'rgba(0,0,0,.25)');
-  gr.addColorStop(1,'rgba(0,0,0,.9)');
-  ctx.fillStyle=gr;ctx.fillRect(0,0,W,H);
+  // 电影级综合遮罩
+  var mask=ctx.createLinearGradient(0,0,0,H);
+  mask.addColorStop(0,'rgba(0,0,0,.6)');
+  mask.addColorStop(.38,'rgba(0,0,0,0)');
+  mask.addColorStop(.65,'rgba(0,0,0,.15)');
+  mask.addColorStop(1,'rgba(0,0,0,.92)');
+  ctx.fillStyle=mask;ctx.fillRect(0,0,W,H);
 
-  // 顶部品牌条（金色竖线 + 品牌名）
-  ctx.fillStyle='rgba(245,166,35,.95)';ctx.fillRect(0,0,4,H);
-  ctx.fillStyle='rgba(245,166,35,.9)';
-  ctx.font='900 18px PingFang SC,sans-serif';
-  ctx.textAlign='left';ctx.shadowColor='rgba(0,0,0,.9)';ctx.shadowBlur=8;
-  ctx.fillText('AI爆款工厂',18,50);
-  ctx.font='600 13px PingFang SC,sans-serif';
-  ctx.fillStyle='rgba(255,255,255,.5)';ctx.fillText('CINEMA GRADE',18,70);
+  // Letterbox 遮幅条 (电影宽银幕感)
+  ctx.fillStyle='rgba(0,0,0,.75)';
+  ctx.fillRect(0,0,W,52);ctx.fillRect(0,H-52,W,52);
 
-  // 字幕区（底部，淡入动画）
-  var tf=Math.min(t*6,1);ctx.globalAlpha=tf;
-  var txt=parts[si]||'';
-  if(txt.length>40)txt=txt.slice(0,40)+'...';
-  // 字幕背景
+  // 品牌区 (顶部)
+  var barG=ctx.createLinearGradient(0,0,200,0);barG.addColorStop(0,'#fbbf24');barG.addColorStop(1,'#fb923c');
+  ctx.fillStyle=barG;ctx.fillRect(0,0,4,52);
+  ctx.fillStyle='#fbbf24';ctx.font='900 17px PingFang SC,sans-serif';
+  ctx.textAlign='left';ctx.shadowColor='rgba(0,0,0,.9)';ctx.shadowBlur=6;
+  ctx.fillText('AI爆款工厂',14,34);
+  ctx.fillStyle='rgba(255,255,255,.45)';ctx.font='600 11px PingFang SC,sans-serif';
+  ctx.fillText('CINEMA GRADE',14,48);
+
+  // 字幕区 (字幕淡入动画)
+  var tf=Math.min(t*8,1);ctx.globalAlpha=tf;
+  var txt=parts[si]||'';if(txt.length>38)txt=txt.slice(0,38)+'…';
   if(txt){
-    ctx.fillStyle='rgba(0,0,0,.5)';
-    ctx.fillRect(0,H-200,W,120);
+    // 字幕背景渐变
+    var subBg=ctx.createLinearGradient(0,H-180,0,H-52);
+    subBg.addColorStop(0,'rgba(0,0,0,0)');subBg.addColorStop(1,'rgba(0,0,0,.7)');
+    ctx.globalAlpha=tf*0.9;ctx.fillStyle=subBg;ctx.fillRect(0,H-180,W,128);
+    ctx.globalAlpha=tf;
+    ctx.fillStyle='#ffffff';ctx.font='bold 33px PingFang SC,sans-serif';
+    ctx.textAlign='center';ctx.shadowColor='rgba(0,0,0,.98)';ctx.shadowBlur=18;
+    wrapText(ctx,txt,W/2,H-108,W-60,44);
   }
-  ctx.fillStyle='#ffffff';
-  ctx.font='bold 34px PingFang SC,sans-serif';
-  ctx.textAlign='center';ctx.shadowColor='rgba(0,0,0,.95)';ctx.shadowBlur=20;
-  vmWrap(ctx,txt,W/2,H-158,W-60,46);
 
-  // CTA按钮（最后一张）
+  // CTA按钮 (最后一张)
   if(si===imgs.length-1){
-    ctx.fillStyle='rgba(245,166,35,.95)';
-    vmRR(ctx,44,H-108,W-88,62,14);ctx.fill();
-    ctx.fillStyle='#000000';ctx.font='bold 23px PingFang SC,sans-serif';
+    var btnG=ctx.createLinearGradient(44,0,W-44,0);btnG.addColorStop(0,'#fbbf24');btnG.addColorStop(1,'#fb923c');
+    ctx.fillStyle=btnG;rrect(ctx,44,H-104,W-88,58,14);ctx.fill();
+    ctx.fillStyle='#000';ctx.font='bold 22px PingFang SC,sans-serif';
     ctx.shadowBlur=0;ctx.fillText('点击主页 立即购买',W/2,H-68);
   }
-  ctx.globalAlpha=1;ctx.shadowBlur=0;
 
-  // 顶部进度条（金色）
-  ctx.fillStyle='rgba(255,255,255,.1)';ctx.fillRect(0,0,W,3);
-  var barGr=ctx.createLinearGradient(0,0,W*totalProg,0);
-  barGr.addColorStop(0,'#f5a623');barGr.addColorStop(1,'#ff6b35');
-  ctx.fillStyle=barGr;ctx.fillRect(0,0,W*totalProg,3);
+  ctx.globalAlpha=1;ctx.shadowBlur=0;
+  // 顶部进度条
+  var pb=ctx.createLinearGradient(0,0,W*totalP,0);pb.addColorStop(0,'#fbbf24');pb.addColorStop(1,'#f472b6');
+  ctx.fillStyle='rgba(255,255,255,.1)';ctx.fillRect(0,50,W,3);
+  ctx.fillStyle=pb;ctx.fillRect(0,50,W*totalP,3);
 }
-function vmWrap(ctx,text,x,y,maxW,lh){var chars=text.split(''),line='',lines=[];for(var i=0;i<chars.length;i++){var tt=line+chars[i];if(ctx.measureText(tt).width>maxW&&line!==''){lines.push(line);line=chars[i];}else line=tt;}if(line)lines.push(line);var sy=y-(lines.length-1)*lh/2;for(var j=0;j<lines.length;j++)ctx.fillText(lines[j],x,sy+j*lh);}
-function vmRR(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+r,r);ctx.lineTo(x+w,y+h-r);ctx.arcTo(x+w,y+h,x+w-r,y+h,r);ctx.lineTo(x+r,y+h);ctx.arcTo(x,y+h,x,y+h-r,r);ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();}
+function wrapText(ctx,text,x,y,mw,lh){var c=text.split(''),line='',lines=[];for(var i=0;i<c.length;i++){var t=line+c[i];if(ctx.measureText(t).width>mw&&line!==''){lines.push(line);line=c[i];}else line=t;}if(line)lines.push(line);var sy=y-(lines.length-1)*lh/2;for(var j=0;j<lines.length;j++)ctx.fillText(lines[j],x,sy+j*lh);}
+function rrect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+r,r);ctx.lineTo(x+w,y+h-r);ctx.arcTo(x+w,y+h,x+w-r,y+h,r);ctx.lineTo(x+r,y+h);ctx.arcTo(x,y+h,x,y+h-r,r);ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();}
 function showVmDone(mime){
-  document.getElementById('vmSubTxt').textContent='合成完成！';
-  document.getElementById('vmFill').style.width='100%';document.getElementById('vmPct').textContent='100%';
+  document.getElementById('vmT').textContent='合成完成！';
+  document.getElementById('vmBf').style.width='100%';document.getElementById('vmPct').textContent='100%';
   document.getElementById('vmEta').textContent='';document.getElementById('vmDone').style.display='block';
   var ext=mime&&mime.indexOf('mp4')>=0?'mp4':'webm';
-  var dlBtn=document.getElementById('vmDlBtn');
-  if(vmVideoUrl){
-    dlBtn.onclick=function(){var a=document.createElement('a');a.download='带货视频_'+Date.now()+'.'+ext;a.href=vmVideoUrl;a.click();toast('视频下载中','ok');};
+  var db=document.getElementById('vmDlBtn');
+  if(vmUrl){
+    db.onclick=function(){var a=document.createElement('a');a.download='带货视频_'+Date.now()+'.'+ext;a.href=vmUrl;a.click();toast('视频下载中','ok');};
     document.getElementById('vmNote').textContent='格式：'+ext.toUpperCase()+'  可直接上传抖音/小红书/视频号';
   }else{
-    dlBtn.textContent='📱 导入剪映合成';
-    dlBtn.onclick=function(){toast('下载录音+配图后导入剪映图文成片','ok');};
+    db.textContent='📱 导入剪映合成';
+    db.onclick=function(){toast('下载录音+配图后导入剪映图文成片','ok');};
     document.getElementById('vmNote').textContent='当前浏览器不支持直接导出，请将录音+配图导入剪映合成';
   }
-  S.stats.g++;saveSt();renderStats();
+  S.stats.g++;sv();rStats();
 }
 
-// ── 工具函数 ──
-function showL(msg,brain){document.getElementById('lm').textContent=msg||'处理中…';document.getElementById('bwl').textContent=brain||'AI思考中';document.getElementById('lo').classList.add('on');}
+// ══ UTILS ══
+function showL(msg,sub){document.getElementById('lmsg').textContent=msg||'处理中…';document.getElementById('lsub').textContent=sub||'AI思考中';document.getElementById('lo').classList.add('on');}
 function hideL(){document.getElementById('lo').classList.remove('on');}
-function toast(msg,type){var el=document.getElementById('tt');el.textContent=msg;el.className='tt'+(type?' '+type:'');el.classList.add('sh');clearTimeout(el._t);el._t=setTimeout(function(){el.classList.remove('sh');},3000);}
-function cpEl(id){var t=(document.getElementById(id)||{}).textContent||'';if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){toast('已复制','ok');});}else{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('已复制','ok');}}
+function toast(msg,type){var el=document.getElementById('tt');el.textContent=msg;el.className='tt'+(type?' '+type:'');el.classList.add('sh');clearTimeout(el._t);el._t=setTimeout(function(){el.classList.remove('sh');},3200);}
+function cpEl(id){var t=(document.getElementById(id)||{}).textContent||'';if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){toast('已复制到剪贴板','ok');});}else{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast('已复制','ok');}}
 
-// ── 初始化 ──
-loadSt();
+// ══ FULLSCREEN ══
+var curFs='';
+function openFs(url){curFs=url;document.getElementById('fsimg').src=url;document.getElementById('fs').classList.add('on');}
+function closeFs(){document.getElementById('fs').classList.remove('on');}
+function dlFs(){if(!curFs)return;var a=document.createElement('a');a.href=curFs;a.download='product_'+Date.now()+'.jpg';a.target='_blank';a.click();toast('图片下载中','ok');}
+
+// ══ INIT ══
+ld();
 if(S.user){enterApp();}
 </script>
 </body>
