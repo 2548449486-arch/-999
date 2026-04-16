@@ -786,7 +786,7 @@ const M_SCRIPT='google/gemini-2.0-flash-001';
 function _dh(s){
   var h=5381,i=0,c;
   s=(s||'').toUpperCase().trim();
-  for(;i<s.length;i++){c=s.charCodeAt(i);h=((h*33)+c)&0xFFFFFFFF;}
+  for(;i<s.length;i++){c=s.charCodeAt(i);h=((h*33)+c)>>>0;}
   return h.toString(16);
 }
 var _PH=["d15df62f","c064e412","c73a8465","2ee9fb28","e0ce462","cb7ffacc","58e8832c","eb0ba5a5","bbb7d4ee","bbb7d4ef","bbb7d4f0","bbb7d4f1","bbb7d4f2","bbb7d4f3","bbb7d4f4","bbb7d4f5","bbb7d4f6","bbb7d50e","bbb7d50f","bbb7d510","bbb7d511","bbb7d512","bbb7d513","bbb7d514","bbb7d515","bbb7d516","bbb7d517","bbb7d52f","bbb7d530","bbb7d531","bbb7d532","bbb7d533","bbb7d534","bbb7d535","bbb7d536","bbb7d537","bbb7d538","bbb7d550","bbb7d551","bbb7d552","bbb7d553","bbb7d554","bbb7d555","bbb7d556","bbb7d557","bbb7d558","bbb7d559","bbb7d571","bbb7d572","bbb7d573","bbb7d574","bbb7d575","bbb7d576","bbb7d577","bbb7d578","bbb7d579","bbb7d57a","bbb7d592"];
